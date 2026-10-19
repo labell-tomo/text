@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La*Bell エレメントバランスケア</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7fcfd;--card:#fff;--ink:#3d4a4f;--sub:#7a8a90;--blue:#A2E8FF;--blue-d:#4fb8d6;--gold:#b8962e;--gold-l:#FFD700;--line:#e3eef1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Maru Gothic",sans-serif;line-height:1.7}
+.wrap{max-width:560px;margin:0 auto;padding:16px}
+header{text-align:center;padding:20px 0 8px}
+header .logo{font-size:26px;font-weight:700;letter-spacing:.06em}
+header .logo span{color:var(--gold)}
+header .logo-img{display:none;max-width:200px;max-height:90px;width:auto;height:auto;margin:0 auto 4px}
+header p{margin:2px 0 0;color:var(--sub);font-size:13px}
+.card{background:var(--card);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 2px 12px rgba(79,184,214,.10)}
+h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:6px}
+h2::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--blue)}
+label{font-size:13px;color:var(--sub)}
+.row{display:flex;gap:8px;margin-top:4px}
+input,select{font:inherit;padding:10px;border:1.5px solid var(--line);border-radius:12px;width:100%;background:#fff;color:var(--ink)}
+button{font:inherit;font-weight:700;border:none;border-radius:999px;padding:12px 20px;cursor:pointer}
+.btn{background:linear-gradient(135deg,var(--gold-l),#f3c94d);color:#5a4500;width:100%;margin-top:14px}
+.btn2{background:var(--blue);color:#1e5a6b}
+.insen{display:flex;align-items:center;justify-content:space-around;text-align:center}
+.tcs{font-size:15px}.tcs b{display:block;font-size:22px;color:var(--blue-d)}
+.kanshi{display:grid;grid-template-columns:repeat(3,52px);gap:4px;text-align:center}
+.kanshi div{font-size:26px;color:var(--gold)}
+.kanshi small{font-size:11px;color:var(--sub)}
+.zk{font-size:12px;color:var(--sub);text-align:center;margin-top:6px}
+.jintai{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--line);border-radius:12px;overflow:hidden}
+.jintai div{background:#fff;padding:12px 4px;text-align:center;font-size:17px;color:var(--gold);min-height:54px}
+.jintai div small{display:block;font-size:10px;color:var(--sub)}
+.jintai .sub{background:#f2fbfe}
+.bars div{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:14px}
+.bars i{display:block;height:12px;border-radius:6px}
+.note{font-size:12px;color:var(--sub)}
+#result{display:none}
+.actions{display:flex;gap:8px}
+.actions button{flex:1}
+@media print{body{background:#fff}.no-print{display:none!important}.card{box-shadow:none;border:1px solid var(--line);break-inside:avoid}}
+.hero{text-align:center;background:linear-gradient(160deg,#e9f9ff,#fffbe6)}
+.hero .ic{font-size:44px}.hero .lead{font-size:13px;color:var(--sub);margin:0}
+.hero h3{font-size:20px;margin:4px 0 6px;line-height:1.5}.hero .tag{display:inline-block;background:#fff;border-radius:999px;padding:3px 12px;font-size:13px;margin:2px;color:var(--gold)}
+.box{background:#f6fcfe;border-radius:14px;padding:12px 14px;margin:10px 0}
+.box h4{margin:0 0 6px;font-size:14px;color:var(--blue-d)}
+ul.chk{list-style:none;padding:0;margin:0}ul.chk li{padding:3px 0 3px 22px;position:relative;font-size:14px}
+ul.chk li::before{content:"✔";position:absolute;left:2px;color:var(--gold)}
+ul.care li::before{content:"🌸";font-size:12px;top:5px}
+.star{font-size:20px;color:var(--gold);font-weight:700}.key{font-size:12px;background:var(--blue);color:#1e5a6b;border-radius:999px;padding:2px 10px;margin-left:6px}
+.soft{background:#fffdf3;text-align:center;font-size:15px}
+p{margin:6px 0}
+@media print{.hero,.soft,.box{-webkit-print-color-adjust:exact;print-color-adjust:exact}.bars i{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.chk-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;margin:6px 0;cursor:pointer;font-size:14px;user-select:none}
+.chk-item.on{background:#e9f9ff;border-color:var(--blue-d)}
+.chk-item .bx{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid #b9d6de;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;margin-top:1px}
+.chk-item.on .bx{background:var(--blue-d);border-color:var(--blue-d)}
+.prog{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--sub);margin:8px 0}
+.prog i{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}.prog b{display:block;height:100%;width:0;background:var(--blue-d);transition:width .2s}
+.kj{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:6px 0}
+.kj span{display:block}
+.tcard{border-radius:14px;padding:14px;margin:10px 0;background:linear-gradient(160deg,#fff7f2,#f2fbff)}
+.tcard h3{margin:0;font-size:19px}.tcard .yomi{font-size:12px;color:var(--sub)}
+.sig{font-size:13px;color:var(--sub)}
+@media print{.pb{break-before:page}.tcard,.kj span,.chk-item{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.why{border-left:3px solid var(--blue);padding:4px 0 4px 12px;margin:14px 0}
+.why h4{margin:0 0 4px;font-size:14px;color:var(--blue-d)}.why p{font-size:14px;margin:0}
+.step{display:flex;gap:12px;margin:14px 0}.step .no{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold-l),#f3c94d);color:#5a4500;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step h4{margin:2px 0 4px;font-size:15px}.step p{font-size:13px;color:var(--sub)}
+.day{display:grid;grid-template-columns:64px 1fr;gap:6px 10px;font-size:14px}.day b{color:var(--gold)}
+@media print{.step .no,.why{-webkit-print-color-adjust:exact;print-color-adjust:exact}.why,.step{break-inside:avoid}}
+.tsubo{background:#fff;border-radius:14px;padding:12px;margin:10px 0;break-inside:avoid}
+.tsubo h4{margin:6px 0 2px;font-size:17px;color:#3f7fc0}.tsubo h4 span{font-size:12px;color:var(--sub);font-weight:400}
+.tsubo .role{font-size:13px;color:var(--gold);margin:0 0 6px}.tsubo ol{margin:0;padding-left:20px;font-size:14px}.tsubo ol li{margin:2px 0}
+.tsubo .how{font-size:13px;background:#fff8e6;border-radius:10px;padding:8px 10px;margin-top:8px}
+@media print{.tsubo,.tsubo .how{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.tabs{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:8px 0;background:var(--bg)}
+.tabs button{font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 2px;border-radius:999px;background:#fff;border:1.5px solid var(--line);text-decoration:none;color:var(--ink);font-size:10.5px;letter-spacing:-.02em;white-space:nowrap;font-weight:700;box-shadow:0 2px 8px rgba(79,184,214,.08)}
+.tabs button.on{background:var(--blue);border-color:var(--blue-d);color:#1e5a6b}
+.page{display:none}.page.on{display:block}
+.yy{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.yy div{background:#f6fcfe;border-radius:14px;padding:12px;text-align:center}.yy b{display:block;font-size:22px;color:var(--gold)}.yy span{font-size:13px}
+.row5{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}.row5 p{margin:0;font-size:14px}
+.row5 .el{flex:none;width:48px;height:48px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;font-weight:700;line-height:1.1}.row5 .el small{font-size:10px;font-weight:400}
+.tcard .yomi{font-size:12px;color:var(--sub)}
+@media print{.page:not(.on){display:none!important}}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}.toc button{font:inherit;font-size:12px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.page h2{scroll-margin-top:80px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.tg{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px;text-align:center;break-inside:avoid}
+.tg h4{margin:4px 0 2px;font-size:14px}.tg p{font-size:12px;margin:2px 0;color:var(--sub)}.tg .tag2{color:#3f7fc0;font-weight:700}
+details.acc{padding:0;overflow:hidden}
+details.acc>summary{list-style:none;cursor:pointer;padding:15px 44px 15px 16px;font-weight:700;font-size:15.5px;position:relative;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary::before{content:"";width:6px;height:18px;border-radius:3px;background:var(--blue);flex:none}
+details.acc>summary::after{content:"";position:absolute;right:18px;top:50%;width:8px;height:8px;border-right:2px solid var(--blue-d);border-bottom:2px solid var(--blue-d);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+details.acc[open]>summary::after{transform:translateY(-30%) rotate(-135deg)}
+details.acc[open]>summary{border-bottom:1px solid var(--line)}
+.accb{padding:12px 16px 18px}
+.accctl{display:flex;gap:6px;justify-content:flex-end;margin:8px 0}.accctl button{font:inherit;font-size:12px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.sec{font-weight:700;color:var(--gold);margin:18px 4px 4px;font-size:14px}
+.yomi2{font-size:12px;color:var(--sub);font-weight:400}
+.mid{font-size:11px;color:#fff;border-radius:999px;padding:1px 8px;font-weight:700}
+.kp{display:flex;gap:10px;padding:9px 0;border-top:1px dashed var(--line)}.kp p{margin:2px 0;font-size:13.5px}.kp small{color:var(--sub)}.kp em{font-style:normal;font-size:11.5px;color:#c0563f;background:#fdeee9;border-radius:6px;padding:1px 6px}
+.kn{flex:none;width:24px;height:24px;border-radius:50%;border:1.6px solid;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#fff;margin-top:2px}
+table.kt{width:100%;border-collapse:separate;border-spacing:4px;margin-top:8px;text-align:center;font-size:15px}table.kt th{font-size:13px;color:var(--sub)}
+table.kt td{background:#f6fcfe;border-radius:10px;padding:8px 4px}table.kt td.yin{background:#dff1fa;font-weight:700}table.kt td.yang{background:#fde8dc;font-weight:700}table.kt small{display:block;font-size:10px;font-weight:400;color:var(--sub)}
+.flow{display:grid;grid-template-columns:1fr 1fr;gap:8px}.flow div{border-radius:14px;padding:10px;text-align:center}.flow .yin{background:#dff1fa}.flow .yang{background:#fde8dc}
+.flow b{font-size:14px}.flow p{margin:4px 0;font-size:15px;font-weight:700}.flow p span{color:var(--gold)}.flow small{font-size:11px;color:var(--sub)}
+.fr{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;text-align:center;margin:8px 0}.fr svg{display:block;margin:0 auto;max-width:100%}.fr b{display:block;color:var(--gold);font-size:16px}.fr span{font-size:11px;color:var(--sub)}
+@media print{details.acc>summary::after{display:none}.kn,.mid,table.kt td,.flow div{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+details.acc>summary .sumsub,.sumsub{flex-basis:100%;font-size:12px;font-weight:400;color:var(--sub);line-height:1.6;padding-left:14px;margin-top:2px}
+.kv{display:grid;grid-template-columns:minmax(0,42%) 1fr;gap:6px 10px;font-size:13.5px}.kv b{color:var(--ink)}
+.fk{padding:8px 0;border-top:1px dashed var(--line)}.fk:first-of-type{border-top:0}.fk b{font-size:14px}.fk small{display:block;color:var(--sub);font-size:11.5px}.fk p{margin:2px 0;font-size:13.5px}
+.tagt{display:inline-block;font-size:11px;background:#e9f9ff;color:#2f7f99;border-radius:999px;padding:1px 8px;margin-left:4px;font-weight:700}
+.hz{border-left:6px solid;border-radius:8px;background:#fafdfe;padding:8px 12px;margin:8px 0}.hz p{margin:2px 0;font-size:13.5px}
+.sc{background:#fafdfe;border-radius:12px;padding:10px 12px;margin:8px 0;break-inside:avoid}.sch{display:flex;align-items:center;justify-content:space-between;gap:6px}.sc p{margin:3px 0;font-size:13.5px}
+.cnt{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px dashed var(--line)}.cnt:first-of-type{border-top:0}.cnt p{margin:1px 0;font-size:13.5px}
+.cd{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#3d4a4f;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+</style></head><body><div class="wrap">
+<header>
+<!-- ロゴ:同じフォルダに logo.png を置くと自動で画像に切り替わります -->
+<img class="logo-img" src="logo.png" alt="La*Bell" onload="this.style.display='block';this.nextElementSibling.style.display='none'" onerror="this.remove()">
+<div class="logo">La<span>*</span>Bell</div>
+<p>エレメントバランスケア</p></header>
+<nav class="tabs no-print">
+<button type="button" data-p="check" onclick="go('check')">🌈<span>体質チェック</span></button>
+<button type="button" data-p="toyo" onclick="go('toyo')">🌿<span>東洋医学</span></button>
+<button type="button" data-p="sanmei" onclick="go('sanmei')">🔮<span>算命学</span></button>
+<button type="button" data-p="self" onclick="go('self')">🪽<span>セルフケア</span></button>
+<button type="button" data-p="sejutsu" onclick="go('sejutsu')">🤲<span>施術</span></button>
+</nav>
+<section class="page" id="p-check">
+<div class="card no-print">
+<h2>生年月日</h2>
+<label>お名前(任意・PDFに表示)</label><input id="name" placeholder="例:べる">
+<div style="margin-top:10px"><label>生年月日</label><input id="birth" type="date" value="1990-01-01" min="1900-01-01" max="2100-12-31"></div>
+</div>
+<div class="card no-print">
+<h2>今の体のチェック 🌈</h2>
+<p class="note">当てはまるものをタップ(いくつでもOK)。チェックなしなら命式だけを表示します。</p>
+<div class="prog"><span id="cnt">0</span> / 22<i><b id="pbar"></b></i></div>
+<div id="checks"></div>
+<button class="btn" onclick="run()">結果を見る ✨</button>
+</div>
+<div id="result">
+<div class="card"><h2>陰占(いんせん)</h2><p class="note" id="who"></p>
+<div class="insen"><div class="tcs">天中殺<b id="tcs"></b></div>
+<div><div class="kanshi"><small>日</small><small>月</small><small>年</small><div id="ds"></div><div id="ms"></div><div id="ys"></div><div id="db"></div><div id="mb"></div><div id="yb"></div></div>
+<div class="zk" id="zk"></div></div></div></div>
+<div class="card"><h2>陽占(人体図)</h2><div class="jintai" id="jt"></div>
+<p class="note">水色のマス(初年・中年・晩年)は十二大従星=エネルギーの強さ、十字の5つは十大主星=本質・性格です。</p></div>
+<div class="card hero" id="hero"></div>
+<div class="card"><h2>あなたの本質</h2><div id="nature"></div></div>
+<div class="card"><h2>心のまんなかにある星</h2><div id="chushin"></div></div>
+<div class="card"><h2>五行のバランス 🫧</h2><div class="bars" id="bars"></div><div id="gogyo"></div></div>
+<div class="card"><h2>体のサインとセルフケア 🪽</h2><div id="care"></div></div>
+<div id="mres">
+<div class="card pb"><h2>今のからだの状態</h2><p class="note">22項目のチェックから見た、今の気・血・水のバランスです。</p><div id="radar"></div><div id="kyojitsu"></div><div id="checked"></div></div>
+<div class="card"><h2>今いちばん出ているサイン</h2><div id="mtype"></div></div>
+<div class="card pb"><h2>なぜ今、このサインが出ているの? 🫧</h2><p class="note">生まれ持った体質(命式)と、今のからだ(チェック)をつなげて考えられる可能性です。</p><div id="bridge"></div></div>
+<div class="card"><h2>コンディションを整える3つのステップ 🪽</h2><div id="steps"></div></div>
+</div>
+<div class="card soft"><div id="closing"></div>
+<p class="note">※ 生年月日から見た体質の「傾向」です。医療的な判断ではありません。気になる症状があるときは専門家にご相談ください。</p></div>
+<div class="actions no-print"><button class="btn2" onclick="window.print()">📄 PDFに保存</button><button class="btn2" onclick="window.scrollTo(0,0)">もう一度</button></div>
+</div>
+</section>
+<section class="page" id="p-toyo"></section>
+<section class="page" id="p-sanmei"></section>
+<section class="page" id="p-self"></section>
+<section class="page" id="p-sejutsu"></section>
+<p class="note" style="text-align:center;margin-top:24px">© La*Bell Holistic Salon</p>
+</div>
+<script>
+// 算命学 命式計算エンジン(朱学院の命式に合わせて検証)
+const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const STEM_EL = [0,0,1,1,2,2,3,3,4,4]; // 木火土金水
+const EL_NAME = ['木','火','土','金','水'];
+const BRANCH_EL = [4,2,0,0,2,1,1,2,3,3,2,4];
+
+// 二十八元表(節入り日を1日目として、その日数までがその蔵干)
+const ZOKAN = {
+  '子':[['癸',99]],
+  '丑':[['癸',9],['辛',12],['己',99]],
+  '寅':[['戊',7],['丙',14],['甲',99]],
+  '卯':[['乙',99]],
+  '辰':[['乙',9],['癸',12],['戊',99]],
+  '巳':[['戊',5],['庚',14],['丙',99]],
+  '午':[['己',19],['丁',99]],
+  '未':[['丁',9],['乙',12],['己',99]],
+  '申':[['戊',10],['壬',13],['庚',99]],
+  '酉':[['辛',99]],
+  '戌':[['辛',9],['丁',12],['戊',99]],
+  '亥':[['甲',12],['壬',99]],
+};
+
+// ---- 太陽黄経(Meeusの簡易式) ----
+function jdFromDate(y,m,d,h){ // UT
+  if(m<=2){y-=1;m+=12;}
+  const A=Math.floor(y/100),B=2-A+Math.floor(A/4);
+  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+h/24+B-1524.5;
+}
+function sunLon(jd){
+  const T=(jd-2451545)/36525;
+  const L0=280.46646+36000.76983*T+0.0003032*T*T;
+  const M=(357.52911+35999.05029*T-0.0001537*T*T)*Math.PI/180;
+  const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(M)+(0.019993-0.000101*T)*Math.sin(2*M)+0.000289*Math.sin(3*M);
+  const om=(125.04-1934.136*T)*Math.PI/180;
+  let lon=L0+C-0.00569-0.00478*Math.sin(om);
+  return ((lon%360)+360)%360;
+}
+// 指定黄経になるJD(UT)を探す
+function findTerm(target, jdGuess){
+  let jd=jdGuess;
+  for(let i=0;i<50;i++){
+    let diff=target-sunLon(jd);
+    diff=((diff+540)%360)-180;
+    jd+=diff*365.2422/360;
+    if(Math.abs(diff)<1e-6)break;
+  }
+  return jd;
+}
+function jstDayNumber(jd){ return Math.floor(jd+0.5+9/24); } // JST日付の通し番号
+function dayNumber(y,m,d){ return jdFromDate(y,m,d,12)+0.5; } // 同じ基準の整数
+
+// 生年月日から命式
+function calc(y,m,d){
+  const dn = Math.round(jdFromDate(y,m,d,12));
+  // 直前の節入り(黄経315+30k)を探す
+  const jdNoonJST = jdFromDate(y,m,d,23.99-9); // その日の終わり(JST)時点で判定
+  const lon = sunLon(jdNoonJST);
+  let k = Math.floor(((lon-315+360)%360)/30); // 寅月=0
+  let target = (315+30*k)%360;
+  let termJd = findTerm(target, jdNoonJST-((lon-target+360)%360)*365.2422/360);
+  let termDay = jstDayNumber(termJd);
+  if(termDay>dn){ // 節入り当日より前なら前の月
+    k=(k+11)%12; target=(315+30*k)%360;
+    termJd=findTerm(target, termJd-30); termDay=jstDayNumber(termJd);
+  }
+  const daysSince = dn-termDay+1;
+  // 年:立春前なら前年
+  let sy = y;
+  if(m<=2 && k>=10) sy=y-1; // 子・丑月(1〜2月の立春前)
+  const yIdx=((sy-4)%60+60)%60;
+  const yStem=yIdx%10, yBr=yIdx%12;
+  const mBr=(k+2)%12;
+  const mStem=((yStem%5)*2+2+k)%10;
+  const dIdx=((dn-11)%60+60)%60;
+  const dStem=dIdx%10, dBr=dIdx%12;
+  const zk = b => ZOKAN[BRANCHES[b]].find(([s,lim])=>daysSince<=lim)[0];
+  const day = STEMS[dStem];
+  const r = {
+    year: STEMS[yStem]+BRANCHES[yBr],
+    month: STEMS[mStem]+BRANCHES[mBr],
+    day: STEMS[dStem]+BRANCHES[dBr],
+    zokan: {year:zk(yBr), month:zk(mBr), day:zk(dBr)},
+    daysSince,
+  };
+  // 天中殺
+  const jun=(dIdx-dStem); // 旬の始まり(甲)
+  const b1=((jun%12)+12+10)%12;
+  r.tenchusatsu = BRANCHES[b1]+BRANCHES[(b1+1)%12];
+  // 人体図
+  r.jintai = {
+    head: mainStar(day, STEMS[yStem]),
+    chest: mainStar(day, r.zokan.month),
+    belly: mainStar(day, STEMS[mStem]),
+    right: mainStar(day, r.zokan.year),  // 表示右(東)
+    left: mainStar(day, r.zokan.day),     // 表示左(西)
+    shoulder: subStar(dStem, yBr), // 初年
+    rFoot: subStar(dStem, mBr),    // 中年
+    lFoot: subStar(dStem, dBr),    // 晩年
+  };
+  // 五行の数(陰占の干支6つ)
+  const els=[0,0,0,0,0];
+  [yStem,mStem,dStem].forEach(s=>els[STEM_EL[s]]++);
+  [yBr,mBr,dBr].forEach(b=>els[BRANCH_EL[b]]++);
+  r.gogyo=els; r.dayEl=EL_NAME[STEM_EL[dStem]];
+  return r;
+}
+
+const MAIN = {same:['貫索星','石門星'], out:['鳳閣星','調舒星'], kill:['禄存星','司禄星'], killed:['車騎星','牽牛星'], born:['龍高星','玉堂星']};
+function mainStar(dayStem, other){
+  const a=STEMS.indexOf(dayStem), b=STEMS.indexOf(other);
+  const ea=STEM_EL[a], eb=STEM_EL[b];
+  const pol = (a%2)===(b%2)?0:1;
+  const rel = ((eb-ea)+5)%5;
+  const key=['same','out','kill','killed','born'][rel];
+  return MAIN[key][pol];
+}
+// 十二大従星
+const SUB = ['天貴星','天恍星','天南星','天禄星','天将星','天堂星','天胡星','天極星','天庫星','天馳星','天報星','天印星']; // 長生から
+const CHOSEI = {0:11,1:6,2:2,3:9,4:2,5:9,6:5,7:0,8:8,9:3}; // 各日干の長生の支
+function subStar(dStem, br){
+  const start=CHOSEI[dStem];
+  const n = dStem%2===0 ? (br-start+12)%12 : (start-br+12)%12;
+  return SUB[n];
+}
+
+const NIKKAN={
+'甲':{img:'大樹',icon:'🌳',catch:'まっすぐ空へ伸びる、大きな木の人',
+ nature:'一度「こう」と決めたら、まっすぐ進む強さを持っています。曲がったことが苦手で、正義感があり、自然とまわりから頼られる存在。大きな木が周りに木陰をつくるように、人を守る力があります。',
+ aru:['頼まれると断れず、気づけば全部ひとりで抱えている','「ちゃんとしなきゃ」と自分にいちばん厳しい','一度決めたことは、途中で変えるのが苦手'],
+ body:'がんばりすぎると首・肩・目にこりが出やすく、めぐりが滞るとイライラしやすくなります。',
+ care:['朝、両手を空に向けてぐーっと伸びる','緑の多い場所をゆっくり歩く','「今日はここまで」と区切る日をつくる']},
+'乙':{img:'草花',icon:'🌼',catch:'風にしなやかに揺れる、草花の人',
+ nature:'やわらかく見えて、実はとても芯の強い人。踏まれても、また立ち上がる草花のような粘り強さがあります。人と人をつなぐのが上手で、その場の空気をやさしく整える力の持ち主です。',
+ aru:['相手の気持ちを先に考えて、自分のことは後回し','ひとりより、誰かと一緒のほうが力が出る','季節の変わり目に、心も体もゆらぎやすい'],
+ body:'気をつかいすぎると自律神経がゆらぎやすく、ため息や浅い呼吸が増えがちです。',
+ care:['好きな香りで深呼吸する時間をつくる','安心できる人と、目的のないおしゃべりを','体をねじるストレッチでめぐりを流す']},
+'丙':{img:'太陽',icon:'🌞',catch:'まわりを明るく照らす、太陽の人',
+ nature:'そこにいるだけで場が明るくなる、天性のムードメーカー。素直で裏表がなく、思ったことが顔に出ます。人を元気にする力を持っていて、あなたの笑顔に救われている人がたくさんいるはず。',
+ aru:['隠しごとや、うそが本当に苦手','楽しいとつい予定を詰め込みすぎる','元気な日と、電池切れの日の差が大きい'],
+ body:'熱がこもりやすく、のぼせや寝つきの悪さ、気分の上下として出やすいタイプです。',
+ care:['夜は照明を落として、気持ちをクールダウン','ぬるめのお風呂で、汗をかきすぎない程度に','予定のない「空白の日」をあえてつくる']},
+'丁':{img:'灯火',icon:'🕯️',catch:'暗闇をやさしく照らす、灯火の人',
+ nature:'静かに見えて、胸の奥に強い情熱を灯している人。感受性が豊かで、人の気持ちの小さな変化にも気づけます。ひとつのことに集中したときの力は、まわりが驚くほど。',
+ aru:['人の言葉を、あとからずっと考えてしまう','直感が当たることが多い','好きなことには時間を忘れて没頭する'],
+ body:'気持ちがそのまま体に出やすく、ドキドキしたり、眠りが浅くなったりしやすいタイプ。',
+ care:['寝る前のスマホを少しだけ早めに手放す','思ったことを紙に書いて、心を空っぽに','キャンドルや間接照明の、ほの暗い時間を']},
+'戊':{img:'山',icon:'⛰️',catch:'どっしりと動かない、山の人',
+ nature:'そばにいると安心できる、大きな包容力の持ち主。面倒見がよく、人が自然と集まってきます。慎重で、動き出すまでに時間はかかるけれど、一度動けば揺るがない安定感があります。',
+ aru:['頼られると、つい引き受けてしまう','新しいことを始めるまでに時間がかかる','気持ちをためこんで、あまり人に見せない'],
+ body:'胃腸にサインが出やすく、食べすぎやむくみ、体の重だるさとして表れがちです。',
+ care:['ひと口30回、よく噛んで食べる','甘いものは「ごほうび」の日だけに','食後にゆっくり歩いて、めぐりを動かす']},
+'己':{img:'田畑',icon:'🌾',catch:'たくさんの命を育てる、田畑の人',
+ nature:'人を育て、才能を引き出すのが上手な人。器用で多才、記憶力もよく、教えることに向いています。豊かな土が作物を育てるように、あなたのそばで人は自然と伸びていきます。',
+ aru:['「あの時ああ言えば…」と思い返しがち','人の世話を焼くのが好き','いろいろできるぶん、何でも引き受けてしまう'],
+ body:'考えすぎると胃腸や食欲に出やすく、なんとなくだるい日が続くことも。',
+ care:['温かいスープなど、胃にやさしい食事を','料理や手仕事など、手を動かして頭を休める','「考える時間」を決めて、それ以外は手放す']},
+'庚':{img:'鉄・原石',icon:'⚔️',catch:'まっすぐで力強い、鉄の人',
+ nature:'行動力があり、白黒はっきりした正直な人。仲間を大切にし、困っている人を放っておけない義理堅さがあります。困難にぶつかるほど、鍛えられて強くなっていくタイプです。',
+ aru:['考えるより先に体が動いている','言い方がストレートで、誤解されることがある','仲間のためなら、自分のことは後回し'],
+ body:'呼吸が浅くなりやすく、肌の荒れや便通のリズムにサインが出がちです。',
+ care:['1日1回、ゆっくり長く息を吐く','軽く汗をかく運動で、たまったものを出す','大根やれんこんなど白い食材を']},
+'辛':{img:'宝石',icon:'💎',catch:'磨かれるほど輝く、宝石の人',
+ nature:'美しいものを見分ける感性と、品のよさを持った人。繊細で、ていねいな暮らしを大切にします。宝石が磨かれて輝くように、経験を重ねるほど、あなたらしい魅力が増していきます。',
+ aru:['小さなひと言に、思った以上に傷つく','こだわりがあって、妥協するのが苦手','きれいなもの、上質なものに触れると元気になる'],
+ body:'肌・のど・乾燥にサインが出やすく、心が傷つくと体にも表れやすいタイプ。',
+ care:['肌と心の保湿をていねいに','お気に入りの器や服を、日常で使う','白湯や、のどを潤す飲みものを']},
+'壬':{img:'海・大河',icon:'🌊',catch:'どこまでも広がる、海の人',
+ nature:'自由を愛し、スケールの大きな発想ができる人。知恵があり、変化を楽しむ柔軟さを持っています。大河が流れ続けるように、ひとところにとどまらず、新しい世界へ進んでいく力があります。',
+ aru:['同じことの繰り返しが苦手','束縛されると、とたんに息苦しくなる','元気な時期と、ぐったりする時期の波がある'],
+ body:'冷えやすく、腰まわりの重さや、体力の波として出やすいタイプです。',
+ care:['腰・お腹・足首をあたためる','疲れる前に休む、を合言葉に','海や水辺で、ぼーっとする時間を']},
+'癸':{img:'雨・露',icon:'💧',catch:'静かに大地をうるおす、雨の人',
+ nature:'目立つことより、見えないところで支えることを選ぶ、やさしい人。物事の本質を見抜く洞察力と、こつこつ続ける努力の力を持っています。恵みの雨のように、あなたの存在が誰かをうるおしています。',
+ aru:['本音を言うまでに時間がかかる','人前に出るより、裏方のほうが落ち着く','気づくと、疲れを体にためこんでいる'],
+ body:'冷えやむくみが出やすく、疲れをためこんでから気づくことが多いタイプ。',
+ care:['シャワーで済ませず、湯船につかる','早めに眠って、エネルギーを貯める','黒豆・ひじきなど、黒い食材を']},
+};
+const CHUSHIN={
+'貫索星':{key:'自分軸',text:'自分のペースを何より大切にする人。周りに流されず、守るべきものをしっかり守れます。ひとりの時間で回復するタイプなので、自分だけの時間を予定に入れてあげて。'},
+'石門星':{key:'つながり',text:'人の輪の中で力を発揮する人。誰とでも分けへだてなく付き合え、仲間をまとめる力があります。やわらかい外見の奥に、ゆずれない芯を持っています。'},
+'鳳閣星':{key:'たのしむ',text:'人生を味わい、楽しむ天才。おいしいもの、自然、ありのままの自分を大切にします。あなたが楽しんでいると、周りも自然とゆるんでいきます。'},
+'調舒星':{key:'感性',text:'鋭い感性と、自分だけの世界を持つ人。こだわりや美意識が強く、表現することで輝きます。感じすぎて疲れたら、ひとりで静かに過ごす時間を。'},
+'禄存星':{key:'愛',text:'人を喜ばせることが自分の喜びになる人。面倒見がよく、自然と人を惹きつける魅力があります。与えるのと同じくらい、受け取ることも大切に。'},
+'司禄星':{key:'コツコツ',text:'日々の積み重ねを大切にする、堅実な人。家庭や身近な人を守る力があり、続けることで大きな実りを手にします。あなたの「いつも通り」が、誰かの安心です。'},
+'車騎星':{key:'行動',text:'思い立ったらすぐ動く、行動力の人。正直で働き者、スピード感があります。走り続けるタイプなので、休むことも「予定」に入れてあげて。'},
+'牽牛星':{key:'責任感',text:'きちんとしていて、期待に応えようとする誇り高い人。責任感が強く、信頼されます。「ちゃんとしなくていい場所」をひとつ持つと、ぐっと楽になります。'},
+'龍高星':{key:'冒険',text:'型にはまらず、未知の世界に惹かれる自由な人。学ぶこと、旅することで心が満たされます。いつもと違う道を歩くだけでも、エネルギーが戻ります。'},
+'玉堂星':{key:'知性',text:'学ぶこと、知ることが好きな知性の人。物事を筋道立てて考え、伝えるのが上手です。やさしく見守る母性のような温かさも持っています。'},
+};
+const GOGYO={
+'木':{organ:'肝・胆',theme:'めぐり・自律神経・目',color:'緑',
+ many:'「伸びる力」が強く、向上心にあふれています。そのぶん張りつめやすいので、ゆるめる時間を意識して。',
+ lack:'しなやかさや「伸びる力」を補うと◎。朝のストレッチ、緑の野菜、酸味のあるものを取り入れて。'},
+'火':{organ:'心・小腸',theme:'血のめぐり・こころ・睡眠',color:'赤',
+ many:'情熱と明るさにあふれています。熱がこもりやすいので、夜は静かにクールダウンを。',
+ lack:'ぽかぽかした温かさや楽しさを補うと◎。日光浴、笑う時間、赤い食材を取り入れて。'},
+'土':{organ:'脾・胃',theme:'消化・水分代謝・安定',color:'黄',
+ many:'安定感と包容力があります。ためこみやすいので、食べすぎや考えすぎに気をつけて。',
+ lack:'どっしりした安定感を補うと◎。決まった時間の食事、温かい食べもの、よく噛むことを大切に。'},
+'金':{organ:'肺・大腸',theme:'呼吸・肌・手放す力',color:'白',
+ many:'意志が強く、筋を通す人。乾燥しやすいので、肌とのどのうるおいを大切に。',
+ lack:'「手放す力」を補うと◎。深い呼吸、不要なものの片づけ、白い食材を取り入れて。'},
+'水':{organ:'腎・膀胱',theme:'冷え・エネルギーの貯え・知恵',color:'黒',
+ many:'知恵と柔軟さがあります。冷えや考えすぎに気をつけて、体をあたためて。',
+ lack:'エネルギーを「貯える力」を補うと◎。早寝、湯船、黒い食材(黒豆・ごま・海藻)を取り入れて。'},
+};
+const TCS={
+'子丑':'自分の力で道を切りひらく、パイオニアの人。年齢を重ねるほど実りが増えていきます。',
+'寅卯':'現実的で行動派。自分の手で形にしていく力を持っています。',
+'辰巳':'大きなエネルギーの持ち主。波があるほど力に変えていける人です。',
+'午未':'人のために力を尽くせる人。精神的な豊かさを大切にします。',
+'申酉':'忙しいほどいきいきする人。いくつものことを同時にこなす力があります。',
+'戌亥':'理想と精神性を大切にする人。ほかの人にはない自由な発想を持っています。',
+};
+
+// 問診22項目と8体質(前回のボディバランスチェックと同じ点数表)
+const ITEMS=[
+"胸やおなかが張って苦しいことが多い","イライラしやすく怒りっぽい","寝つきが悪い・眠りが浅い","黄色い粘りのある痰や鼻水がよく出る",
+"尿がよく濃い黄色になる","肩がこりやすい","唇や歯ぐきの色が紫っぽい","頭が重く感じられることが多い",
+"雨の日や湿度の高い日は体調が悪くなりがち","皮膚が乾燥してカサカサしている","舌の縁がギザギザしている(歯のあと)","舌の苔がべったりと厚くついている",
+"舌の裏の静脈が太くふくらんで見える","食が細いほうだ","下痢や軟便になることがよくある","腰やひざに疲れや力の抜ける感じがある",
+"むくみを感じることが多い","髪の毛が抜けやすい","目が疲れやすい・乾きやすい","筋肉がピクピクしたり、つりやすい",
+"体温は高くないのに、体が熱っぽく感じる","疲れた時や夜に、手のひらや足の裏がほてる"];
+const _=0;
+const TABLE=[[_,_,_,_,3,1,_,1],[_,_,_,2,3,_,_,_],[_,_,3,2,3,_,1,_],[_,_,_,_,_,3,_,_],[_,_,_,1,_,3,_,_],[_,_,_,_,3,1,3,1],[_,_,_,_,_,_,3,_],[1,_,_,_,_,1,1,3],[_,_,_,_,_,1,_,3],[_,_,3,1,_,_,1,_],[3,1,_,_,_,_,_,2],[2,1,_,_,_,2,_,2],[_,_,_,_,_,_,3,_],[3,_,_,_,_,_,_,_],[3,1,_,_,_,1,_,2],[_,3,_,_,_,_,_,_],[_,3,_,_,_,_,_,2],[_,2,3,_,_,1,1,_],[_,_,3,1,_,_,_,_],[_,_,3,1,1,_,_,_],[_,_,_,3,2,1,_,_],[_,_,_,3,_,_,_,_]];
+function scoreMonshin(checked){
+  const raw=new Array(8).fill(0);
+  checked.forEach((c,i)=>{if(c)TABLE[i].forEach((v,t)=>raw[t]+=v)});
+  return raw.map(s=>s>=10?Math.round(s/2*10)/10:s); // 10以上は÷2
+}
+const TYPES=[
+{name:'脾虚',yomi:'ひきょ',el:'土',kyo:true,icon:'🍚',catch:'おなかのエネルギーが少しお疲れ',
+ state:'食べたものをエネルギーに変える「おなか(脾胃)」の力が弱まっている状態。元気のもとが作られにくいので、疲れやすさやだるさとして表れやすくなっています。',
+ point:['足三里(ひざのお皿の下、指4本分)をじんわり温める','おへそのまわりを時計回りにやさしくなでる','朝ごはんは温かいものから'],
+ life:['かぼちゃ・山いも・お米など、やさしい甘みの食材を','冷たい飲みもの・生ものは控えめに','心配ごとは書き出して、考えすぎない']},
+{name:'腎陽虚',yomi:'じんようきょ',el:'水',kyo:true,icon:'🔥',catch:'体をあたためる火が小さめ',
+ state:'体をあたためる「陽気」が不足して、冷えやすくなっている状態。特に腰から下、足先の冷えや、腰・ひざのだるさとして出やすくなっています。',
+ point:['腎兪(腰のくびれの高さ、背骨から指2本外)をカイロで温める','くるぶしまでの足湯を10分','湯船に肩までつかる'],
+ life:['しょうが・ねぎ・黒豆・黒ごまで内側から温める','夜ふかしを控え、エネルギーを貯める','焦らず、自分のペースを守る']},
+{name:'血虚',yomi:'けっきょ',el:'木',kyo:true,icon:'🌹',catch:'からだをうるおす「血」が足りない',
+ state:'全身に栄養を届ける「血」が不足している状態。目の疲れ、髪や肌のパサつき、眠りの浅さなどにサインが出やすくなっています。',
+ point:['三陰交(内くるぶしから指4本上)をやさしく押す','頭皮をゆっくりもみほぐす','スマホを見る時間を少し減らして目を休める'],
+ life:['ほうれん草・レバー・なつめ・黒豆など血をつくる食材を','23時までに眠って、血を養う','がんばりすぎず、ほっとする時間を']},
+{name:'陰虚',yomi:'いんきょ',el:'水',kyo:true,icon:'💧',catch:'からだのうるおいが不足ぎみ',
+ state:'体を内側からうるおす「陰液」が不足し、乾燥と、こもった熱が出やすい状態。ほてりや寝汗、肌・のどの乾きとして表れやすくなっています。',
+ point:['太渓(内くるぶしとアキレス腱の間)をやさしく押す','熱すぎないお湯で、ゆっくり入浴','保湿ケアをいつもよりていねいに'],
+ life:['白きくらげ・豆乳・梨・はちみつなど、うるおす食材を','辛いもの・お酒は控えめに','夜は早めに休み、静かな時間を']},
+{name:'気滞',yomi:'きたい',el:'木',kyo:false,icon:'🌀',catch:'エネルギーのめぐりが渋滞中',
+ state:'生命エネルギー「気」の流れが滞っている状態。ストレスや我慢がたまると、胸やおなかの張り、イライラ、ため息として表れやすくなっています。',
+ point:['太衝(足の親指と人差し指の骨の間)を押す','胸をひらくストレッチと深呼吸','好きな香り(柑橘・ミント)をかぐ'],
+ life:['玉ねぎ・春菊・柑橘・ジャスミン茶でめぐりを助ける','体を動かして、気持ちも一緒に流す','「我慢していること」を言葉にしてみる']},
+{name:'湿熱',yomi:'しつねつ',el:'土',kyo:false,icon:'♨️',catch:'余分な水分に熱がこもっている',
+ state:'体にたまった余分な水分に熱がこもっている状態。べたつく汗、濃い色の尿、吹き出ものや、ねばりのある痰として出やすくなっています。',
+ point:['陰陵泉(すねの内側、ひざ下のくぼみ)を押す','汗をかいたらこまめに流す','通気性のよい服で熱を逃がす'],
+ life:['きゅうり・冬瓜・はと麦・緑豆で熱と水をすっきり','脂っこいもの・甘いもの・お酒は控えめに','寝室の湿気をためない']},
+{name:'血瘀',yomi:'けつお',el:'火',kyo:false,icon:'🍇',catch:'血のめぐりがゆっくり',
+ state:'血の流れが滞っている状態。肩こり、くすみ、唇の色の暗さ、決まった場所の痛みなどとして表れやすくなっています。',
+ point:['血海(ひざのお皿の内側上、指3本分)を温める','肩・首をゆっくり回す','ふくらはぎをさすり上げる'],
+ life:['玉ねぎ・青魚・黒きくらげ・ベリーでめぐりを助ける','同じ姿勢を長く続けない','体を冷やさない服装を']},
+{name:'湿痰',yomi:'しったん',el:'土',kyo:false,icon:'☁️',catch:'余分な水分がたまりやすい',
+ state:'余分な水分が体にたまり、重く固まりやすい状態。むくみ、頭の重さ、雨の日の不調、体の重だるさとして出やすくなっています。',
+ point:['足三里を温めて、水をさばく力を助ける','おなかのマッサージで水のめぐりを','足首を回して、むくみを流す'],
+ life:['はと麦・小豆・昆布・とうもろこしのひげ茶を','冷たい飲みもの・甘いもの・乳製品は控えめに','軽く汗をかく運動を習慣に']},
+];
+// 五行の「からだ」の言葉
+const EL_BODY={木:'めぐり(肝)',火:'血と心(心)',土:'おなか(脾胃)',金:'呼吸と肌(肺)',水:'冷えと貯える力(腎)'};
+
+
+// 生まれ持った体質 × 今のからだ:考察とアドバイス
+const ELC={
+'木':{trait:'がんばる力・伸びる力',emo:'イライラや我慢',season:'春',food:'春菊・セロリ・柑橘・お酢',act:'伸びやストレッチ、外をゆっくり歩く',night:'23時までに眠って、めぐりを休ませる'},
+'火':{trait:'情熱・明るさ',emo:'はしゃぎすぎや、そわそわする不安',season:'夏',food:'トマト・なつめ・少しの苦味(ゴーヤ・緑茶)',act:'声を出して笑う、ゆったり呼吸する',night:'寝る前は照明を落として、心を静める'},
+'土':{trait:'受けとめる力・消化する力',emo:'考えすぎや心配',season:'梅雨・季節の変わり目',food:'かぼちゃ・さつまいも・山いも・お米',act:'よく噛んで食べる、食後に少し歩く',night:'寝る3時間前までに夕食を終える'},
+'金':{trait:'けじめをつける力・手放す力',emo:'さみしさや悲しみ',season:'秋',food:'大根・れんこん・梨・白ごま',act:'深呼吸、片づけ、軽く汗をかく',night:'のど・肌を保湿してから眠る'},
+'水':{trait:'貯える力・ねばる力',emo:'不安やおそれ',season:'冬',food:'黒豆・黒ごま・海藻・くるみ',act:'腰と足元をあたためる、湯船につかる',night:'いつもより30分早く眠る'},
+};
+const GEN=['木','火','土','金','水']; // 相生の順
+const CTRL={'木':'土','土':'水','水':'火','火':'金','金':'木'}; // 相剋
+const CTRL_NOTE={
+'木土':'がんばりや緊張、ストレスが「おなか」に出る形です。気を張る日が続くと、食欲が落ちたり、おなかがゆるくなったりしやすい組み合わせ。',
+'土水':'食べすぎや、たまった水分が「冷え」や「貯える力」を弱める形です。むくみや腰の重さ、冷えとして出やすい組み合わせ。',
+'水火':'冷えや不安が、「血のめぐり」や「心」の元気を押さえる形です。体が冷えると気持ちまで沈みやすい組み合わせ。',
+'火金':'こもった熱や気持ちの高ぶりが、「呼吸」や「肌」を乾かす形です。肌あれやのどの乾き、呼吸の浅さに出やすい組み合わせ。',
+'金木':'我慢やさみしさ、張りつめた気持ちが「めぐり」をしばる形です。肩こりやため息、胸のつかえとして出やすい組み合わせ。',
+};
+const STAR_HABIT={
+'貫索星':['ひとりで抱え込みやすく、弱音を吐かずにがんばってしまう','「ひとりの時間」を予定に入れて、ちゃんと回復させる'],
+'石門星':['人に合わせて動くことが多く、気づかないうちに気疲れをためやすい','人と会った日は、ひとりでほっとする時間をセットに'],
+'鳳閣星':['楽しいことやおいしいものが好きで、食べすぎや夜ふかしになりやすい','楽しみは「昼」に。夜はゆるめる時間にする'],
+'調舒星':['感受性が強く、感じたことを内側にためこみやすい','書く・描く・歌うなど、感じたことを外に出す'],
+'禄存星':['人のために動きすぎて、自分のケアが後回しになりやすい','自分のためだけの時間を「予約」して守る'],
+'司禄星':['コツコツ型で、疲れや気持ちもいつの間にかためこみやすい','週に1回「何もしない日」で、たまったものをリセット'],
+'車騎星':['じっとしていられず、休む前に動いてしまう','休むことも「予定」として、先に手帳に書き込む'],
+'牽牛星':['責任感から「ちゃんと」を続けて、緊張がとけにくい','「ちゃんとしなくていい場所」をひとつ持つ'],
+'龍高星':['好奇心のままに動いて、食事や睡眠のリズムが乱れやすい','起きる時間と朝ごはんだけは毎日そろえる'],
+'玉堂星':['頭を使う時間が長く、考えすぎて体が置き去りになりやすい','1時間に1回は立ち上がって、体に意識を戻す'],
+};
+function relation(de,te){
+  if(de===te)return'same';
+  if(GEN[(GEN.indexOf(de)+1)%5]===te)return'iGen';   // 自分が今のサインを生む
+  if(GEN[(GEN.indexOf(te)+1)%5]===de)return'genMe';  // 今のサインが自分を生む
+  if(CTRL[de]===te)return'iCtrl';
+  return'ctrlMe';
+}
+function kousatsu(o){ // o:{you,de,te,top,second,N,chest,gogyo,kyo,jit,img}
+  const {you,de,te,top}=o,T=ELC,eb=EL_BODY;
+  const rel=relation(de,te);
+  const parts=[];
+  // ① 五行のつながり
+  let r1;
+  if(rel==='same') r1=`生まれ持った中心と、今のサインが同じ<b>「${te}」</b>。${T[de].trait}は${you}のいちばんの持ち味ですが、同時にいちばん使い込みやすい場所でもあります。得意だからこそ頼りすぎて、${eb[te]}が疲れてきている可能性があります。`;
+  else if(rel==='iGen') r1=`${you}の中心<b>「${de}」</b>は、今のサインが出ている<b>「${te}」</b>を生み育てる関係(相生)。持ち前の${T[de].trait}で${eb[te]}を支えようと、エネルギーを注ぎ続けてきたのかもしれません。このままだと、もとの「${de}」の力まで減ってしまうので、早めのケアが大切です。`;
+  else if(rel==='genMe') r1=`今のサインが出ている<b>「${te}」</b>は、${you}の中心<b>「${de}」</b>を育てる、お母さんのような存在(相生)。${eb[te]}が乱れると、${you}本来の${T[de].trait}に栄養が届きにくくなります。「最近、自分らしさが出ない」と感じるなら、その根っこはここかもしれません。`;
+  else if(rel==='iCtrl') r1=`${you}の中心<b>「${de}」</b>は、<b>「${te}」</b>をおさえる関係(相剋)。${T[de].trait}が強く働きすぎると、${eb[te]}を押さえつけてしまうことがあります。${CTRL_NOTE[de+te]}`;
+  else r1=`今のサインが出ている<b>「${te}」</b>は、${you}の中心<b>「${de}」</b>をおさえる関係(相剋)。${eb[te]}の乱れが、${you}本来の${T[de].trait}にブレーキをかけているかもしれません。${CTRL_NOTE[te+de]}`;
+  parts.push(['🌳 五行のつながりから',r1]);
+  // ② 命式の五行バランス
+  const n=o.gogyo[GEN.indexOf(te)];
+  let r2;
+  if(n===0) r2=`命式の中に「${te}」がひとつもない${you}。もともと手薄なところなので、無理が続くとサインが出やすい場所です。逆にいえば、意識してケアするほど変化を感じやすいところでもあります。`;
+  else if(n>=3) r2=`命式の中に「${te}」が${n}つと多い${you}。もともと強く働く場所なので、使いすぎて「あふれる・たまる」形でサインが出やすくなっています。`;
+  else r2=`命式の中の「${te}」は${n}つ。極端に多くも少なくもないので、今のサインは生まれつきというより、<b>最近の暮らし方や環境</b>の影響が大きいと考えられます。`;
+  parts.push(['🫧 生まれ持った五行のバランスから',r2]);
+  // ③ 心のクセ(中心星)
+  const h=STAR_HABIT[o.chest];
+  parts.push(['⭐ 心のクセから',`心のまんなかに「${o.chest}」を持つ${you}は、<b>${h[0]}</b>ところがあります。その積み重ねが、今の「${top.name}」のサインにつながっているのかもしれません。<br>また「${te}」は<b>${T[te].emo}</b>と結びつきやすい五行。最近こんな気持ちが続いていなかったか、ふり返ってみてください。`]);
+  // ④ 虚実
+  parts.push(['⚖️ 「足りない」と「たまっている」から', o.kyo>=o.jit
+   ?`今は「足りない(虚)」ほうに傾いています。睡眠不足、食事の乱れ、がんばり続けた疲れなどで、<b>エネルギーやうるおいを使いすぎた</b>状態かもしれません。今は「足す・休む」が最優先です。`
+   :`今は「たまっている(実)」ほうに傾いています。ストレス、運動不足、食べすぎや湿気などで、<b>気・血・水が流れずにたまっている</b>状態かもしれません。今は「流す・動かす・出す」が最優先です。`]);
+  if(o.second) parts.push(['🌸 もうひとつのサイン',`次に高いのは「${o.second.name}」。${o.second.catch}傾向もあります。メインのケアと一緒に、少し意識してあげてください。`]);
+  // アドバイス
+  const mother=GEN[(GEN.indexOf(te)+4)%5],child=GEN[(GEN.indexOf(te)+1)%5];
+  const step2=top.kyo
+   ?{t:`「${mother}」を補って、「${te}」を育てる`,d:`東洋医学では、足りないときは<b>お母さんにあたる五行</b>を補うと、子どもが元気になると考えます。「${te}」のお母さんは「${mother}」。`,list:[`${T[mother].food}を食事に`,T[mother].act,T[mother].night]}
+   :{t:`「${child}」を動かして、「${te}」の詰まりを流す`,d:`東洋医学では、たまっているときは<b>子どもにあたる五行</b>を動かして、流れをつくると考えます。「${te}」の子どもは「${child}」。`,list:[T[child].act,`${T[child].food}を食事に`,T[te].night]};
+  const advice=[
+   {t:`まずは今の「${top.name}」をやわらげる`,d:`いちばん出ているサインから整えます。体がゆるむと、心も動きやすくなります。`,list:[top.point[0],top.life[0],top.life[1]]},
+   step2,
+   {t:`生まれ持った「${o.img}」の体質を味方に`,d:`${you}の中心「${de}」の力が戻ると、ほかのバランスも自然に整いやすくなります。`,list:[o.N.care[0],o.N.care[1],STAR_HABIT[o.chest][1]]},
+  ];
+  const season=(de===te)?`<b>${T[te].season}</b>は、${you}の体質と今のサインが重なる季節。特に早めのケアを。`
+   :`<b>${T[te].season}</b>は今のサイン「${te}」が、<b>${T[de].season}</b>は生まれ持った「${de}」が揺れやすい季節。季節の変わり目は少しペースを落として。`;
+  const day=[['🌅 朝',T[te].act.split('、')[0]+'。白湯を一杯'],['🍚 食事',T[te].food+'を意識して'],['🌙 夜',T[te].night]];
+  return {parts,advice,season,day};
+}
+
+// ツボ図解(やわらかい線画タッチ)
+const SK='#fbe2cc',SK2='#f6cfae',LN='#4d4a48';
+const DEF=`<defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter></defs>`;
+const pin=(x,y,l,lx,ly)=>`<circle cx="${x}" cy="${y}" r="14" fill="#7fb2e5" opacity=".25"/><circle cx="${x}" cy="${y}" r="6.5" fill="#6aa3df"/>`+
+ (l?`<line x1="${x}" y1="${y}" x2="${lx}" y2="${ly}" stroke="#6aa3df" stroke-width="1.2" stroke-dasharray="3 3"/><text x="${lx+(lx>x?4:-4)}" y="${ly+5}" font-size="14" font-weight="700" fill="#3f7fc0" text-anchor="${lx>x?'start':'end'}">${l}</text>`:'');
+const daisy=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})" stroke="${LN}" stroke-width="1" fill="#fff">${[0,60,120,180,240,300].map(a=>`<ellipse cx="0" cy="-7" rx="4" ry="6.5" transform="rotate(${a})"/>`).join('')}<circle r="3.6" fill="#f7e27a"/></g>`;
+const bub=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${LN}" stroke-width="1"/>`;
+// 指幅のものさし
+const ruler=(x,y1,y2,label)=>`<g stroke="#c9a24a" stroke-width="1.4" fill="none"><line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}"/><line x1="${x-5}" y1="${y1}" x2="${x+5}" y2="${y1}"/><line x1="${x-5}" y1="${y2}" x2="${x+5}" y2="${y2}"/></g><text x="${x-8}" y="${(y1+y2)/2+5}" font-size="13" fill="#a8822c" text-anchor="end" font-weight="700">${label}</text>`;
+const wrap=(vb,body)=>`<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">${DEF}${body}</svg>`;
+const skin=d=>`<path d="${d}" fill="${SK}"/><path d="${d}" fill="${SK2}" filter="url(#soft)" opacity=".55" transform="translate(6 4) scale(.97)"/><path d="${d}" fill="none" stroke="${LN}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+const FIG={
+// すね外側:足三里
+sanri:()=>wrap('0 0 260 250',
+ skin('M88 0 C82 40 80 62 84 88 C88 120 96 170 100 250 L150 250 C152 175 158 120 160 88 C164 58 162 34 158 0 Z')+
+ `<ellipse cx="121" cy="76" rx="20" ry="22" fill="#fdeedf" stroke="${LN}" stroke-width="1.4"/>`+
+ `<path d="M120 102 C122 150 124 200 125 250" stroke="#c8b1a0" stroke-width="1.2" fill="none" stroke-dasharray="4 4"/>`+
+ ruler(108,98,150,'指4本')+pin(140,150,'足三里',196,190)+
+ `<text x="130" y="40" font-size="11" fill="#8a7f78" text-anchor="middle">ひざのお皿</text>`+
+ `<text x="126" y="232" font-size="11" fill="#8a7f78">すねの骨</text>`+daisy(222,40,1.1)+bub(200,70,4)+bub(214,86,2.5)),
+// すね内側:三陰交・陰陵泉
+inner:(pts)=>wrap('0 0 260 270',
+ skin('M92 0 C86 30 90 60 94 90 C98 130 100 170 104 205 C100 222 70 226 40 232 C22 236 20 256 40 258 L168 258 C186 256 188 236 176 222 C164 200 162 170 166 120 C170 80 176 40 172 0 Z')+
+ `<path d="M98 30 C104 60 108 120 110 205" stroke="#c8b1a0" stroke-width="1.2" fill="none" stroke-dasharray="4 4"/>`+
+ `<ellipse cx="130" cy="218" rx="11" ry="9" fill="#fdeedf" stroke="${LN}" stroke-width="1.3"/>`+
+ `<text x="146" y="246" font-size="11" fill="#8a7f78">内くるぶし</text><text x="112" y="16" font-size="11" fill="#8a7f78">ひざ</text>`+
+ (pts.includes('sanin')?ruler(152,160,209,'')+`<text x="196" y="190" font-size="13" fill="#a8822c" font-weight="700">指4本</text>`+pin(118,160,'三陰交',74,128):'')+
+ (pts.includes('inryo')?pin(112,48,'陰陵泉',72,92):'')+daisy(225,40)+bub(205,62,3.5)),
+// 内くるぶし:太渓
+taikei:()=>wrap('0 0 260 220',
+ skin('M100 0 C98 50 100 90 104 120 C96 140 60 150 34 158 C14 164 14 190 36 194 L190 196 C214 194 218 170 204 150 C190 130 186 80 190 0 Z')+
+ `<ellipse cx="128" cy="132" rx="16" ry="13" fill="#fdeedf" stroke="${LN}" stroke-width="1.4"/>`+
+ `<path d="M184 10 C180 60 182 110 194 152" stroke="#c8b1a0" stroke-width="1.4" fill="none"/>`+
+ `<text x="250" y="40" font-size="11" fill="#8a7f78" text-anchor="end">アキレス腱</text><text x="76" y="118" font-size="11" fill="#8a7f78" text-anchor="end">内くるぶし</text>`+
+ pin(160,134,'太渓',214,92)+daisy(36,40)+bub(60,60,3.5)),
+// 足の甲:太衝
+taisho:()=>wrap('0 0 260 250',
+ skin('M84 248 C78 200 66 150 62 112 C58 84 56 60 60 40 C62 20 88 14 92 34 C94 22 106 22 108 36 C110 26 122 26 124 40 C126 32 138 32 139 46 C141 40 152 42 152 56 C162 64 168 92 166 130 C164 170 164 210 164 248 Z')+
+ `<path d="M66 34 C68 26 82 24 84 32" stroke="${LN}" stroke-width="1" fill="none"/>`+
+ `<path d="M92 40 L98 112 M108 42 L112 114 M124 46 L126 116 M139 52 L138 118" stroke="#c8b1a0" stroke-width="1.1" fill="none" stroke-dasharray="3 4"/>`+
+ `<defs><marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#e5a07a"/></marker></defs>`+
+ `<path d="M100 54 L104 100" stroke="#e5a07a" stroke-width="2" fill="none" marker-end="url(#ar)"/>`+
+ `<text x="250" y="240" font-size="11" fill="#8a7f78" text-anchor="end">(右足・甲)</text><text x="34" y="30" font-size="11" fill="#8a7f78" text-anchor="middle">親指</text>`+
+ pin(104,120,'太衝',196,168)+daisy(222,36)+bub(204,64,3)),
+// ひざ上内側:血海
+kekkai:()=>wrap('0 0 260 250',
+ skin('M70 0 C64 50 66 110 84 150 C90 190 94 220 96 250 L156 250 C156 220 160 190 166 150 C176 110 178 50 176 0 Z')+
+ `<ellipse cx="124" cy="160" rx="21" ry="23" fill="#fdeedf" stroke="${LN}" stroke-width="1.4"/>`+
+ ruler(66,96,138,'指3本')+pin(92,96,'血海',62,52)+
+ `<text x="124" y="200" font-size="11" fill="#8a7f78" text-anchor="middle">ひざのお皿</text><text x="250" y="240" font-size="11" fill="#8a7f78" text-anchor="end">(右足・正面)</text>`+daisy(220,40)+bub(204,66,3.5)),
+// 背中:腎兪
+jinyu:()=>wrap('0 0 260 250',
+ skin('M40 0 C44 30 52 60 70 110 C76 130 72 150 64 175 C56 200 52 225 50 250 L210 250 C208 225 204 200 196 175 C188 150 184 130 190 110 C208 60 216 30 220 0 Z')+
+ `<path d="M130 0 L130 250" stroke="#c8b1a0" stroke-width="1.4" stroke-dasharray="5 5"/>`+
+ `<path d="M70 150 L190 150" stroke="#e5a07a" stroke-width="1" stroke-dasharray="3 3"/>`+
+ `<text x="40" y="138" font-size="11" fill="#c27b55">くびれの高さ</text><text x="136" y="20" font-size="11" fill="#8a7f78">背骨</text>`+
+ `<g stroke="#c9a24a" stroke-width="1.3"><line x1="130" y1="176" x2="156" y2="176"/></g><text x="143" y="194" font-size="12" fill="#a8822c" text-anchor="middle" font-weight="700">指2本</text>`+
+ pin(104,150,'',0,0)+pin(156,150,'腎兪',210,108)+daisy(28,30)+bub(48,56,3)),
+};
+const TSUBO={
+'足三里':{yomi:'あしさんり',fig:()=>FIG.sanri(),find:['ひざのお皿のすぐ下に指をそろえて置く','指4本分下がった、すねの骨の外側','押すとじんわり響くところ'],how:'親指で、息を吐きながら5秒押して、ゆっくりはなす。5回くり返します。カイロやお灸で温めるのも◎',role:'おなかの元気を助け、疲れにくい体をつくるツボ'},
+'三陰交':{yomi:'さんいんこう',fig:()=>FIG.inner(['sanin']),find:['内くるぶしの一番高いところに小指を置く','指4本分上、すねの骨のきわ','少し押すと痛気持ちいいところ'],how:'親指で、骨のきわに向かってやさしく5秒。左右5回ずつ。お風呂の中でもおすすめです',role:'血をととのえ、女性のリズムを助けるツボ'},
+'陰陵泉':{yomi:'いんりょうせん',fig:()=>FIG.inner(['inryo']),find:['すねの内側の骨のきわを、下から上へなぞる','ひざの下で指が止まるくぼみ'],how:'親指で下から押し上げるように5秒。左右5回ずつ。むくみが気になる夜に',role:'余分な水分をさばき、体を軽くするツボ'},
+'太渓':{yomi:'たいけい',fig:()=>FIG.taikei(),find:['内くるぶしの一番高いところ','そこから、かかと側(アキレス腱)へすべらせる','くるぶしとアキレス腱の間のくぼみ'],how:'親指の腹で、くぼみをやさしく5秒。強く押さず、さするだけでも大丈夫です',role:'体のうるおいと、エネルギーの貯えを助けるツボ'},
+'太衝':{yomi:'たいしょう',fig:()=>FIG.taisho(),find:['足の親指と人差し指の間に指を置く','骨の間を足首のほうへなぞる','骨が合わさって指が止まるところ'],how:'人差し指で、足首のほうへ押し上げるように5秒。イライラした時にも',role:'気のめぐりを流し、張りつめた気持ちをゆるめるツボ'},
+'血海':{yomi:'けっかい',fig:()=>FIG.kekkai(),find:['ひざのお皿の内側の上の角','そこから指3本分上','太ももの内側のふくらみ'],how:'親指で5秒押す、を5回。手のひらで温めるのも◎',role:'血のめぐりを助けるツボ'},
+'腎兪':{yomi:'じんゆ',fig:()=>FIG.jinyu(),find:['両手を腰に当て、ウエストのくびれの高さを確認','背骨から指2本分外側(左右)','親指が自然に当たるところ'],how:'こぶしで軽くトントン、または手のひらで温める。カイロを貼るのもおすすめです',role:'腰を温め、体をあたためる力を助けるツボ'},
+};
+// 体質ごとのツボ
+const TYPE_TSUBO={'脾虚':['足三里'],'腎陽虚':['腎兪','太渓'],'血虚':['三陰交'],'陰虚':['太渓','三陰交'],'気滞':['太衝'],'湿熱':['陰陵泉'],'血瘀':['血海','三陰交'],'湿痰':['足三里','陰陵泉']};
+function tsuboCard(n){const t=TSUBO[n];return `<div class="tsubo"><div class="tfig">${t.fig()}</div><div class="tbody"><h4>${n} <span>${t.yomi}</span></h4><p class="role">${t.role}</p><ol>${t.find.map(s=>`<li>${s}</li>`).join('')}</ol><p class="how">🌸 ${t.how}</p></div></div>`;}
+
+
+// 教科書ページ(東洋医学・算命学・施術)
+const ELCOL={'木':'#8fd19e','火':'#f4a3a3','土':'#e9c87a','金':'#c9ccd6','水':'#8cc8e8'};
+function gogyoDiagram(){
+  const els=['木','火','土','金','水'],cx=160,cy=150,R=100;
+  const P=els.map((e,i)=>{const a=-Math.PI/2+i*2*Math.PI/5;return[cx+Math.cos(a)*R,cy+Math.sin(a)*R]});
+  let g='<defs><marker id="ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e5a07a"/></marker><marker id="gb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6aa3df"/></marker></defs>';
+  const shrink=(a,b,d)=>{const dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);return[a[0]+dx/L*d,a[1]+dy/L*d,b[0]-dx/L*d,b[1]-dy/L*d]};
+  for(let i=0;i<5;i++){const[x1,y1,x2,y2]=shrink(P[i],P[(i+2)%5],30);g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#6aa3df" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#gb)"/>`}
+  for(let i=0;i<5;i++){const[x1,y1,x2,y2]=shrink(P[i],P[(i+1)%5],30);g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#e5a07a" stroke-width="2" marker-end="url(#ga)"/>`}
+  els.forEach((e,i)=>{g+=`<circle cx="${P[i][0]}" cy="${P[i][1]}" r="24" fill="${ELCOL[e]}" stroke="#4d4a48" stroke-width="1.2"/><text x="${P[i][0]}" y="${P[i][1]+7}" text-anchor="middle" font-size="20" font-weight="700" fill="#3d4a4f">${e}</text>`});
+  return `<svg viewBox="0 0 320 300" style="width:100%;max-width:340px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">${g}</svg><p class="note" style="text-align:center"><span style="color:#e5a07a">━ 相生(生み育てる)</span> ・ <span style="color:#6aa3df">┅ 相剋(おさえる)</span></p>`;
+}
+function kiketsuDiagram(){
+  const it=[['気','き','#bfe6c8','目に見えない生命エネルギー。体を動かし、温め、守る'],['血','けつ','#f6c3c3','全身に栄養とうるおいを運ぶ。心を落ち着かせる'],['水','すい','#bfe0f2','血以外の体液。体をうるおし、熱を冷ます']];
+  return `<svg viewBox="0 0 320 250" style="width:100%;max-width:340px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">`+
+  [[160,70],[95,175],[225,175]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="62" fill="${it[i][2]}" opacity=".75" stroke="#4d4a48" stroke-width="1.2"/><text x="${x}" y="${y+4}" text-anchor="middle" font-size="30" font-weight="700" fill="#3d4a4f">${it[i][0]}</text><text x="${x}" y="${y+24}" text-anchor="middle" font-size="11" fill="#5b6a70">${it[i][1]}</text>`).join('')+
+  `<text x="160" y="146" text-anchor="middle" font-size="12" fill="#3d4a4f" font-weight="700">めぐって</text><text x="160" y="161" text-anchor="middle" font-size="12" fill="#3d4a4f" font-weight="700">支えあう</text></svg>`+
+  `<ul class="chk">${it.map(x=>`<li><b>${x[0]}</b>:${x[3]}</li>`).join('')}</ul>`;
+}
+const ZOFU=[['肝','木','気と血のめぐりを調整し、血を蓄える','目・爪・筋','イライラ・怒り','春'],['心','火','血を全身に送り、こころの働きをつかさどる','舌・顔色','はしゃぎすぎ・不安','夏'],['脾','土','食べものを消化し、気・血・水のもとをつくる','口・唇・筋肉','考えすぎ・心配','梅雨・季節の変わり目'],['肺','金','呼吸で気を取り込み、水をめぐらせ、体を守る','鼻・皮膚','悲しみ・さみしさ','秋'],['腎','水','生命力を蓄え、成長・老化や水分代謝に関わる','耳・髪・骨','不安・おそれ','冬']];
+const JUNI={
+'天報星':['胎児','変化と多才。いろいろな可能性を秘めたエネルギー'],'天印星':['赤ちゃん','愛され上手。素直で人に好かれるエネルギー'],'天貴星':['子ども','気品と学ぶ力。純粋で向上心のあるエネルギー'],
+'天恍星':['思春期','夢と憧れ。自由で華やかなエネルギー'],'天南星':['青年','行動と批判精神。まっすぐで勢いのあるエネルギー'],'天禄星':['壮年','安定と現実感覚。どっしり落ち着いたエネルギー'],
+'天将星':['家長','最大のパワー。リーダーとして背負うエネルギー'],'天堂星':['老人','穏やかさと気配り。経験を生かすエネルギー'],'天胡星':['病人','感性と夢見る力。ロマンチックなエネルギー'],
+'天極星':['死人','無欲で純粋。人のために尽くすエネルギー'],'天庫星':['入墓','探究心と継承。ひとつを深めるエネルギー'],'天馳星':['あの世','瞬発力と感覚。一瞬に集中するエネルギー']};
+const pageToyo=()=>`
+<div class="card"><h2>東洋医学ってなに?</h2><p>東洋医学は、体を「部分」ではなく「全体」として見る考え方です。不調の原因を、体の中のバランスのくずれと捉え、そのくずれを整えることで、自然と元気になる力(自然治癒力)を引き出します。</p><p>体だけでなく、心・季節・食事・暮らし方まで、すべてがつながっていると考えるのが特徴です🌿</p></div>
+<div class="card"><h2>陰陽(いんよう)</h2><p>世界のすべてを、たがいに支えあう「陰」と「陽」の2つで捉えます。</p>
+<div class="yy"><div><b>陰</b><span>夜・冷・静・潤・内側</span></div><div><b>陽</b><span>昼・熱・動・乾・外側</span></div></div>
+<p>どちらかが多すぎても少なすぎても不調のもと。シーソーのように、バランスよく揺れているのが健康な状態です。</p></div>
+<div class="card"><h2>五行(ごぎょう)</h2><p>自然界のすべてを「木・火・土・金・水」の5つの性質に分けて考えます。5つは、たがいに<b>生み育てあい(相生)</b>、<b>おさえあって(相剋)</b>、バランスを保っています。</p>${gogyoDiagram()}
+<div class="box"><h4>相生のめぐり</h4><p style="font-size:14px">木が燃えて火を生み → 火が燃えたあとの灰が土になり → 土の中から金(鉱物)が生まれ → 金の表面に水がつき → 水が木を育てる</p></div></div>
+<div class="card"><h2>五臓と五行</h2><p class="note">東洋医学の「五臓」は、臓器そのものよりも広い「はたらき」を表します。</p>
+<div class="tbl">${ZOFU.map(z=>`<div class="row5"><span class="el" style="background:${ELCOL[z[1]]}">${z[0]}<small>${z[1]}</small></span><div><p><b>${z[2]}</b></p><p class="note">関わる部分:${z[3]} / 感情:${z[4]} / 季節:${z[5]}</p></div></div>`).join('')}</div></div>
+<div class="card"><h2>気・血・水(き・けつ・すい)</h2><p>体をつくり、動かしている3つの要素。どれかが<b>足りない</b>か、<b>滞る</b>と、不調として表れます。</p>${kiketsuDiagram()}</div>
+<div class="card"><h2>虚と実</h2><div class="yy"><div style="background:#e6f4fb"><b>虚(きょ)</b><span>足りない状態<br>→ 補う・休む・温める</span></div><div style="background:#fdeee6"><b>実(じつ)</b><span>たまっている状態<br>→ 流す・動かす・出す</span></div></div></div>
+<div class="card"><h2>8つの体質タイプ</h2><p class="note">体質チェックで出てくる8つのタイプです。</p>
+${TYPES.map(t=>`<div class="tcard" style="margin:8px 0"><span style="font-size:24px">${t.icon}</span> <b style="font-size:17px">${t.name}</b> <span class="yomi">${t.yomi}・${t.kyo?'虚':'実'}・${t.el}</span><p style="font-size:14px;margin-top:4px"><b>${t.catch}</b><br>${t.state}</p></div>`).join('')}</div>`;
+const pageSanmei=()=>`
+<div class="card"><h2>算命学ってなに?</h2><p>算命学は、古代中国で生まれた運命学です。生年月日を、自然界の「干支(かんし)」に置きかえて、その人が生まれ持った性質やエネルギーを読み解きます。</p><p>東洋医学と同じ<b>陰陽五行</b>がベース。だからこそ、生まれ持った「体質」ともつながって見ることができます🌸</p></div>
+<div class="card"><h2>十干と十二支</h2><p><b>十干(じっかん)</b>は天の気、<b>十二支(じゅうにし)</b>は地の気。この組み合わせで、年・月・日を表します。</p>
+<div class="tbl">${['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'].map((s,i)=>{const n=NIKKAN[s];return `<div class="row5"><span class="el" style="background:${ELCOL[['木','火','土','金','水'][i>>1]]}">${s}<small>${i%2?'陰':'陽'}</small></span><div><p><b>${n.icon} ${n.img}</b> ― ${n.catch}</p></div></div>`}).join('')}</div></div>
+<div class="card"><h2>命式の見方</h2><div class="box"><h4>陰占(いんせん)</h4><p style="font-size:14px">年・月・日の干支と蔵干。その人の「内面」や、生まれ持った五行のバランスを表します。中でも<b>日干</b>は「自分自身」を表す、いちばん大切な文字です。</p></div>
+<div class="box"><h4>陽占(ようせん)・人体図</h4><p style="font-size:14px">陰占から導いた星を、人の体の形に並べたもの。外から見た性格や、人生のエネルギーを表します。</p>
+<div class="jintai" style="font-size:13px">${[['',''],['頭','目上・親'],['初年','〜30歳頃'],['左手','配偶者・友人'],['胸','本質・中心'],['右手','社会・仕事'],['晩年','60歳頃〜'],['腹','目下・子ども'],['中年','30〜60歳頃']].map(([a,b],i)=>`<div class="${[2,6,8].includes(i)?'sub':''}" style="font-size:15px">${a}<small>${b}</small></div>`).join('')}</div>
+<p class="note">十字の5マス=十大主星(性質)、水色の3マス=十二大従星(エネルギー)</p></div></div>
+<div class="card"><h2>十大主星</h2><p class="note">日干と、ほかの干との五行の関係から生まれる10の星です。</p>
+${Object.entries(CHUSHIN).map(([k,v])=>`<div class="why"><h4>${k} <span class="key">${v.key}</span></h4><p>${v.text}</p></div>`).join('')}</div>
+<div class="card"><h2>十二大従星</h2><p class="note">人の一生になぞらえた12のエネルギーの星です。</p>
+${Object.entries(JUNI).map(([k,v])=>`<div class="why"><h4>${k} <span class="note">(${v[0]})</span></h4><p>${v[1]}</p></div>`).join('')}</div>
+<div class="card"><h2>天中殺</h2><p>十干と十二支を組み合わせると、12の支のうち2つが余ります。この「天の気が届かない」2つが天中殺。6つのグループがあり、それぞれの持ち味があります。</p>
+${Object.entries(TCS).map(([k,v])=>`<div class="why"><h4>${k}天中殺</h4><p>${v}</p></div>`).join('')}</div>`;
+const pageSejutsu=()=>`
+<div class="card"><h2>ツボ押しの基本</h2><p>体質チェックで出てくるツボの、探し方と押し方です🌿</p>${li(['息を吐きながら、ゆっくり押す','「痛気持ちいい」くらいの強さで','1か所5秒 × 5回が目安','食後すぐ・飲酒後・体調が悪い日は控える'],'care')}</div>
+${Object.keys(TSUBO).map(n=>`<div class="card"><h2>${n}<small class="yomi2">${TSUBO[n].yomi}</small><span class="sumsub">🌿 体質:${Object.entries(TYPE_TSUBO).filter(([k,v])=>v.includes(n)).map(([k])=>k).join("・")}<br>💭 ${TSUBO[n].role}</span></h2>${tsuboCard(n)}<p class="note">おすすめの体質:${Object.entries(TYPE_TSUBO).filter(([k,v])=>v.includes(n)).map(([k])=>k).join('・')}</p></div>`).join('')}`;
+
+// 四診・舌診・季節の養生
+function tongue(o){ // o:{body,coat,coatOp,teeth,red,spots,thin,crack,veins,label}
+  const LN='#4d4a48';
+  const shape=o.thin?'M46 14 C40 50 42 92 60 116 C68 126 92 126 100 116 C118 92 120 50 114 14 Z':'M36 14 C30 52 34 96 56 118 C68 130 92 130 104 118 C126 96 130 52 124 14 Z';
+  let g=`<path d="${shape}" fill="${o.body}" stroke="${LN}" stroke-width="1.5" stroke-linejoin="round"/>`;
+  if(o.coat)g+=`<ellipse cx="80" cy="${o.coatY||58}" rx="${o.coatRx||24}" ry="${o.coatRy||28}" fill="${o.coat}" opacity="${o.coatOp||.8}" filter="url(#tsf)"/>`;
+  if(o.teeth)[[37,40],[36,58],[38,76],[44,94],[123,40],[124,58],[122,76],[116,94]].forEach(([x,y])=>g+=`<path d="M${x} ${y-7} Q${x+(x<80?6:-6)} ${y} ${x} ${y+7}" fill="none" stroke="${LN}" stroke-width="1.1"/>`);
+  if(o.red)g+=`<circle cx="70" cy="104" r="2" fill="#d9534f"/><circle cx="86" cy="108" r="2" fill="#d9534f"/><circle cx="78" cy="98" r="1.8" fill="#d9534f"/>`;
+  if(o.spots)g+=`<ellipse cx="50" cy="70" rx="5" ry="4" fill="#6b3f6e" opacity=".7"/><ellipse cx="108" cy="60" rx="4" ry="5" fill="#6b3f6e" opacity=".7"/>`;
+  if(o.crack)g+=`<path d="M80 30 L80 90 M80 50 L66 62 M80 64 L94 74" stroke="#a8504a" stroke-width="1.3" fill="none"/>`;
+  if(o.veins)g=`<path d="${shape}" fill="${o.body}" stroke="${LN}" stroke-width="1.5"/><path d="M68 110 C64 80 66 50 72 24 M92 110 C96 80 94 50 88 24" stroke="#5b4a8a" stroke-width="5" fill="none" stroke-linecap="round" opacity=".75"/><path d="M80 116 L80 40" stroke="#c9787a" stroke-width="1.5"/>`;
+  return `<svg viewBox="0 0 160 136" style="width:100%;max-width:150px;display:block;margin:0 auto"><defs><filter id="tsf"><feGaussianBlur stdDeviation="4"/></filter></defs><path d="M20 14 L140 14" stroke="${LN}" stroke-width="1.2" stroke-linecap="round"/>${g}</svg>`;
+}
+const TONGUES=[
+ ['健康な舌','淡いピンク色で、うすく白い苔。ほどよくうるおっている',{body:'#f2a7a5',coat:'#ffffff',coatOp:.75},'理想の状態'],
+ ['白っぽく、歯のあと','色がうすく、ふちに歯のあとがつく。ぽってり大きめ',{body:'#f6cfc8',coat:'#fff',coatOp:.6,teeth:1},'気虚・脾虚(エネルギー不足、水はけが悪い)'],
+ ['赤くて苔が少ない','赤みが強く、苔がほとんどない。ひび割れることも',{body:'#e46b6b',thin:1,crack:1},'陰虚(うるおい不足、熱がこもる)'],
+ ['紫っぽい・斑点','暗い紫色を帯び、紫の点やしみがある',{body:'#b98aa8',spots:1,coat:'#fff',coatOp:.4},'血瘀(血のめぐりの滞り)'],
+ ['白く厚い苔','白い苔がべったりと厚くつく',{body:'#f2b0ab',coat:'#fbfbf4',coatOp:1,coatRx:32,coatRy:38,coatY:62},'湿痰(余分な水がたまっている)'],
+ ['黄色くねばる苔','黄色い苔が厚く、ねばりがある',{body:'#e98c86',coat:'#efd36a',coatOp:.95,coatRx:30,coatRy:36,coatY:62},'湿熱(水分に熱がこもっている)'],
+ ['舌の裏の静脈','舌を上げたとき、裏の2本の静脈が太く、黒っぽくふくらむ',{body:'#f2a7a5',veins:1},'血瘀(血のめぐりの滞り)'],
+];
+function tongueMap(){
+  const LN='#4d4a48';
+  return `<svg viewBox="0 0 220 190" style="width:100%;max-width:260px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">
+  <path d="M50 16 C40 70 46 130 80 162 C96 178 124 178 140 162 C174 130 180 70 170 16 Z" fill="#f6c2bf" stroke="${LN}" stroke-width="1.5"/>
+  <path d="M50 16 C40 70 46 130 80 162 C96 178 124 178 140 162 C174 130 180 70 170 16" fill="none"/>
+  <ellipse cx="110" cy="38" rx="48" ry="20" fill="#bfe0f2" opacity=".85"/><text x="110" y="43" text-anchor="middle" font-size="13" font-weight="700" fill="#3d4a4f">腎(舌のおく)</text>
+  <ellipse cx="110" cy="96" rx="30" ry="30" fill="#f3dc9a" opacity=".9"/><text x="110" y="101" text-anchor="middle" font-size="13" font-weight="700" fill="#3d4a4f">脾・胃</text>
+  <ellipse cx="62" cy="96" rx="12" ry="34" fill="#bfe6c8" opacity=".95"/><ellipse cx="158" cy="96" rx="12" ry="34" fill="#bfe6c8" opacity=".95"/>
+  <text x="16" y="100" font-size="12" fill="#3d4a4f" font-weight="700">肝・胆</text><text x="174" y="100" font-size="12" fill="#3d4a4f" font-weight="700">肝・胆</text>
+  <ellipse cx="110" cy="150" rx="26" ry="14" fill="#f6b3b3" opacity=".95"/><text x="110" y="155" text-anchor="middle" font-size="12" font-weight="700" fill="#3d4a4f">心・肺(先)</text>
+  </svg>`;
+}
+const SHISHIN=[
+ ['👀','望診','ぼうしん','目で見る','顔色・表情・姿勢・肌つや・舌の状態などを観察します。特に「舌」は、体の中をうつす鏡といわれます。'],
+ ['👂','聞診','ぶんしん','耳で聞く・鼻でかぐ','声の大きさやはり、呼吸、せき、体のにおいなどから、エネルギーの状態を感じとります。'],
+ ['💬','問診','もんしん','たずねる','睡眠・食欲・便通・冷え・汗・気分・生活習慣などを聞き、不調の背景を探ります。体質チェックもこの問診のひとつです。'],
+ ['🤲','切診','せっしん','ふれる','脈をみたり(脈診)、おなかにふれたり(腹診)して、体の内側の状態を確かめます。'],
+];
+const SEASONS=[
+ ['🌱','春','木','肝','2〜4月頃','冬にためたものを外へ出し、のびのびと動き出す季節。気がのぼりやすく、イライラや目の疲れ、頭痛が出やすくなります。',['朝はゆっくり体を伸ばす','ゆったりした服で、体をしめつけない','春菊・セロリ・菜の花など、香りと苦味のある野菜を','怒りをためこまず、外を歩いて気分転換']],
+ ['☀️','夏','火','心','5〜7月頃','陽気がいちばん強い季節。汗とともにエネルギーも出ていきやすく、のぼせや寝苦しさ、心の落ち着かなさが出やすくなります。',['冷たいものの摂りすぎに気をつける','トマト・きゅうり・ゴーヤなどで、こもった熱をとる','昼に少し休んで、心臓をいたわる','汗をかいたら、こまめに水分を']],
+ ['🌧️','梅雨・土用','土','脾','季節の変わり目','湿気が多く、おなか(脾胃)が弱りやすい時期。むくみ、だるさ、食欲の低下、頭の重さが出やすくなります。',['はと麦・とうもろこし・豆類で水はけをよく','冷たいもの・甘いもの・脂っこいものは控えめに','室内の湿気をためない','軽く汗をかく運動を']],
+ ['🍂','秋','金','肺','8〜10月頃','空気が乾き、のど・鼻・肌が乾燥しやすい季節。さみしさや物悲しさも感じやすくなります。',['梨・れんこん・白きくらげ・はちみつで、うるおいを','深呼吸で、肺をひらく','早寝早起きでリズムを整える','加湿と保湿をていねいに']],
+ ['❄️','冬','水','腎','11〜1月頃','エネルギーを内にためこむ季節。冷えが体の奥に入りやすく、腰や足の冷え、トイレの近さ、不安感が出やすくなります。',['早く寝て、遅めに起きる','黒豆・黒ごま・くるみ・根菜で体を温める','首・手首・足首の「3つの首」を冷やさない','汗をかくほどの激しい運動は控えめに']],
+];
+const pageShin=()=>`
+<div class="card"><h2>四診(ししん)</h2><p>東洋医学で体の状態をみる、4つの方法です。ひとつだけでなく、4つを合わせて全体をみるのが大切です。</p>
+${SHISHIN.map(s=>`<div class="why"><h4>${s[0]} ${s[1]} <span class="note">${s[2]}・${s[3]}</span></h4><p>${s[4]}</p></div>`).join('')}</div>
+<div class="card"><h2>舌診(ぜっしん)</h2><p>舌は「体の中をうつす鏡」。色・形・苔(こけ)・うるおいを見ることで、今の気・血・水の状態がわかります。</p>
+<div class="box"><h4>舌の見方のポイント</h4>${li(['朝、歯みがきの前に、明るい自然光で','力を抜いて、舌を軽く出す','舌の「色・形・苔・うるおい」を順に見る','色のついた食べもの・飲みもののあとは避ける'],'care')}</div>
+<div class="box"><h4>舌の場所と五臓</h4>${tongueMap()}<p class="note" style="text-align:center">舌の場所ごとに、関わる臓が違うと考えます</p></div>
+<div class="tgrid">${TONGUES.map(t=>`<div class="tg">${tongue(t[2])}<h4>${t[0]}</h4><p>${t[1]}</p><p class="tag2">${t[3]}</p></div>`).join('')}</div>
+<p class="note">※ 舌の状態は、食事や時間帯でも変わります。毎日同じ条件で見ると、変化に気づきやすくなります。</p></div>
+<div class="card"><h2>季節の養生</h2><p>東洋医学では、人も自然の一部。季節に合わせて暮らすことで、体は整いやすくなります🌿</p>
+${SEASONS.map(s=>`<div class="tcard" style="margin:10px 0"><span style="font-size:26px">${s[0]}</span> <b style="font-size:18px">${s[1]}</b> <span class="yomi">${s[2]}・${s[3]}・${s[4]}</span><p style="font-size:14px;margin-top:4px">${s[5]}</p>${li(s[6],'care')}</div>`).join('')}</div>`;
+
+// 経絡・経穴(施術者向け)
+const KLN='#4d4a48',KSK='#fbe2cc',KSK2='#f6cfae';
+const KCOL={'木':'#4f9e62','火':'#d9625c','土':'#c9962a','金':'#7d8296','水':'#3f8fc6'};
+function smoothPath(p,closed){
+  const n=p.length;if(n<2)return'';
+  const g=i=>closed?p[(i+n)%n]:p[Math.max(0,Math.min(n-1,i))];
+  let d=`M${p[0][0]} ${p[0][1]}`;const last=closed?n:n-1;
+  for(let i=0;i<last;i++){const p0=g(i-1),p1=g(i),p2=g(i+1),p3=g(i+2);
+    d+=` C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0]} ${p2[1]}`;}
+  return d+(closed?'Z':'');
+}
+const MIR=p=>p.map(([x,y])=>[200-x,y]);
+const BODY_R=[[107,56],[108,68],[119,72],[132,77],[144,84],[150,94],[155,118],[160,150],[165,178],[171,204],[166,211],[162,209],[156,182],[147,152],[142,128],[136,110],[133,126],[131,146],[127,168],[129,186],[135,204],[138,222],[137,252],[134,282],[130,312],[132,340],[130,368],[125,392],[123,402],[128,410],[131,418],[128,425],[116,426],[107,425],[104,416],[105,403],[106,380],[108,350],[107,318],[105,290],[103,262],[100,232]];
+const BODY=BODY_R.concat(MIR(BODY_R.slice(0,-1).reverse()));
+const PALM=[[160,205],[172,202],[177,212],[180,225],[178,238],[170,241],[162,238],[159,226],[159,213]];
+const FINGERS=[[[176,215],[187,233],5.6],[[176,236],[177,258],4.6],[[171,239],[171,263],4.8],[[166,238],[165,261],4.5],[[162,235],[159,255],4]];
+const THUMB=[];
+const lerp=(t,v)=>{if(v<=t[0][0])return t[0][1];for(let i=1;i<t.length;i++)if(v<=t[i][0]){const[a,b]=[t[i-1],t[i]];return a[1]+(b[1]-a[1])*(v-a[0])/(b[0]-a[0]);}return t[t.length-1][1];};
+const TY=[[0,0],[12,11],[34,34],[60,60],[72,70],[80,81],[90,91],[116,110],[200,170],[244,210],[264,228],[330,316],[394,402],[425,429]];
+const TS=[[0,1],[116,1],[170,.97],[200,.95],[244,.97],[264,.97],[330,.9],[394,.87],[425,.9]];
+const AY=[[90,91],[116,112],[158,150],[214,207],[270,264],[280,272]];
+const ACO=[[90,145],[116,144],[158,149],[214,157.5],[240,162],[270,162]],AWO=[[90,20],[116,18],[158,16],[214,17],[240,24],[270,16]];
+const ACN=[[90,144],[116,145],[158,153.5],[214,166.5],[240,170],[270,168]],AWN=[[90,18],[116,15.5],[158,13],[214,10],[240,18],[270,10]];
+const AIN=[[96,136],[116,134],[140,137],[165,140],[192,145],[218,149],[250,151],[275,154]];
+function warp([x,y]){
+  if(x<100){const[q,r]=warp([200-x,y]);return[200-q,r];}
+  let X,Y;
+  if(y>=96&&y<=280&&x>=lerp(AIN,y)-1){
+    if(y>=214){const dx=x-157.5,dy=y-214;X=166+1.085*dx-0.0432*dy;Y=207-0.085*dx+0.955*dy;}
+    else{Y=lerp(AY,y);X=lerp(ACN,y)+(x-lerp(ACO,y))*lerp(AWN,y)/lerp(AWO,y);}}
+  else{Y=lerp(TY,y);X=100+(x-100)*lerp(TS,y);}
+  return[+X.toFixed(1),+Y.toFixed(1)];
+}
+function handSVG(mir){
+  const M=p=>mir?[200-p[0],p[1]]:p;let h='';
+  FINGERS.forEach(([p,q,w])=>{const[a,b]=[M(p),M(q)];h+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${KLN}" stroke-width="${w+2.8}" stroke-linecap="round"/><line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${KSK}" stroke-width="${w}" stroke-linecap="round"/>`;});
+  const P=PALM.map(M);h+=`<path d="${smoothPath(P,true)}" fill="${KSK}"/>`;
+  const sd=(pts)=>`<path d="${smoothPath(pts.map(M),false)}" fill="none" stroke="${KLN}" stroke-width="1.4" stroke-linecap="round"/>`;
+  h+=sd([[171.5,202.5],[175,207],[177.5,214]])+sd([[179.5,229],[179.5,234],[178.6,237.5]])+sd([[160,206],[158.6,218],[159.4,230],[161,235.5]]);
+  h+=`<path d="${smoothPath([[165,220],[170,226],[173,232]].map(M),false)}" fill="none" stroke="#d4b8a4" stroke-width=".9"/>`;
+  return h;
+}
+function bodyFig(view,ox){
+  const b=smoothPath(BODY,true);
+  let s=`<g transform="translate(${ox} 0)">`;
+  s+=`<path d="${b}" fill="${KSK}"/><path d="${b}" fill="${KSK2}" opacity=".5" filter="url(#kbl)" transform="translate(4 3)"/>`;
+  s+=`<path d="${b}" fill="none" stroke="${KLN}" stroke-width="1.5" stroke-linejoin="round"/>`;
+  s+=handSVG(0)+handSVG(1);
+  s+=`<ellipse cx="79.5" cy="39" rx="3.5" ry="6.5" fill="${KSK}" stroke="${KLN}" stroke-width="1.2"/><ellipse cx="120.5" cy="39" rx="3.5" ry="6.5" fill="${KSK}" stroke="${KLN}" stroke-width="1.2"/>`;
+  s+=`<ellipse cx="100" cy="35" rx="19.5" ry="25" fill="${KSK}" stroke="${KLN}" stroke-width="1.5"/>`;
+  if(view==='F'){
+    s+=`<path d="M80.6 37 C78 13 92 8 100 8 C108 8 122 13 119.4 37 C116 24 108 19 100 20 C92 19 84 24 80.6 37Z" fill="#e7b689" opacity=".9"/>`;
+    s+=`<path d="M88 34 q4 3 8 0 M104 34 q4 3 8 0" stroke="${KLN}" stroke-width="1.1" fill="none"/><path d="M95 49 q5 3.5 10 0" stroke="${KLN}" stroke-width="1.1" fill="none"/><circle cx="88" cy="42" r="4" fill="#f5a9a0" opacity=".35"/><circle cx="112" cy="42" r="4" fill="#f5a9a0" opacity=".35"/>`;
+    s+=`<path d="M106 75 q11 2 24 6 M94 75 q-11 2 -24 6" stroke="#c9a893" stroke-width="1" fill="none"/>`;
+    s+=`<circle cx="116" cy="110" r="1.6" fill="#c9a893"/><circle cx="84" cy="110" r="1.6" fill="#c9a893"/><path d="M98 162 q2 3 4 0" stroke="#b5917a" stroke-width="1.1" fill="none"/>`;
+    s+=`<path d="M112 312 q6 -5 12 0 M88 312 q-6 -5 -12 0" stroke="#d4b8a4" stroke-width="1" fill="none"/>`;
+    s+=`<path d="M109 419 l0 5 M114 420 l0 5 M119 420 l0 5 M123.5 419 l0 4.5 M91 419 l0 5 M86 420 l0 5 M81 420 l0 5 M76.5 419 l0 4.5" stroke="#c9a893" stroke-width=".9"/>`;
+  }else{
+    s+=`<path d="M80.6 38 C78 11 122 11 119.4 38 C120 50 112 57 100 57 C88 57 80 50 80.6 38Z" fill="#e7b689" opacity=".9"/>`;
+    s+=`<path d="M100 70 L100 206" stroke="#c9a893" stroke-width="1.1" stroke-dasharray="3 4"/><path d="M114 94 q12 12 3 32 M86 94 q-12 12 -3 32" stroke="#c9a893" stroke-width="1.1" fill="none"/>`;
+    s+=`<path d="M100 206 L100 230 M101 232 q16 7 33 -4 M99 232 q-16 7 -33 -4" stroke="#c9a893" stroke-width="1.1" fill="none"/><path d="M110 318 q8 3 16 0 M90 318 q-8 3 -16 0" stroke="#d4b8a4" stroke-width="1" fill="none"/>`;
+    s+=`<path d="M110 416 q6 4 12 0 M90 416 q-6 4 -12 0" stroke="#d4b8a4" stroke-width="1" fill="none"/>`;
+  }
+  s+=`<text x="100" y="443" text-anchor="middle" font-size="13" fill="#8a7f78">${view==='F'?'前':'後ろ'}</text></g>`;
+  return s;
+}
+function meridianSVG(m){
+  const views=['F','B'].filter(v=>m[v]&&m[v].length);
+  const col=KCOL[m.el],W=views.length*210;
+  let s=`<svg viewBox="-5 0 ${W} 450" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${views.length*260}px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif"><defs><filter id="kbl"><feGaussianBlur stdDeviation="4"/></filter></defs>`;
+  let no=0;const nums={};m.pts.forEach(p=>nums[p[0]]=++no);
+  views.forEach((v,i)=>{const ox=i*210;s+=bodyFig(v,ox);s+=`<g transform="translate(${ox} 0)">`;
+    m[v].forEach(seg0=>{const seg=seg0.map(warp);const segs=m.center?[seg]:[seg,MIR(seg)];
+      segs.forEach((q,k)=>s+=`<path d="${smoothPath(q,false)}" fill="none" stroke="${col}" stroke-width="${k?2:2.6}" stroke-linecap="round" opacity="${k?.45:.95}"/>`);});
+    m.pts.filter(p=>p[2]===v).forEach(p0=>{const[wx,wy]=warp([p0[3],p0[4]]);const p=[p0[0],0,0,wx,wy];s+=`<circle cx="${p[3]}" cy="${p[4]}" r="6.5" fill="#fff" stroke="${col}" stroke-width="1.6"/><text x="${p[3]}" y="${p[4]+3}" text-anchor="middle" font-size="8.5" font-weight="700" fill="${col}">${nums[p[0]]}</text>`});
+    s+='</g>';});
+  return s+'</svg>';
+}
+// [名前,よみ,図,x,y,取り方,おもな働き,注意]
+const MERIDIANS=[
+{id:'LU',types:'陰虚',name:'手太陰肺経',yomi:'てのたいいんはいけい',el:'金',yin:1,time:'3〜5時',pair:'大腸経',route:'胸(中府)からはじまり、腕の内側の親指側を通って、親指の先へ。',sign:'咳・息苦しさ、鼻やのどの不調、肌の乾燥、悲しみやすさ',
+ F:[[[127,84],[133,96],[140,112],[150,135],[154,160],[159,190],[163,214],[170,227],[178,243]]],
+ pts:[['中府','ちゅうふ','F',127,86,'鎖骨の外端の下のくぼみから、1寸下','咳、息苦しさ、肩の前の痛み'],['尺沢','しゃくたく','F',154,160,'肘の横じわ上、上腕二頭筋腱の親指側のくぼみ','咳、のどの痛み、肘の痛み'],['孔最','こうさい','F',157,182,'手首の横じわから7寸上、尺沢と太淵を結ぶ線上','咳、急な痛み、痔'],['太淵','たいえん','F',164,214,'手首の横じわ上、親指側の脈を打つところ','呼吸を整える、疲れ'],['少商','しょうしょう','F',178,243,'親指の爪の付け根、外側の角から0.1寸','のどの痛み、熱']]},
+{id:'LI',types:'湿熱',name:'手陽明大腸経',yomi:'てのようめいだいちょうけい',el:'金',time:'5〜7時',pair:'肺経',route:'人差し指の先から、腕の外側の親指側を上がり、肩・首を通って、反対側の小鼻の横へ。',sign:'便秘・下痢、歯や顔の不調、鼻の不調、肩の前のこり',
+ B:[[[169,267],[171,250],[172,236],[166,214],[160,185],[157,165],[156,150],[153,120],[149,92]]],F:[[[149,92],[130,76],[114,66],[108,56],[101,50],[93,45]]],
+ pts:[['商陽','しょうよう','B',169,267,'人差し指の爪の付け根、親指側の角から0.1寸','のどの腫れ、歯の痛み'],['合谷','ごうこく','B',172,234,'手の甲、親指と人差し指の骨の間、人差し指の骨の中点のきわ','頭痛、歯の痛み、顔の不調、肩こり','妊娠中は強い刺激を避ける'],['手三里','てさんり','B',159,165,'曲池から手首のほうへ2寸','腕の疲れ、胃腸'],['曲池','きょくち','B',157,154,'肘を曲げてできる横じわの外端と、骨の出っぱりの中間','皮膚の不調、熱、腕の痛み'],['肩髃','けんぐう','B',149,92,'腕を横に上げたとき、肩の前にできるくぼみ','肩の痛み、腕が上がりにくい'],['迎香','げいこう','F',93,45,'小鼻のわき、ほうれい線の中','鼻づまり、鼻水']]},
+{id:'ST',types:'脾虚・湿熱',name:'足陽明胃経',yomi:'あしのようめいいけい',el:'土',time:'7〜9時',pair:'脾経',route:'目の下から顔・首・胸・おなか・太ももの前・すねの外側を通って、足の人差し指へ。体の前面を流れる長い経絡。',sign:'胃の不調、食欲の乱れ、顔のむくみ、膝の痛み',
+ F:[[[108,39],[110,46],[107,53],[115,57],[114,66],[114,78],[117,100],[117,130],[113,160],[112,190],[114,215],[118,240],[121,275],[121,318],[125,346],[127,364],[121,394],[115,412],[113,421]]],
+ pts:[['承泣','しょうきゅう','F',108,39,'瞳の真下、目の下の骨のふち','目の疲れ、目の下のくま'],['地倉','ちそう','F',106,53,'口角の外0.4寸','口元のこわばり'],['頬車','きょうしゃ','F',116,57,'あごの角の前上方、歯をかみしめると盛り上がるところ','歯の痛み、あごの疲れ'],['天枢','てんすう','F',112,190,'おへその外2寸','便秘・下痢、おなかの張り'],['足三里','あしさんり','F',125,346,'膝のお皿の外下のくぼみから3寸下、すねの骨の外1横指','胃腸、疲労回復、全身の元気'],['豊隆','ほうりゅう','F',128,366,'外くるぶしの上8寸、すねの骨の外2横指','痰・むくみ、めまい'],['内庭','ないてい','F',115,414,'足の第2指と第3指の間、水かきのふち','胃の熱、歯の痛み']]},
+{id:'SP',types:'脾虚・湿痰・血虚',name:'足太陰脾経',yomi:'あしのたいいんひけい',el:'土',yin:1,time:'9〜11時',pair:'胃経',route:'足の親指の内側から、足・すね・太ももの内側を上がり、おなかを通って胸のわきへ。',sign:'消化の不調、むくみ、だるさ、考えすぎ、月経のトラブル',
+ F:[[[107,419],[107,410],[108,398],[110,383],[110,340],[110,307],[108,285],[116,252],[124,222],[124,185],[126,155],[132,140]]],
+ pts:[['隠白','いんぱく','F',107,420,'足の親指の爪の付け根、内側の角から0.1寸','月経が多い、出血'],['公孫','こうそん','F',107,408,'足の内側、親指の付け根の骨の後ろの下のくぼみ','胃の痛み、おなかの不調'],['三陰交','さんいんこう','F',110,383,'内くるぶしの上3寸、すねの骨の内側の後ろのきわ','婦人科、冷え、むくみ','妊娠中は刺激を避ける'],['陰陵泉','いんりょうせん','F',110,340,'すねの骨の内側を上へなぞり、膝の下で止まるくぼみ','むくみ、水分代謝'],['血海','けっかい','F',110,307,'膝のお皿の内側の上の角から2寸上','血のめぐり、月経、皮膚'],['大包','だいほう','F',132,140,'わきの下の中央、第6肋間','全身のだるさ・痛み']]},
+{id:'HT',types:'血虚・陰虚',name:'手少陰心経',yomi:'てのしょういんしんけい',el:'火',yin:1,time:'11〜13時',pair:'小腸経',route:'わきの下から、腕の内側の小指側を通って、小指の先へ。',sign:'動悸、不眠、不安、汗をかきやすい',
+ F:[[[135,113],[138,135],[141,158],[145,190],[150,214],[153,240],[154,265]]],
+ pts:[['極泉','きょくせん','F',135,113,'わきの下の中央、脈を打つところ','胸の苦しさ、腕のしびれ'],['少海','しょうかい','F',141,158,'肘を曲げてできる横じわの内端と、骨の出っぱりの中間','肘の痛み、手のふるえ'],['神門','しんもん','F',150,214,'手首の横じわ上、小指側の腱の親指側のくぼみ','不眠、不安、動悸'],['少衝','しょうしょう','F',154,265,'小指の爪の付け根、薬指側の角から0.1寸','動悸、気つけ']]},
+{id:'SI',types:'気滞',name:'手太陽小腸経',yomi:'てのたいようしょうちょうけい',el:'火',time:'13〜15時',pair:'心経',route:'小指の先から、腕の外側の小指側を上がり、肩甲骨をジグザグに通って、耳の前へ。',sign:'肩甲骨まわり・首のこり、耳の不調',
+ B:[[[154,265],[151,245],[150,228],[147,200],[142,160],[139,135],[140,108],[128,114],[124,96],[118,80],[110,64]]],F:[[[110,62],[114,50],[119,40]]],
+ pts:[['少沢','しょうたく','B',154,265,'小指の爪の付け根、外側の角から0.1寸','頭痛、母乳の出'],['後渓','こうけい','B',151,244,'軽くこぶしを握ったとき、小指の付け根の横じわの端','首・背中のこわばり、寝違え'],['小海','しょうかい','B',141,157,'肘の内側、肘頭と骨の出っぱりの間のくぼみ','肘の痛み'],['天宗','てんそう','B',127,114,'肩甲骨の中央のくぼみ','肩甲骨まわりのこり、肩の痛み'],['聴宮','ちょうきゅう','F',119,40,'耳の前、口を開けるとくぼむところ','耳鳴り、聞こえにくさ']]},
+{id:'BL',types:'腎陽虚・湿痰',name:'足太陽膀胱経',yomi:'あしのたいようぼうこうけい',el:'水',time:'15〜17時',pair:'腎経',route:'目頭から頭のてっぺんを越え、背骨の両側を2本のラインで下り、脚の後ろを通って足の小指へ。いちばん長い経絡で、背中には五臓六腑の「兪穴」が並びます。',sign:'腰・背中のこり、頭痛、目の疲れ、冷え、トイレの不調',
+ F:[[[104,34],[104,22],[103,12]]],B:[[[103,12],[104,30],[105,48],[107,60],[110,80],[110,140],[110,200],[110,240],[114,262],[118,300],[119,328],[120,350],[121,370],[127,394],[131,414]],[[107,60],[118,82],[118,150],[118,220],[120,252],[119,328]]],
+ pts:[['睛明','せいめい','F',104,33,'目頭の内上方0.1寸のくぼみ','目の疲れ'],['天柱','てんちゅう','B',107,60,'うなじの髪の生え際、首の太い筋肉の外側のくぼみ','首こり、頭痛、目の疲れ'],['肺兪','はいゆ','B',110,98,'第3胸椎の下、外1.5寸','呼吸器、かぜ'],['脾兪','ひゆ','B',110,165,'第11胸椎の下、外1.5寸','胃腸、だるさ'],['腎兪','じんゆ','B',110,190,'第2腰椎の下、外1.5寸(おへその高さの背中側)','腰痛、冷え、疲れ'],['委中','いちゅう','B',119,328,'膝の裏の横じわの中央','腰痛、膝の痛み'],['承山','しょうざん','B',120,362,'ふくらはぎ、つま先立ちで筋肉が人の字にへこむところ','こむら返り、足の疲れ'],['崑崙','こんろん','B',127,394,'外くるぶしとアキレス腱の間のくぼみ','腰痛、かかとの痛み','妊娠中は刺激を避ける'],['至陰','しいん','B',131,414,'足の小指の爪の付け根、外側の角から0.1寸','逆子のお灸で知られる','専門家のもとで']]},
+{id:'KI',types:'腎陽虚・陰虚',name:'足少陰腎経',yomi:'あしのしょういんじんけい',el:'水',yin:1,time:'17〜19時',pair:'膀胱経',route:'足の裏から、内くるぶしの後ろ・脚の内側を上がり、おなか・胸の正中線の近くを通って鎖骨の下へ。',sign:'冷え、腰や膝のだるさ、耳鳴り、むくみ、不安',
+ B:[[[117,418],[112,405],[109,394],[108,370],[107,335],[105,300],[102,270]]],F:[[[102,262],[104,240],[104,190],[104,160],[111,140],[112,110],[110,80]]],
+ pts:[['湧泉','ゆうせん','B',117,415,'足の裏、指を曲げたときにへこむところ(前から1/3)','疲れ、冷え、足のほてり'],['太渓','たいけい','B',109,394,'内くるぶしの頂点とアキレス腱の間のくぼみ','冷え、耳鳴り、腰のだるさ'],['肓兪','こうゆ','F',104,190,'おへその外0.5寸','便秘、おなかの冷え'],['兪府','ゆふ','F',110,80,'鎖骨の下のふち、体の中心から外2寸','咳、胸の苦しさ']]},
+{id:'PC',types:'気滞・血瘀',name:'手厥陰心包経',yomi:'てのけついんしんぽうけい',el:'火',yin:1,time:'19〜21時',pair:'三焦経',route:'乳頭の外側から、腕の内側の真ん中を通って、中指の先へ。心を包んで守る経絡です。',sign:'胸の苦しさ、吐き気、緊張、不安',
+ F:[[[125,112],[135,114],[143,135],[147,158],[152,190],[156,214],[160,232],[162,244],[164,270]]],
+ pts:[['天池','てんち','F',125,112,'乳頭の外1寸、第4肋間','胸の苦しさ、わきの痛み'],['曲沢','きょくたく','F',147,158,'肘の横じわ上、上腕二頭筋腱の小指側のくぼみ','胸の不調、胃のむかつき'],['内関','ないかん','F',155,205,'手首の横じわから2寸上、2本の腱の間','吐き気、乗りもの酔い、胸のつかえ、不安'],['労宮','ろうきゅう','F',161,242,'手のひら、こぶしを握って中指の先が当たるところ','緊張、疲れ、手のほてり'],['中衝','ちゅうしょう','F',164,270,'中指の先の中央','気つけ、熱']]},
+{id:'TE',types:'湿痰・気滞',name:'手少陽三焦経',yomi:'てのしょうようさんしょうけい',el:'火',time:'21〜23時',pair:'心包経',route:'薬指の先から、腕の外側の真ん中を上がり、肩・耳のまわりを通って眉の外端へ。三焦は体全体の気と水の通り道です。',sign:'耳の不調、むくみ、のぼせ、肩こり',
+ B:[[[159,269],[160,250],[161,236],[157,214],[154,200],[150,175],[149,156],[146,125],[142,95],[130,80],[115,64],[119,48],[122,38],[121,30]]],F:[[[121,31],[114,27]]],
+ pts:[['関衝','かんしょう','B',159,269,'薬指の爪の付け根、小指側の角から0.1寸','のどの痛み、熱'],['中渚','ちゅうしょ','B',159,249,'手の甲、薬指と小指の骨の間、付け根の関節の後ろのくぼみ','耳鳴り、肩こり'],['外関','がいかん','B',155,205,'手首の甲側の横じわから2寸上、2本の骨の間(内関の裏)','かぜのひきはじめ、首・肩'],['翳風','えいふう','B',119,48,'耳たぶの後ろ、あごの骨と耳の後ろの骨の間のくぼみ','耳鳴り、顔のむくみ'],['糸竹空','しちくくう','F',114,27,'眉毛の外端のくぼみ','目の疲れ、こめかみの頭痛']]},
+{id:'GB',types:'気滞・湿熱',name:'足少陽胆経',yomi:'あしのしょうようたんけい',el:'木',time:'23〜1時',pair:'肝経',route:'目尻から頭の横をジグザグにめぐり、首・肩・体の側面・脚の外側を通って、足の薬指へ。',sign:'側頭部の頭痛、首肩こり、体の側面の張り、決められない',
+ F:[[[114,35],[119,38]],[[132,118],[131,150],[129,185],[133,215],[138,250],[138,270],[135,315],[132,342],[129,370],[126,392],[125,410],[124,420]]],B:[[[120,30],[115,22],[118,32],[115,42],[110,58],[122,72],[131,80]],[[134,225],[127,252],[136,268]]],
+ pts:[['瞳子髎','どうしりょう','F',115,35,'目尻の外0.5寸のくぼみ','目の疲れ、目尻のしわ'],['風池','ふうち','B',110,58,'後頭部の下、首の2本の太い筋肉の間のくぼみ','首こり、頭痛、かぜ、目の疲れ'],['肩井','けんせい','B',126,77,'首の付け根(大椎)と肩先を結ぶ線の中点','肩こり','妊娠中は刺激を避ける'],['環跳','かんちょう','B',127,252,'お尻の横、太ももの骨の出っぱりと仙骨を結ぶ線の外1/3','腰痛、お尻から脚のしびれ'],['風市','ふうし','F',138,270,'気をつけの姿勢で、中指の先が当たる太ももの外側','脚のしびれ、かゆみ'],['陽陵泉','ようりょうせん','F',132,342,'膝の外下、腓骨の頭の前下のくぼみ','筋のこわばり、足のつり'],['足臨泣','あしりんきゅう','F',125,409,'足の甲、薬指と小指の骨の付け根の間のくぼみ','頭痛、目の疲れ']]},
+{id:'LR',types:'気滞・血虚・血瘀',name:'足厥陰肝経',yomi:'あしのけついんかんけい',el:'木',yin:1,time:'1〜3時',pair:'胆経',route:'足の親指から、脚の内側を上がり、陰部をめぐって、わき腹・肋骨の下へ。',sign:'イライラ、目の疲れ、月経のトラブル、筋のつり、わき腹の張り',
+ F:[[[110,420],[111,407],[110,398],[108,372],[108,340],[107,330],[106,300],[106,270],[112,252],[122,225],[132,172],[117,136]]],
+ pts:[['大敦','だいとん','F',110,420,'足の親指の爪の付け根、人差し指側の角から0.1寸','月経のトラブル'],['太衝','たいしょう','F',111,406,'足の甲、親指と人差し指の骨が合わさる手前のくぼみ','イライラ、目の疲れ、頭痛'],['曲泉','きょくせん','F',107,330,'膝を曲げたとき、膝の内側の横じわの端のくぼみ','膝の痛み、婦人科'],['章門','しょうもん','F',132,172,'わき腹、第11肋骨の先端の下','おなかの張り、消化'],['期門','きもん','F',117,136,'乳頭の真下、第6肋間','胸わきの張り、ストレス']]},
+{id:'CV',types:'腎陽虚・脾虚・血虚',name:'任脈',yomi:'にんみゃく',el:'水',yin:1,center:1,time:'',pair:'',route:'体の前の正中線を、会陰から下唇の下へ。陰の経絡をまとめる「陰脈の海」です。',sign:'冷え、婦人科、おなかの不調',
+ F:[[[100,264],[100,225],[100,190],[100,155],[100,110],[100,70],[100,57]]],
+ pts:[['関元','かんげん','F',100,223,'おへその下3寸','冷え、元気、婦人科'],['気海','きかい','F',100,206,'おへその下1.5寸','気の不足、だるさ'],['中脘','ちゅうかん','F',100,160,'おへその上4寸(みぞおちとおへその中間)','胃の不調全般'],['膻中','だんちゅう','F',100,112,'両乳頭を結ぶ線の中点','胸のつかえ、不安、呼吸'],['承漿','しょうしょう','F',100,57,'下唇の下、あごの中央のくぼみ','口元、顔のむくみ']]},
+{id:'GV',types:'腎陽虚・気滞',name:'督脈',yomi:'とくみゃく',el:'火',center:1,time:'',pair:'',route:'尾骨から背骨の上を上がり、頭のてっぺんを越えて上唇へ。陽の経絡をまとめる「陽脈の海」です。',sign:'背骨のこわばり、頭痛、気力の低下',
+ B:[[[100,252],[100,195],[100,120],[100,74],[100,50],[100,14]]],F:[[[100,13],[100,25],[100,40],[100,48]]],
+ pts:[['長強','ちょうきょう','B',100,252,'尾骨の先端と肛門の中間','痔、腰の痛み'],['命門','めいもん','B',100,190,'第2腰椎の下(おへその真裏)','腰の冷え、元気'],['大椎','だいつい','B',100,74,'首を前に倒すといちばん出っぱる骨の下','かぜ、熱、首肩こり'],['百会','ひゃくえ','B',100,14,'頭のてっぺん、両耳を結ぶ線と体の中心線が交わるところ','頭痛、自律神経、気分の落ち込み'],['水溝','すいこう','F',100,48,'鼻の下のみぞの上1/3(人中)','気つけ']]},
+];
+function horaryClock(){
+  const L=[['胆','木','23-1'],['肝','木','1-3'],['肺','金','3-5'],['大腸','金','5-7'],['胃','土','7-9'],['脾','土','9-11'],['心','火','11-13'],['小腸','火','13-15'],['膀胱','水','15-17'],['腎','水','17-19'],['心包','火','19-21'],['三焦','火','21-23']];
+  const cx=160,cy=160,R1=140,R0=70;let g='';
+  L.forEach((l,i)=>{const a0=(i*30-105)*Math.PI/180,a1=((i+1)*30-105)*Math.PI/180,am=(i*30-90)*Math.PI/180;
+    const P=(r,a)=>[cx+Math.cos(a)*r,cy+Math.sin(a)*r];const[x0,y0]=P(R1,a0),[x1,y1]=P(R1,a1),[x2,y2]=P(R0,a1),[x3,y3]=P(R0,a0);
+    g+=`<path d="M${x0} ${y0} A${R1} ${R1} 0 0 1 ${x1} ${y1} L${x2} ${y2} A${R0} ${R0} 0 0 0 ${x3} ${y3}Z" fill="${KCOL[l[1]]}" opacity=".22" stroke="#fff" stroke-width="2"/>`;
+    const[tx,ty]=P(112,am),[hx,hy]=P(84,am);g+=`<text x="${tx}" y="${ty+5}" text-anchor="middle" font-size="15" font-weight="700" fill="#3d4a4f">${l[0]}</text><text x="${hx}" y="${hy+4}" text-anchor="middle" font-size="10" fill="#6a777c">${l[2]}</text>`;});
+  g+=`<text x="${cx}" y="${cy-4}" text-anchor="middle" font-size="13" font-weight="700" fill="#b8962e">気のめぐり</text><text x="${cx}" y="${cy+14}" text-anchor="middle" font-size="11" fill="#7a8a90">24時間</text>`;
+  return `<svg viewBox="0 0 320 320" style="width:100%;max-width:320px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">${g}</svg>`;
+}
+function fingerRuler(){
+  const f=(x,w,h)=>`<rect x="${x}" y="${70-h}" width="${w}" height="${h+30}" rx="${w/2}" fill="${KSK}" stroke="${KLN}" stroke-width="1.3"/><path d="M${x+4} ${78-h} q${w/2-4} -6 ${w-8} 0" stroke="#c9a893" fill="none"/>`;
+  const set=[['親指の幅','1寸',[[0,24,40]]],['指2本','1.5寸',[[0,18,52],[18,18,58]]],['指3本','2寸',[[0,18,52],[18,18,58],[36,17,54]]],['指4本','3寸',[[0,18,52],[18,18,58],[36,17,54],[53,15,44]]]];
+  return `<div class="fr">${set.map(([a,b,fs])=>{const W=fs.reduce((s,q)=>Math.max(s,q[0]+q[1]),0);return `<div><svg viewBox="-6 0 ${W+12} 130" style="height:110px">${fs.map(q=>f(q[0],q[1],q[2])).join('')}<line x1="0" y1="78" x2="${W}" y2="78" stroke="#c9a24a" stroke-width="2"/><line x1="0" y1="72" x2="0" y2="84" stroke="#c9a24a" stroke-width="2"/><line x1="${W}" y1="72" x2="${W}" y2="84" stroke="#c9a24a" stroke-width="2"/></svg><b>${b}</b><span>${a}</span></div>`}).join('')}</div>`;
+}
+const SANYIN=[['太陰','たいいん','肺','脾'],['少陰','しょういん','心','腎'],['厥陰','けついん','心包','肝']],SANYANG=[['陽明','ようめい','大腸','胃'],['太陽','たいよう','小腸','膀胱'],['少陽','しょうよう','三焦','胆']];
+function meridianCard(m){
+  const col=KCOL[m.el];let no=0;
+  return `<div class="card"><h2>${m.name}<span class="mid" style="background:${col}">${m.id}</span><span class="sumsub">🌿 体質:${m.types}<br>💭 サイン:${m.sign}</span></h2>
+  <p class="note">${m.yomi}${m.time?` ・ ${m.yin?'陰経':'陽経'} ・ ${m.el} ・ 気が盛んな時間 ${m.time} ・ 表裏:${m.pair}`:''}</p>
+  ${meridianSVG(m)}
+  <div class="box"><h4>流れ</h4><p style="font-size:14px">${m.route}</p></div>
+  <div class="box"><h4>乱れたときのサイン</h4><p style="font-size:14px">${m.sign}</p><p class="note">関わりの深い体質:${m.types}</p></div>
+  <p class="note" style="text-align:center">※ 図は流れのイメージです。正確な位置は下の「取り方」で確認してください</p>
+  <h4 style="margin:14px 0 4px;color:${col}">おもな経穴</h4>
+  ${m.pts.map(p=>`<div class="kp"><span class="kn" style="border-color:${col};color:${col}">${++no}</span><div><b>${p[0]}</b> <small>${p[1]}</small>${p[7]?` <em>⚠ ${p[7]}</em>`:''}<p>📍 ${p[5]}</p><p>🌿 ${p[6]}</p></div></div>`).join('')}</div>`;
+}
+const pageSejutsu2=()=>`
+<p class="sec">🤲 経絡のきほん</p>
+<div class="card"><h2>経絡(けいらく)とは</h2><p>経絡は、<b>気と血が流れる通り道</b>。体の中の五臓六腑と、体の表面(皮膚・筋肉・ツボ)をつないでいます。</p>
+<p>「経」はたての太い道、「絡」は横につなぐ細い道。全身に網の目のように張りめぐらされ、どこかが詰まったり弱ったりすると、その経絡が通る場所や、つながる臓腑に不調が出ると考えます。</p>
+<div class="box"><h4>施術で大切なこと</h4><p style="font-size:14px">経絡に沿ってふれる・流すことで、体の表面から内側の臓腑に働きかけることができます。不調のある場所だけでなく、<b>その場所を通る経絡全体</b>を見るのがポイントです。</p></div>
+<div class="box"><h4>十四経</h4><p style="font-size:14px">五臓六腑にひとつずつつながる<b>十二正経</b>と、体の中心を通る<b>任脈・督脈</b>をあわせて「十四経」と呼びます。</p></div></div>
+<div class="card"><h2>名前のルール</h2><p>経絡の名前は「<b>手か足か</b>」+「<b>陰陽の名前</b>」+「<b>臓腑</b>」でできています。</p>
+<div class="box"><p style="font-size:15px;text-align:center"><b style="color:#3f7fc0">手</b> + <b style="color:#b8962e">太陰</b> + <b style="color:#d9625c">肺</b> + 経 = 手太陰肺経</p></div>
+<table class="kt"><tr><th></th><th>手</th><th>足</th></tr>
+${SANYIN.map(r=>`<tr><td class="yin">${r[0]}<small>${r[1]}</small></td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}
+${SANYANG.map(r=>`<tr><td class="yang">${r[0]}<small>${r[1]}</small></td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</table>
+<p class="note">水色=陰経(五臓)、オレンジ=陽経(六腑)。同じ段の手と足はつながっています。</p></div>
+<div class="card"><h2>流れる方向</h2><p>経絡にはそれぞれ流れる向きがあります。</p>
+<div class="flow">${[['手の陰経','胸','手','肺・心包・心'],['手の陽経','手','頭','大腸・三焦・小腸'],['足の陽経','頭','足','胃・胆・膀胱'],['足の陰経','足','胸・おなか','脾・肝・腎']].map((f,i)=>`<div class="${i%3?'yang':'yin'}"><b>${f[0]}</b><p><span>${f[1]}</span> → <span>${f[2]}</span></p><small>${f[3]}</small></div>`).join('')}</div>
+<p class="note">両手をバンザイすると、陰経はすべて下から上へ、陽経はすべて上から下へ流れる形になります。</p></div>
+<div class="card"><h2>表裏と気のめぐる時間</h2><p>陰経と陽経は2本ずつペア(<b>表裏</b>)になっています。肺⇔大腸、脾⇔胃、心⇔小腸、腎⇔膀胱、心包⇔三焦、肝⇔胆。</p>
+<p>気は肺経からはじまり、2時間ずつ12の経絡をめぐって、24時間で体をひとまわりすると考えます(子午流注)。</p>${horaryClock()}
+<p class="note">その経絡の気がもっとも盛んな時間です。たとえば「夜中の1〜3時に目が覚める」→ 肝経の乱れ、のように見立てに使います。</p></div>
+<div class="card"><h2>経穴(けいけつ)と取穴</h2><p>経穴(ツボ)は、経絡の上で<b>気が集まり、出入りするポイント</b>。WHOでは361穴が定められています。</p>
+<div class="box"><h4>ものさしは「その人の指」(同身寸)</h4><p style="font-size:14px">「寸」は、施術を受ける人の指の幅で測ります。体の大きさが違っても、同じ場所を取ることができます。</p>${fingerRuler()}<p class="note">指をそろえて、第2関節の高さで測ります。</p></div>
+<div class="box"><h4>取穴のコツ</h4>${li(['骨・筋・しわなどの目印から探す','指でなぞって、くぼみ・かたさ・温度の違いを感じる','押したときに「ひびく」感覚があるところ','左右を比べて、反応の強いほうを使う'],'care')}</div></div>
+<div class="card"><h2>施術の注意</h2>${li(['妊娠中は、合谷・三陰交・肩井・崑崙などへの強い刺激を避ける','食後すぐ、飲酒後、発熱時、体調の悪い日は控える','皮膚に傷・炎症・腫れがある場所はさわらない','強さは「痛気持ちいい」まで。押すときは息を吐くタイミングで','持病のある方、治療中の方は、医師に相談してから'],'care')}</div>
+${pageKarada()}
+<p class="sec">🗺 十四経の図解</p>
+${MERIDIANS.map(meridianCard).join('')}`;
+
+// からだの地図:背骨・おなか・頭
+const ELF={'木':'#bfe6c8','火':'#f6c3c3','土':'#f3dc9a','金':'#dfe1e8','水':'#bfe0f2'};
+function spineSVG(){
+  const V=[['C7','首を前に倒すと出っぱる骨','大椎','督脈','火']];
+  const T={3:['肺兪','肺','金'],4:['厥陰兪','心包','火'],5:['心兪','心','火'],7:['膈兪','血','火'],9:['肝兪','肝','木'],10:['胆兪','胆','木'],11:['脾兪','脾','土'],12:['胃兪','胃','土']};
+  const L={1:['三焦兪','三焦','火'],2:['腎兪','腎','水'],4:['大腸兪','大腸','金']};
+  const mark={7:'肩甲骨の下の角の高さ'},markL={2:'おへその真裏',4:'骨盤の上端の高さ'};
+  let y=20,g='';const cx=150;
+  const row=(lab,h,w,info,land)=>{g+=`<rect x="${cx-w/2}" y="${y}" width="${w}" height="${h}" rx="6" fill="#fbf3ea" stroke="#4d4a48" stroke-width="1.2"/><text x="${cx}" y="${y+h/2+4}" text-anchor="middle" font-size="10" fill="#6a5f58">${lab}</text>`;
+    if(info){const c=ELF[info[2]];g+=`<line x1="${cx+w/2}" y1="${y+h/2}" x2="${cx+46}" y2="${y+h/2}" stroke="#c9a893" stroke-dasharray="2 3"/><rect x="${cx+48}" y="${y+h/2-11}" width="${info[0].length*13+46}" height="22" rx="11" fill="${c}"/><text x="${cx+58}" y="${y+h/2+5}" font-size="12.5" font-weight="700" fill="#3d4a4f">${info[0]}</text><text x="${cx+58+info[0].length*13+4}" y="${y+h/2+4}" font-size="10.5" fill="#5b6a70">${info[1]}</text>`;}
+    if(land)g+=`<text x="${cx-w/2-8}" y="${y+h/2+4}" text-anchor="end" font-size="10.5" fill="#b8962e">${land}</text>`;
+    y+=h+3;};
+  row('C7',16,30,['大椎','督脈','火'],'首を倒すと出る骨');
+  for(let i=1;i<=12;i++)row('T'+i,17,34,T[i],mark[i]);
+  for(let i=1;i<=5;i++)row('L'+i,21,42,L[i]&&(i===2?['腎兪','腎','水']:L[i]),markL[i]);
+  g+=`<path d="M${cx-24} ${y} L${cx+24} ${y} L${cx+6} ${y+56} L${cx-6} ${y+56}Z" fill="#fbf3ea" stroke="#4d4a48" stroke-width="1.2"/><text x="${cx}" y="${y+22}" text-anchor="middle" font-size="10" fill="#6a5f58">仙骨</text>`;
+  [['小腸兪','小腸','火',y+12],['膀胱兪','膀胱','水',y+34]].forEach(([a,b,e,yy])=>{g+=`<line x1="${cx+20}" y1="${yy}" x2="${cx+46}" y2="${yy}" stroke="#c9a893" stroke-dasharray="2 3"/><rect x="${cx+48}" y="${yy-11}" width="${a.length*13+46}" height="22" rx="11" fill="${ELF[e]}"/><text x="${cx+58}" y="${yy+5}" font-size="12.5" font-weight="700" fill="#3d4a4f">${a}</text><text x="${cx+58+a.length*13+4}" y="${yy+4}" font-size="10.5" fill="#5b6a70">${b}</text>`;});
+  return `<svg viewBox="0 0 320 ${y+66}" style="width:100%;max-width:380px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">${g}</svg>`;
+}
+function abdomenSVG(){
+  const LN='#4d4a48';
+  // [臓器, 感情, x, y, rx, ry, 回転, 色]
+  const Z=[['肝','ストレス・怒り',92,92,40,26,-25,'#8fd3e8'],['心','焦り・多忙',150,74,24,20,0,'#f59ac0'],['脾','不安・心配',208,92,40,26,25,'#f1df6a'],
+           ['胃','精神疲労',150,150,32,30,0,'#f1df6a'],['大腸','悲しみ',82,262,30,26,-20,'#9fca8f'],['大腸','失望・罪悪感',218,262,30,26,20,'#9fca8f'],['膀胱','自己否定',150,292,22,15,0,'#c5a3e0']];
+  const glow=(x,y,rx,ry,r,c)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" transform="rotate(${r} ${x} ${y})" fill="none" stroke="${c}" stroke-width="13" opacity=".55" filter="url(#ab2)"/><ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" transform="rotate(${r} ${x} ${y})" fill="${c}" opacity=".12"/>`;
+  let g=`<defs><filter id="abl"><feGaussianBlur stdDeviation="5"/></filter><filter id="ab2"><feGaussianBlur stdDeviation="2.2"/></filter></defs>`;
+  const T='M52 20 C48 80 56 120 66 160 C70 200 58 250 64 330 L236 330 C242 250 230 200 234 160 C244 120 252 80 248 20Z';
+  g+=`<path d="${T}" fill="#fbe2cc"/><path d="${T}" fill="#f6cfae" opacity=".5" filter="url(#abl)" transform="translate(4 3)"/>`;
+  g+=`<path d="M52 20 C48 80 56 120 66 160 C70 200 58 250 64 330 M248 20 C252 80 244 120 234 160 C230 200 242 250 236 330" fill="none" stroke="${LN}" stroke-width="1.5"/>`;
+  g+=`<path d="M70 118 C98 100 128 72 150 48 C172 72 202 100 230 118" fill="none" stroke="#d4b8a4" stroke-width="1.2" stroke-dasharray="4 4"/>`;
+  // 腎・小腸の弧
+  g+=`<path d="M96 168 C96 238 204 238 204 168" fill="none" stroke="#f5b26b" stroke-width="13" opacity=".55" stroke-linecap="round" filter="url(#ab2)"/>`;
+  Z.forEach(z=>g+=glow(z[2],z[3],z[4],z[5],z[6],z[7]));
+  // 肺(白)
+  [[58,150],[242,150]].forEach(([x,y])=>g+=`<circle cx="${x}" cy="${y}" r="22" fill="#fff" opacity=".9" filter="url(#ab2)"/>`);
+  g+=`<path d="M146 168 q4 5 8 0" stroke="#b5917a" stroke-width="1.4" fill="none"/>`;
+  const lab=(o,e,x,y)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="15" font-weight="700" fill="#3d4a4f">${o}</text>`+(e?`<text x="${x}" y="${y+15}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5b6a70">${e}</text>`:'');
+  Z.forEach(z=>g+=lab(z[0],z[1],z[2],z[3]-2));
+  g+=lab('肺','落ち込み',58,148)+lab('肺','つまり',242,148);
+  g+=lab('腎','冷え',100,196)+lab('腎','恐れ',200,196);
+  g+=`<text x="118" y="232" text-anchor="middle" font-size="11" font-weight="700" fill="#a86a2a">小腸</text><text x="182" y="232" text-anchor="middle" font-size="11" font-weight="700" fill="#a86a2a">小腸</text>`;
+  g+=`<text x="40" y="346" font-size="10.5" fill="#8a7f78">体の右</text><text x="260" y="346" text-anchor="end" font-size="10.5" fill="#8a7f78">体の左</text>`;
+  return `<svg viewBox="20 10 260 345" style="width:100%;max-width:360px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">${g}</svg>`;
+}
+const CNT=[['肝','#8fd3e8','右の肋骨の下','ストレス・怒り','張る・かたい・押すと苦しい','気滞'],['心','#f59ac0','みぞおち','焦り・多忙','つかえる・ドキドキする','気滞・血虚'],['脾','#f1df6a','左の肋骨の下','不安・心配','かたい・重い','脾虚'],['肺','#e9ecef','左右のわき腹','落ち込み(右)・つまり(左)','かたい・呼吸が浅い','気滞'],['胃','#f1df6a','おへその上','精神疲労','かたい・冷たい・ぽちゃぽちゃ鳴る','脾虚・湿痰'],['腎','#f5b26b','おへその両わき','冷え(右)・恐れ(左)','冷たい・力がない','腎陽虚'],['小腸','#f5b26b','おへその下のまわり','(消化・吸収)','かたい・張る','湿熱・湿痰'],['大腸','#9fca8f','左右の下腹','悲しみ(右)・失望・罪悪感(左)','かたい・ゴロゴロする','湿熱・気滞'],['膀胱','#c5a3e0','恥骨の上','自己否定','冷たい・こわばる','腎陽虚']];
+function skullSVG(){
+  const LN='#4d4a48';
+  const P={
+   fr:['M70 140 C58 92 92 46 150 36 C156 70 160 108 160 140 C140 142 104 142 70 140Z','#fde7d0'],
+   pa:['M150 36 C210 26 262 52 278 100 C246 112 204 118 162 118 C162 92 158 62 150 36Z','#e3f1fa'],
+   oc:['M278 100 C298 134 294 176 266 200 C252 210 238 208 228 198 C234 168 240 138 246 112 C258 108 270 104 278 100Z','#e6f4e2'],
+   te:['M162 118 C204 118 246 112 246 112 C240 140 234 170 228 198 C212 200 196 194 184 184 C174 172 166 160 162 146Z','#fdf0c4'],
+   sp:['M160 140 C162 152 168 166 180 180 C168 186 154 180 148 168 C146 156 150 146 160 140Z','#f1dff1'],
+   zy:['M116 184 C132 180 152 182 180 186 C182 194 174 198 160 198 C146 198 132 200 118 202 C110 198 110 190 116 184Z','#fde0e0'],
+   mx:['M70 140 C64 162 66 184 76 206 C86 216 102 220 120 216 C126 208 124 200 118 202 C110 198 110 190 116 184 C102 186 90 180 82 168 C76 158 72 150 70 140Z','#ffffff'],
+   md:['M80 218 C84 238 98 252 118 254 C142 254 168 248 186 238 C190 222 192 206 188 190 L178 192 C178 208 176 222 168 230 C150 236 132 238 118 234 C104 230 92 224 80 218Z','#f3ece3']};
+  let g=Object.values(P).map(([d,c])=>`<path d="${d}" fill="${c}" stroke="${LN}" stroke-width="1.4" stroke-linejoin="round"/>`).join('');
+  g+=`<circle cx="104" cy="164" r="19" fill="#fff" stroke="${LN}" stroke-width="1.4"/><path d="M70 178 C64 188 68 198 78 200 C80 192 78 184 70 178Z" fill="#d8cfc7" stroke="${LN}"/>`;
+  for(let i=0;i<7;i++)g+=`<rect x="${82+i*7}" y="212" width="6" height="9" rx="2" fill="#fff" stroke="${LN}" stroke-width=".8"/>`;
+  g+=`<ellipse cx="198" cy="180" rx="6" ry="7" fill="#d8cfc7" stroke="${LN}"/>`;
+  const lab=(t,x,y,s=13)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${s}" font-weight="700" fill="#3d4a4f">${t}</text>`;
+  g+=lab('前頭骨',112,100)+lab('頭頂骨',214,80)+lab('後頭骨',264,158,12)+lab('側頭骨',204,150)+lab('下顎骨',140,247,11);
+  const lead=(t,x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2-4}" stroke="#6aa3df" stroke-width="1" stroke-dasharray="2 2"/><circle cx="${x1}" cy="${y1}" r="2.5" fill="#6aa3df"/><text x="${x2}" y="${y2+8}" text-anchor="middle" font-size="12" font-weight="700" fill="#3f7fc0">${t}</text>`;
+  g+=lead('蝶形骨',162,162,230,262)+lead('頬骨',150,190,180,280)+lead('上顎骨',90,196,60,262)+lead('外耳孔',198,180,290,236);
+  g+=`<text x="40" y="24" font-size="10.5" fill="#8a7f78">← 顔の向き</text>`;
+  return `<svg viewBox="20 10 300 290" style="width:100%;max-width:380px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">${g}</svg>`;
+}
+function headZoneSVG(){
+  const LN='#4d4a48';
+  return `<svg viewBox="0 0 300 330" style="width:100%;max-width:330px;display:block;margin:0 auto" font-family="Zen Maru Gothic,sans-serif">
+  <defs><clipPath id="hz"><ellipse cx="150" cy="170" rx="96" ry="122"/></clipPath></defs>
+  <path d="M138 50 L150 30 L162 50Z" fill="#fbe2cc" stroke="${LN}" stroke-width="1.2"/>
+  <ellipse cx="54" cy="176" rx="9" ry="20" fill="#fbe2cc" stroke="${LN}" stroke-width="1.2"/><ellipse cx="246" cy="176" rx="9" ry="20" fill="#fbe2cc" stroke="${LN}" stroke-width="1.2"/>
+  <g clip-path="url(#hz)">
+   <rect x="0" y="0" width="300" height="330" fill="#f6c3c3" opacity=".55"/>
+   <rect x="0" y="0" width="300" height="100" fill="#f3dc9a"/>
+   <rect x="0" y="100" width="98" height="140" fill="#bfe6c8"/><rect x="202" y="100" width="98" height="140" fill="#bfe6c8"/>
+   <rect x="0" y="240" width="300" height="100" fill="#bfe0f2"/>
+  </g>
+  <ellipse cx="150" cy="170" rx="96" ry="122" fill="none" stroke="${LN}" stroke-width="1.6"/>
+  <path d="M150 48 L150 292" stroke="#c0563f" stroke-width="2"/><path d="M128 52 C126 120 126 220 132 290 M172 52 C174 120 174 220 168 290" stroke="#3f8fc6" stroke-width="1.6" fill="none" stroke-dasharray="5 3"/>
+  <path d="M100 70 C82 120 98 150 86 200 C84 230 100 250 112 280 M200 70 C218 120 202 150 214 200 C216 230 200 250 188 280" stroke="#4f9e62" stroke-width="1.6" fill="none" stroke-dasharray="5 3"/>
+  ${[['百会',150,166],['神庭',150,60],['頭維',106,66],['頭維',194,66],['風池',122,280],['風池',178,280]].map(([n,x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#fff" stroke="#c0563f" stroke-width="1.6"/><text x="${x}" y="${y-8}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3d4a4f">${n}</text>`).join('')}
+  <text x="150" y="88" text-anchor="middle" font-size="12" font-weight="700" fill="#7a5d12">前頭部</text>
+  <text x="70" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#2e6b3e">側頭部</text><text x="230" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#2e6b3e">側頭部</text>
+  <text x="150" y="210" text-anchor="middle" font-size="12" font-weight="700" fill="#8a3c3c">頭頂部</text>
+  <text x="150" y="262" text-anchor="middle" font-size="12" font-weight="700" fill="#2c5f86">後頭部</text>
+  <text x="150" y="318" text-anchor="middle" font-size="10.5" fill="#8a7f78">頭を上から見た図(上が顔側)</text>
+  </svg>
+  <p class="note" style="text-align:center"><span style="color:#c0563f">━ 督脈</span> ・ <span style="color:#3f8fc6">┅ 膀胱経</span> ・ <span style="color:#4f9e62">┅ 胆経</span></p>`;
+}
+const SPINE_TIPS=[['こり・はり','その臓腑が疲れている、がんばりすぎているサイン'],['冷たい・へこんでいる','その臓腑の元気が足りない(虚)サイン'],['熱っぽい・ふくらんでいる','熱や滞りがある(実)サイン'],['押すと痛い・ひびく','その臓腑に今、負担がかかっているサイン']];
+const FUKUSHIN=[['みぞおちがつかえる・かたい','心下痞硬(しんかひこう)','胃の弱り、ストレス、食べすぎ','脾虚・気滞'],['肋骨の下が張る・押すと苦しい','胸脇苦満(きょうきょうくまん)','肝・胆の緊張、ストレス、イライラ','気滞'],['おへその上でドクドク脈打つ','臍上悸(さいじょうき)','不安・緊張・気がのぼる','気滞・陰虚'],['おへその斜め下が押すと痛い','臍傍圧痛(さいぼうあっつう)','血のめぐりの滞り','血瘀'],['下腹に力がなく、やわらかすぎる','小腹不仁(しょうふくふじん)','腎の元気の不足、冷え','腎陽虚'],['おなかがぽちゃぽちゃ鳴る','胃内停水(いないていすい)','余分な水がたまっている','湿痰'],['おなか全体がひんやりしている','腹部の冷え','陽気の不足、冷え','腎陽虚・脾虚']];
+const SKULL=[['前頭骨','ぜんとうこつ','おでこの骨。目の疲れや考えごとでこわばりやすく、表情のくもりにもつながります。'],['頭頂骨','とうちょうこつ','頭のてっぺんの左右1対の骨。中央の合わせ目(矢状縫合)の上に百会があります。'],['側頭骨','そくとうこつ','耳のまわりの骨。上にのる側頭筋は、食いしばりやストレスでかたくなりやすい場所です。'],['後頭骨','こうとうこつ','頭のうしろの骨。首の筋肉がつき、首こり・肩こりと深く関わります。風池・天柱はこの下のふち。'],['蝶形骨','ちょうけいこつ','こめかみの奥にある、蝶の形をした骨。頭蓋骨の中心で、ほかの骨をつないでいます。'],['頬骨・上顎骨・下顎骨','きょうこつ ほか','顔をつくる骨。あごの緊張は側頭部や首にも広がります。']];
+const SUTURE=[['冠状縫合','前頭骨と頭頂骨の合わせ目(頭の前の横ライン)'],['矢状縫合','左右の頭頂骨の合わせ目(頭の中心ライン)'],['ラムダ縫合','頭頂骨と後頭骨の合わせ目(後頭部の人の字)'],['鱗状縫合','頭頂骨と側頭骨の合わせ目(耳の上)']];
+const HEADZONE=[['前頭部','#f3dc9a','陽明(胃・大腸)','胃腸の疲れ、食べすぎ、考えすぎ','頭維・神庭'],['側頭部','#bfe6c8','少陽(胆・三焦)','ストレス、目の疲れ、食いしばり、決められない','率谷・角孫'],['頭頂部','#f6c3c3','厥陰(肝)・督脈','イライラ、自律神経の乱れ、のぼせ、気分の落ち込み','百会'],['後頭部','#bfe0f2','太陽(膀胱)','首肩こり、冷え、かぜのひきはじめ、目の疲れ','風池・天柱']];
+const SCALP=[['かたい・張っている','気滞','ストレス、目の使いすぎ、緊張が続いている','側頭部と首をゆるめ、深い呼吸を'],['ぶよぶよ・むくんでいる','湿痰','余分な水がたまり、頭が重い','耳まわりから首へ流し、水のめぐりを'],['赤みがある・熱っぽい','湿熱・のぼせ','熱がこもっている、睡眠不足、脂っこい食事','頭頂から熱を逃がし、冷やしすぎずにクールダウン'],['青白い・ひんやり','腎陽虚・血虚','冷え、血が足りない','後頭部と首を温め、やさしく血行を'],['乾燥・フケが出やすい','血虚・陰虚','うるおい不足、髪や肌もパサつく','強くこすらず、保湿と早めの睡眠'],['べたつく・においが気になる','湿熱','食生活の乱れ、熱と湿気','食事を見直し、前頭部〜頭頂をすっきり'],['頭皮が動かない・かたまっている','血瘀','血のめぐりが滞っている','頭皮を大きく動かし、首肩からほぐす'],['抜け毛・白髪が気になる','腎の弱り・血虚','エネルギーと血の不足、加齢、疲れ','腎を温め、血を養う食事と睡眠を']];
+const pageKarada=()=>`
+<p class="sec">🧭 からだの地図</p>
+<div class="card"><h2>背骨と臓器<span class="sumsub">背中のこり・冷えから、疲れている臓腑がわかる</span></h2>
+<p>背骨の両わき(指2本外=1.5寸)には、五臓六腑の気が注ぐ<b>「兪穴(ゆけつ)」</b>が並んでいます。背中にふれるだけで、どの臓腑が疲れているかの手がかりになります。</p>${spineSVG()}
+<div class="box"><h4>背中にふれたときの見方</h4><div class="kv">${SPINE_TIPS.map(([a,b])=>`<b>${a}</b><span>${b}</span>`).join('')}</div></div>
+<div class="box"><h4>施術のポイント</h4><p style="font-size:14px">施術の前に背中全体をなでて、左右差・温度差・こりのある高さを確認。体質チェックの結果と合わせると、見立てがぐっと深まります。</p></div></div>
+<div class="card"><h2>お腹の地図(チネイザン)<span class="sumsub">お腹の張り・冷え・かたさから、内臓の疲れと心の状態をみる</span></h2>
+<p><b>チネイザン(気内臓)</b>は、古代中国の道教から伝わるお腹のケアです。内臓には感情がたまると考え、お腹にふれることで、体と心の両方をほぐしていきます。</p>${abdomenSVG()}
+<p class="note" style="text-align:center">※ 受ける人から見た左右です(図の右側=体の左)</p>
+<div class="box"><h4>内臓と感情の早見表</h4>${CNT.map(c=>`<div class="cnt"><span class="cd" style="background:${c[1]}">${c[0]}</span><div><p><b>${c[3]}</b> <span class="note">${c[2]}</span></p><p class="note">ふれたときのサイン:${c[4]} <span class="tagt">${c[5]}</span></p></div></div>`).join('')}</div>
+<div class="box"><h4>おなかのサインと見立て(腹診)</h4>${FUKUSHIN.map(f=>`<div class="fk"><b>${f[0]}</b><small>${f[1]}</small><p>${f[2]} <span class="tagt">${f[3]}</span></p></div>`).join('')}</div>
+<div class="box"><h4>ふれるときのコツ</h4>${li(['手を温めてから、手のひら全体でやさしく','ひざを立てて、おなかの力を抜いてもらう','受ける人の呼吸に合わせて、吐く息でゆっくり沈める','かたい場所は無理に押さず、温めるように待つ','おへそのまわりから、時計回りに','食後すぐ・妊娠中・生理中の強い刺激は避ける'],'care')}</div></div>
+<div class="card"><h2>頭蓋骨のしくみ<span class="sumsub">ヘッドケアの土台。骨の位置と合わせ目を知る</span></h2>
+<p>頭蓋骨は、15種23個の骨が組み合わさってできています。脳を包む「脳頭蓋」と、顔をつくる「顔面頭蓋」に分かれます。</p>${skullSVG()}
+${SKULL.map(s=>`<div class="why"><h4>${s[0]} <span class="note">${s[1]}</span></h4><p>${s[2]}</p></div>`).join('')}
+<div class="box"><h4>骨の合わせ目(縫合)</h4><div class="kv">${SUTURE.map(([a,b])=>`<b>${a}</b><span>${b}</span>`).join('')}</div><p class="note">縫合のまわりは、ヘッドケアで丁寧にゆるめたいポイントです。</p></div></div>
+<div class="card"><h2>頭のエリアと経絡<span class="sumsub">頭痛やこりの場所から、関わる臓腑がわかる</span></h2>
+<p>頭には多くの経絡が集まっています。こりや痛みが出る場所で、どの経絡・臓腑が関わっているかを見立てます。</p>${headZoneSVG()}
+${HEADZONE.map(z=>`<div class="hz" style="border-left-color:${z[1]}"><b>${z[0]}</b> <span class="note">${z[2]}</span><p>🌿 ${z[3]}</p><p class="note">おもな経穴:${z[4]}</p></div>`).join('')}</div>
+<div class="card"><h2>頭皮の状態とからだ<span class="sumsub">頭皮のかたさ・色・うるおいは、体の中をうつす</span></h2>
+<p>頭皮は顔の皮膚とひとつながり。頭皮の状態には、体の中の気・血・水のバランスがあらわれます。</p>
+${SCALP.map(s=>`<div class="sc"><div class="sch"><b>${s[0]}</b><span class="tagt">${s[1]}</span></div><p>💭 ${s[2]}</p><p>🤲 ${s[3]}</p></div>`).join('')}
+<p class="note">※ 強いかゆみ・湿疹・急な抜け毛などは、皮膚科の受診をおすすめしてください。</p></div>`;
+
+const PAGES={toyo:()=>'<p class="sec">🍃 東洋医学のきほん</p>'+pageToyo()+'<p class="sec">👀 みかたと養生</p>'+pageShin(),sanmei:pageSanmei,self:pageSejutsu,sejutsu:pageSejutsu2};
+function accordionize(el){
+ el.querySelectorAll(':scope > .card').forEach(c=>{const h=c.querySelector(':scope > h2');if(!h)return;
+  const d=document.createElement('details');d.className='card acc';const s=document.createElement('summary');s.innerHTML=h.innerHTML;h.remove();
+  const b=document.createElement('div');b.className='accb';while(c.firstChild)b.appendChild(c.firstChild);d.append(s,b);c.replaceWith(d);});
+ el.insertAdjacentHTML('afterbegin','<div class="accctl no-print"><button type="button" onclick="accAll(1)">すべて開く</button><button type="button" onclick="accAll(0)">すべて閉じる</button><button type="button" onclick="printPage()">📄 PDF</button></div>');
+}
+function accAll(o){document.querySelectorAll('.page.on details.acc').forEach(d=>d.open=!!o);}
+function printPage(){accAll(1);setTimeout(()=>{try{window.print()}catch(e){}},100);}
+window.addEventListener('beforeprint',()=>document.querySelectorAll('.page.on details.acc:not([open])').forEach(d=>{d.open=true;d.dataset.tmp=1}));
+window.addEventListener('afterprint',()=>document.querySelectorAll('details.acc[data-tmp]').forEach(d=>{d.open=false;delete d.dataset.tmp}));
+function tocBar(){const t=[['基本','陰陽(いんよう)'],['五行','五行(ごぎょう)'],['五臓','五臓と五行'],['気血水','気・血・水(き・けつ・すい)'],['8体質','8つの体質タイプ'],['四診','四診(ししん)'],['舌診','舌診(ぜっしん)'],['季節','季節の養生']];
+ return `<div class="toc no-print">${t.map(([a,b])=>`<button type="button" onclick="jump('${b}')">${a}</button>`).join('')}</div>`;}
+function jump(title){const h=[...document.querySelectorAll('#p-toyo h2')].find(x=>x.textContent.trim()===title);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});}
+function go(id){
+ if(!['check','toyo','sanmei','self','sejutsu'].includes(id))id='check';
+ document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.id==='p-'+id));
+ document.querySelectorAll('.tabs button').forEach(a=>a.classList.toggle('on',a.dataset.p===id));
+ const el=document.getElementById('p-'+id);
+ if(id!=='check'&&!el.dataset.ok){try{el.innerHTML=PAGES[id]();accordionize(el);el.dataset.ok=1;}catch(err){el.innerHTML='<div class="card">読み込みエラー:'+err.message+'</div>';}}
+ try{window.scrollTo(0,0);}catch(e){}
+ try{history.replaceState(null,'','#'+id);}catch(e){}
+}
+function startPage(){let p='check';try{p=(location.hash||'#check').slice(1);}catch(e){}go(p);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startPage);else startPage();
+let CHK=new Array(22).fill(false);
+function drawChecks(){
+ document.getElementById('checks').innerHTML=ITEMS.map((t,i)=>`<div class="chk-item ${CHK[i]?'on':''}" onclick="tg(${i})"><span class="bx">${CHK[i]?'✓':''}</span><span>${t}</span></div>`).join('');
+ const n=CHK.filter(Boolean).length;document.getElementById('cnt').textContent=n;document.getElementById('pbar').style.width=(n/22*100)+'%';
+}
+function tg(i){CHK[i]=!CHK[i];drawChecks();}
+document.addEventListener('DOMContentLoaded',drawChecks);
+function radarSVG(sc){
+ const W=320,cx=160,cy=150,R=105,n=8,mx=10;
+ const pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n;return[cx+Math.cos(a)*R*v/mx,cy+Math.sin(a)*R*v/mx]};
+ let g='';
+ [2.5,5,7.5,10].forEach(v=>{g+=`<polygon points="${[...Array(n)].map((_,i)=>pt(i,v).join(',')).join(' ')}" fill="none" stroke="#e3eef1"/>`});
+ for(let i=0;i<n;i++){const[x,y]=pt(i,10);g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#e3eef1"/>`;
+  const[lx,ly]=pt(i,12.6);g+=`<text x="${lx}" y="${ly+4}" text-anchor="middle" font-size="12" fill="${TYPES[i].kyo?'#4fb8d6':'#d98b6a'}">${TYPES[i].name}</text>`}
+ g+=`<polygon points="${sc.map((v,i)=>pt(i,Math.min(v,10)).join(',')).join(' ')}" fill="rgba(79,184,214,.28)" stroke="#4fb8d6" stroke-width="2"/>`;
+ sc.forEach((v,i)=>{const[x,y]=pt(i,Math.min(v,10));g+=`<circle cx="${x}" cy="${y}" r="3" fill="#4fb8d6"/>`});
+ return `<svg viewBox="0 0 ${W} 300" style="width:100%;max-width:360px;display:block;margin:0 auto">${g}</svg>`;
+}
+const EL=['木','火','土','金','水'],EC=['#8fd19e','#f4a3a3','#e9c87a','#c9ccd6','#8cc8e8'];
+const $=id=>document.getElementById(id);
+const li=(a,c)=>`<ul class="chk ${c||''}">${a.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+function run(){
+ const v=$('birth').value;if(!v)return;
+ const [y,m,d]=v.split('-').map(Number);const r=calc(y,m,d);
+ const nm=$('name').value.trim(),you=nm?nm+' さん':'あなた';
+ $('who').textContent=(nm?nm+' さん ・ ':'')+`${y}年${m}月${d}日生まれ`;
+ $('tcs').textContent=r.tenchusatsu;
+ const s=(id,t)=>$(id).textContent=t;
+ s('ds',r.day[0]);s('ms',r.month[0]);s('ys',r.year[0]);s('db',r.day[1]);s('mb',r.month[1]);s('yb',r.year[1]);
+ s('zk',`蔵干 日:${r.zokan.day} 月:${r.zokan.month} 年:${r.zokan.year}`);
+ const j=r.jintai,c=(t,l,cls)=>`<div class="${cls||''}">${t}<small>${l}</small></div>`;
+ $('jt').innerHTML=c('','')+c(j.head,'頭')+c(j.shoulder,'初年','sub')+c(j.left,'左手')+c(j.chest,'胸')+c(j.right,'右手')+c(j.lFoot,'晩年','sub')+c(j.belly,'腹')+c(j.rFoot,'中年','sub');
+ const N=NIKKAN[r.day[0]],C=CHUSHIN[j.chest],G=r.gogyo;
+ const max=Math.max(...G),many=EL.filter((e,i)=>G[i]>=3),lack=EL.filter((e,i)=>G[i]===0);
+ $('hero').innerHTML=`<div class="ic">${N.icon}</div><p class="lead">${you}は</p><h3>「${N.img}」の心に<br>「${C.key}」の星を持つ人</h3>
+  <span class="tag">${r.day[0]} ・ ${N.img}</span><span class="tag">${j.chest}</span><span class="tag">${r.tenchusatsu}天中殺</span>`;
+ $('nature').innerHTML=`<p><b>${N.catch}</b></p><p>${N.nature}</p>
+  <div class="box"><h4>こんなこと、ありませんか？</h4>${li(N.aru)}</div>
+  <div class="box"><h4>${r.tenchusatsu}天中殺の${you}</h4><p style="font-size:14px">${TCS[r.tenchusatsu]}</p></div>`;
+ $('chushin').innerHTML=`<p><span class="star">${j.chest}</span><span class="key">${C.key}</span></p><p>${C.text}</p>
+  <p class="note">胸の星は、人体図の真ん中。${you}の心の中心にある性質です。</p>`;
+ $('bars').innerHTML=G.map((n,i)=>`<div><span style="width:20px">${EL[i]}</span><i style="width:${n*40+4}px;background:${EC[i]}"></i>${n}</div>`).join('');
+ let g='';
+ many.forEach(e=>g+=`<div class="box"><h4>多い五行:${e}(${GOGYO[e].theme})</h4><p style="font-size:14px">${GOGYO[e].many}</p></div>`);
+ lack.forEach(e=>g+=`<div class="box"><h4>少ない五行:${e}(${GOGYO[e].theme})</h4><p style="font-size:14px">${GOGYO[e].lack}</p></div>`);
+ if(!many.length&&!lack.length)g='<p style="font-size:14px">五行がバランスよく巡っている命式です。いろいろな面を持ち、状況に合わせて力を発揮できるタイプ。</p>';
+ $('gogyo').innerHTML=g;
+ const ce=EL[['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'].indexOf(r.day[0])>>1];
+ $('care').innerHTML=`<p>${N.body}</p><p class="note">東洋医学では、${ce}のエネルギーは「${GOGYO[ce].organ}」と深く関わると考えます。</p>
+  <div class="box"><h4>${you}におすすめのセルフケア</h4>${li(N.care,'care')}</div>`;
+ $('closing').innerHTML=`<p>🌿 ${N.catch}。<br>体と心を整えるほど、${you}らしさはもっと輝きます。</p><p style="font-size:13px;color:var(--gold)">La*Bell Holistic Salon</p>`;
+ 
+ const nck=CHK.filter(Boolean).length;
+ if(!nck){$('mres').style.display='none';}else{$('mres').style.display='block';
+  const sc=scoreMonshin(CHK),mx=Math.max(...sc),top=TYPES.filter((t,i)=>sc[i]===mx&&mx>0);
+  const kyo=sc.slice(0,4).reduce((a,b)=>a+b,0),jit=sc.slice(4).reduce((a,b)=>a+b,0),tot=kyo+jit||1;
+  $('radar').innerHTML=radarSVG(sc)+`<p class="note" style="text-align:center">水色=足りないタイプ(虚) ・ オレンジ=たまっているタイプ(実)</p>`;
+  $('kyojitsu').innerHTML=`<div class="box"><h4>「足りない」と「たまっている」のバランス</h4>
+   <div class="kj"><span style="width:${kyo/tot*100}%;background:#8cc8e8"></span><span style="width:${jit/tot*100}%;background:#f3b49a"></span></div>
+   <p style="font-size:14px">${kyo>jit?'今は<b>エネルギーやうるおいが「足りない」</b>ほうに傾いています。補う・休む・あたためるケアが合います。':kyo<jit?'今は<b>めぐりが滞って「たまっている」</b>ほうに傾いています。流す・動かす・すっきりさせるケアが合います。':'「足りない」と「たまっている」が同じくらい。補いながら、めぐらせるケアを。'}</p></div>`;
+  const sigs=ITEMS.filter((t,i)=>CHK[i]&&TABLE[i][TYPES.indexOf(top[0])]>0);
+  $('mtype').innerHTML=(top.length>1?`<p class="note">${top.map(t=>t.name).join('・')}が同じスコアです</p>`:'')+top.map(t=>{
+   const ti=TYPES.indexOf(t),s=ITEMS.filter((x,i)=>CHK[i]&&TABLE[i][ti]>0);
+   return `<div class="tcard"><span style="font-size:30px">${t.icon}</span><h3>${t.name} <span class="yomi">${t.yomi}</span></h3><p><b>${t.catch}</b></p><p style="font-size:14px">${t.state}</p>
+   ${s.length?`<div class="box"><h4>${you}のサイン</h4>${li(s)}</div>`:''}
+   <div class="box"><h4>おすすめのツボ</h4>${(TYPE_TSUBO[t.name]||[]).map(tsuboCard).join('')}</div><div class="box"><h4>ボディケア</h4>${li(t.point,'care')}</div>
+   <div class="box"><h4>暮らしの整え方</h4>${li(t.life,'care')}</div></div>`}).join('');
+  const all=ITEMS.filter((t,i)=>CHK[i]);
+  $('checked').innerHTML=`<div class="box"><h4>チェックした項目(${all.length}個)</h4>${li(all)}</div>`;
+  const order=sc.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
+  const sec=order.find(([v,i])=>v>0&&!top.includes(TYPES[i]));
+  const K=kousatsu({you,de:r.dayEl,te:top[0].el,top:top[0],second:sec?TYPES[sec[1]]:null,N,chest:j.chest,gogyo:r.gogyo,kyo,jit,img:N.img});
+  $('bridge').innerHTML=K.parts.map(([t,p])=>`<div class="why"><h4>${t}</h4><p>${p}</p></div>`).join('')+
+   `<p class="note">※ ここに書いたのは「可能性」です。思い当たるものがあれば、そこからケアを始めてみてください。</p>`;
+  $('steps').innerHTML=K.advice.map((a,i)=>`<div class="step"><div class="no">${i+1}</div><div><h4>${a.t}</h4><p>${a.d}</p>${li(a.list,'care')}</div></div>`).join('')+
+   `<div class="box"><h4>今日からの1日の過ごし方</h4><div class="day">${K.day.map(([a,b])=>`<b>${a}</b><span>${b}</span>`).join('')}</div></div>
+   <div class="box"><h4>気をつけたい季節</h4><p style="font-size:14px">${K.season}</p></div>`;
+ }
+ $('result').style.display='block';$('result').scrollIntoView({behavior:'smooth'});
+}
+</script></body></html>
