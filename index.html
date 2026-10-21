@@ -62,7 +62,7 @@ p{margin:6px 0}
 .tcard{border-radius:14px;padding:14px;margin:10px 0;background:linear-gradient(160deg,#fff7f2,#f2fbff)}
 .tcard h3{margin:0;font-size:19px}.tcard .yomi{font-size:12px;color:var(--sub)}
 .sig{font-size:13px;color:var(--sub)}
-@media print{.pb{break-before:page}.tcard,.kj span,.chk-item{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tcard,.kj span,.chk-item{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 .why{border-left:3px solid var(--blue);padding:4px 0 4px 12px;margin:14px 0}
 .why h4{margin:0 0 4px;font-size:14px;color:var(--blue-d)}.why p{font-size:14px;margin:0}
 .step{display:flex;gap:12px;margin:14px 0}.step .no{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold-l),#f3c94d);color:#5a4500;font-weight:700;display:flex;align-items:center;justify-content:center}
@@ -127,23 +127,64 @@ details.acc>summary .sumsub,.sumsub{flex-basis:100%;font-size:12px;font-weight:4
  body.pk #karte{display:block;break-after:page;font-size:10.5px;line-height:1.45;color:#333}
  #karte *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
  #karte p{margin:0}
- .kr-kh{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #A2E8FF;padding-bottom:4px;margin-bottom:6px}
+ .kr-kh{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #A2E8FF;padding-bottom:3px;margin-bottom:5px}
  .kr-kh b{font-size:17px;letter-spacing:.05em}.kr-kh span{font-size:10px;color:#7a8a90;margin-left:4px}
- .kr-kinfo{display:grid;grid-template-columns:2fr 1.6fr 1fr 1fr;gap:4px;margin-bottom:6px}.kr-kinfo div{border:1px solid #d6e6eb;border-radius:6px;padding:4px 6px}.kr-kinfo span{display:block;font-size:8.5px;color:#7a8a90}.kr-kinfo b{font-size:13px}
- .kr-ksec{border:1px solid #d6e6eb;border-radius:8px;padding:5px 8px;margin-bottom:6px}
- .kr-ksh{font-weight:700;font-size:11px;color:#2f7f99;margin-bottom:3px}
- .kr-krow3{display:grid;grid-template-columns:1.2fr 1.2fr 1fr;gap:8px}.kr-krow2{display:grid;grid-template-columns:1fr 1.15fr;gap:10px}
- .kr-kk{font-size:8.5px;color:#7a8a90}.kr-kbig{font-size:12.5px;font-weight:700}.kr-kmono{font-size:11.5px;font-weight:700;letter-spacing:.03em}.kr-kn{font-size:9.5px;color:#555}
- .kr-kg{display:flex;gap:3px;flex-wrap:wrap}.kr-kg span{border-radius:10px;padding:1px 6px;font-weight:700;font-size:10px}
- .kr-ksc div{display:grid;grid-template-columns:42px 1fr 22px;align-items:center;gap:4px;font-size:9px;margin:1px 0}.kr-ksc i{height:6px;background:#eef4f6;border-radius:3px;overflow:hidden}.kr-ksc b{display:block;height:100%}.kr-ksc em{font-style:normal;text-align:right}
- .kr-kcl{margin:0;padding-left:13px;font-size:9px;columns:1}.kr-kcl li{margin:0}
- .kr-kmemo{margin-top:4px!important;font-size:9.5px;background:#fffbe9;border-radius:6px;padding:3px 6px}
+ .kr-top{display:grid;grid-template-columns:1.25fr 1fr;gap:6px;margin-bottom:5px}
+ .kr-kinfo{display:grid;grid-template-columns:1.4fr 1.3fr .9fr;gap:4px}.kr-kinfo div,.kr-elem{border:1px solid #cfdde2;border-radius:6px;padding:3px 6px}.kr-kinfo span,.kr-elem span{display:block;font-size:8.5px;color:#7a8a90}.kr-kinfo b{font-size:13px}
+ .kr-elem{display:grid;grid-template-columns:auto 1fr 1fr;gap:6px;align-items:center;background:#f6fcfe}.kr-elem b{font-size:11px}
+ .kr-row{display:grid;grid-template-columns:1fr 1.35fr;gap:6px;margin-bottom:5px}
+ .kr-row2{display:grid;grid-template-columns:.9fr 1fr;gap:6px;margin-bottom:5px}
+ .kr-col{display:grid;gap:5px}
+ .kr-ksec{border:1px solid #cfdde2;border-radius:8px;padding:4px 8px}
+ .kr-ksh{font-weight:700;font-size:11px;color:#2f7f99;margin-bottom:2px}.kr-ksh span{font-weight:400;font-size:8.5px;color:#999}
+ .kr-born{display:grid;grid-template-columns:.9fr 1.1fr;gap:6px}
+ .kr-jt{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#d6e6eb;border-radius:4px;overflow:hidden}.kr-jt div{background:#fff;text-align:center;font-size:9.5px;font-weight:700;color:#8a6d1e;padding:1px 0;min-height:22px}.kr-jt div.s{background:#eef9fd}.kr-jt small{display:block;font-size:7px;color:#999;font-weight:400}
+ .kr-kk{font-size:8.5px;color:#7a8a90}.kr-kbig{font-size:13px;font-weight:700}.kr-kmono{font-size:11.5px;font-weight:700;line-height:1.35}.kr-kn{font-size:9.5px;color:#555}
+ .kr-ksc div{display:grid;grid-template-columns:40px 1fr 22px;align-items:center;gap:4px;font-size:9px;margin:0}.kr-ksc i{height:6px;background:#eef4f6;border-radius:3px;overflow:hidden}.kr-ksc b{display:block;height:100%}.kr-ksc em{font-style:normal;text-align:right}
+ .kr-kcl{font-size:8.5px;line-height:1.45;color:#444}
+ .kr-kmemo{margin-top:4px!important;font-size:9px;background:#fffbe9;border-radius:6px;padding:3px 6px}
  .kr-kgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
- .kr-kb{border:1px solid #d6e6eb;border-radius:8px;padding:4px 8px 6px}.kr-kt{font-weight:700;font-size:10.5px;color:#2f7f99}.kr-kt span{font-weight:400;font-size:8.5px;color:#9aa;margin-left:4px}
- .kr-kl{border-bottom:1px dashed #cfdfe4;height:19px}
- .kr-kfoot{display:flex;justify-content:space-between;margin-top:8px;font-size:10px;border-top:1px solid #d6e6eb;padding-top:5px}
+ .kr-kb{border:1px solid #cfdde2;border-radius:8px;padding:3px 8px 5px}.kr-kt{font-weight:700;font-size:10.5px;color:#2f7f99}.kr-kt span{font-weight:400;font-size:8.5px;color:#9aa;margin-left:4px}
+ .kr-kl{border-bottom:1px dashed #cfdfe4;height:18px}
+ .kr-kfoot{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;border-top:1px solid #cfdde2;padding-top:4px}
  body.pk header{display:none}
  .lgout{display:none}
+}
+
+@media print{
+ @page{size:A4;margin:9mm}
+ html,body{background:#fff!important}
+ .wrap{max-width:none!important;padding:0!important}
+ header{padding:0 0 4px!important}header .logo{font-size:20px}header p{font-size:10px}header .logo-img{max-height:50px}
+ #result{font-size:11px;line-height:1.55}
+ #result .card{padding:7px 11px!important;margin:0 0 6px!important;border-radius:10px;box-shadow:none}
+ #result h2{font-size:12.5px;margin:0 0 4px}#result h2::before{height:13px;width:4px}
+ #result h3{font-size:14px;margin:2px 0}
+ #result p{margin:2px 0}
+ #result .note{font-size:9px}
+ #result .box{padding:5px 9px;margin:4px 0;border-radius:8px}#result .box h4{font-size:11px;margin:0 0 2px}
+ #result .box p,#result .why p,#result ul.chk li,#result .fk p,#result .step p{font-size:10.5px!important}
+ #result ul.chk li{padding:1px 0 1px 16px}
+ .pgrp{break-before:page}
+ body:not(.pk) #g1{break-before:auto}
+ #g3{break-before:auto}
+ .pair{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pair .card{margin:0 0 6px!important}
+ .kanshi{grid-template-columns:repeat(3,40px)}.kanshi div{font-size:20px}
+ .jintai div{padding:5px 2px;min-height:34px;font-size:12px}.jintai div small{font-size:8px}
+ .hero{padding:6px!important}.hero .ic{font-size:26px}
+ .tag{font-size:10px;padding:1px 8px}
+ .bars div{margin:1px 0;font-size:10.5px}.bars i{height:9px}
+ .nowgrid{display:grid;grid-template-columns:42% 1fr;gap:8px;align-items:start}
+ #radar svg{max-width:230px!important}
+ #checked ul.chk{columns:1}
+ .tcard{padding:8px 10px!important;margin:4px 0!important}
+ #mtype .tsubo{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:center;padding:4px 6px;margin:4px 0}
+ #mtype .tsubo svg{max-width:120px!important}.tsubo h4{font-size:12px!important;margin:0!important}.tsubo ol{font-size:10px}.tsubo .how{font-size:9.5px;padding:4px 7px;margin-top:3px}
+ .why{margin:5px 0;padding:2px 0 2px 9px}.why h4{font-size:11px}
+ .step{margin:5px 0;gap:8px}.step .no{width:22px;height:22px;font-size:12px}.step h4{font-size:11.5px;margin:0}
+ .day{font-size:10.5px;gap:2px 8px}
+ .soft{padding:6px!important}
+ .card,.box,.tcard,.why,.step,.tsubo{break-inside:avoid}
 }
 </style></head><body>
 <div id="lock" style="display:none">
@@ -188,22 +229,28 @@ details.acc>summary .sumsub,.sumsub{flex-basis:100%;font-size:12px;font-weight:4
 </div>
 <div id="result">
 <div id="karte"></div>
-<div class="card"><h2>陰占(いんせん)</h2><p class="note" id="who"></p>
+<div class="pgrp" id="g1">
+<div class="pair"><div class="card"><h2>陰占(いんせん)</h2><p class="note" id="who"></p>
 <div class="insen"><div class="tcs">天中殺<b id="tcs"></b></div>
 <div><div class="kanshi"><small>日</small><small>月</small><small>年</small><div id="ds"></div><div id="ms"></div><div id="ys"></div><div id="db"></div><div id="mb"></div><div id="yb"></div></div>
 <div class="zk" id="zk"></div></div></div></div>
 <div class="card"><h2>陽占(人体図)</h2><div class="jintai" id="jt"></div>
 <p class="note">水色のマス(初年・中年・晩年)は十二大従星=エネルギーの強さ、十字の5つは十大主星=本質・性格です。</p></div>
+</div>
 <div class="card hero" id="hero"></div>
 <div class="card"><h2>あなたの本質</h2><div id="nature"></div></div>
 <div class="card"><h2>心のまんなかにある星</h2><div id="chushin"></div></div>
+</div>
+<div class="pgrp" id="g2">
 <div class="card"><h2>五行のバランス 🫧</h2><div class="bars" id="bars"></div><div id="gogyo"></div></div>
 <div class="card"><h2>体のサインとセルフケア 🌿</h2><div id="care"></div></div>
+</div>
 <div id="mres">
-<div class="card pb"><h2>今のからだの状態</h2><p class="note">22項目のチェックから見た、今の気・血・水のバランスです。</p><div id="radar"></div><div id="kyojitsu"></div><div id="checked"></div></div>
-<div class="card"><h2>今いちばん出ているサイン</h2><div id="mtype"></div></div>
-<div class="card pb"><h2>なぜ今、このサインが出ているの? 🫧</h2><p class="note">生まれ持った体質(命式)と、今のからだ(チェック)をつなげて考えられる可能性です。</p><div id="bridge"></div></div>
-<div class="card"><h2>コンディションを整える3つのステップ 🌿</h2><div id="steps"></div></div>
+<div class="pgrp" id="g3"><div class="card" id="nowcard"><h2>今のからだの状態</h2><p class="note">22項目のチェックから見た、今の気・血・水のバランスです。</p><div class="nowgrid"><div id="radar"></div><div><div id="kyojitsu"></div><div id="checked"></div></div></div></div>
+</div>
+<div class="pgrp" id="g4"><div class="card"><h2>今いちばん出ているサイン</h2><div id="mtype"></div></div></div>
+<div class="pgrp" id="g5"><div class="card"><h2>なぜ今、このサインが出ているの? 🫧</h2><p class="note">生まれ持った体質(命式)と、今のからだ(チェック)をつなげて考えられる可能性です。</p><div id="bridge"></div></div>
+<div class="card"><h2>コンディションを整える3つのステップ 🌿</h2><div id="steps"></div></div></div>
 </div>
 <div class="card soft"><div id="closing"></div>
 <p class="note">※ 生年月日から見た体質の「傾向」です。医療的な判断ではありません。気になる症状があるときは専門家にご相談ください。</p></div>
@@ -833,10 +880,10 @@ function handSVG(mir){
   h+=`<path d="${smoothPath([[165,220],[170,226],[173,232]].map(M),false)}" fill="none" stroke="#d4b8a4" stroke-width=".9"/>`;
   return h;
 }
-function bodyFig(view,ox){
+function bodyFig(view,ox,plain){
   const b=smoothPath(BODY,true);
   let s=`<g transform="translate(${ox} 0)">`;
-  s+=`<path d="${b}" fill="${KSK}"/><path d="${b}" fill="${KSK2}" opacity=".5" filter="url(#kbl)" transform="translate(4 3)"/>`;
+  s+=plain?`<path d="${b}" fill="#fff"/>`:`<path d="${b}" fill="${KSK}"/><path d="${b}" fill="${KSK2}" opacity=".5" filter="url(#kbl)" transform="translate(4 3)"/>`;
   s+=`<path d="${b}" fill="none" stroke="${KLN}" stroke-width="1.5" stroke-linejoin="round"/>`;
   s+=handSVG(0)+handSVG(1);
   s+=`<ellipse cx="79.5" cy="39" rx="3.5" ry="6.5" fill="${KSK}" stroke="${KLN}" stroke-width="1.2"/><ellipse cx="120.5" cy="39" rx="3.5" ry="6.5" fill="${KSK}" stroke="${KLN}" stroke-width="1.2"/>`;
@@ -1140,32 +1187,45 @@ function pad2(n){return String(n).padStart(2,'0')}
 function todayStr(sep){const t=new Date();return t.getFullYear()+sep+pad2(t.getMonth()+1)+sep+pad2(t.getDate());}
 function ageOf(y,m,d){const t=new Date();let a=t.getFullYear()-y;if(t.getMonth()+1<m||(t.getMonth()+1===m&&t.getDate()<d))a--;return a;}
 const REL_NAME={same:'同じ五行',iGen:'自分が生む(相生)',genMe:'自分を生む(相生)',iCtrl:'自分がおさえる(相剋)',ctrlMe:'自分をおさえる(相剋)'};
+function pentaSVG(G){
+ const cx=70,cy=66,R=50,mx=4,ang=i=>(-90+i*72)*Math.PI/180,P=(i,v)=>[cx+Math.cos(ang(i))*R*v/mx,cy+Math.sin(ang(i))*R*v/mx];
+ let g='';[1,2,3,4].forEach(v=>g+=`<polygon points="${[0,1,2,3,4].map(i=>P(i,v).join(',')).join(' ')}" fill="none" stroke="#c9d6da" stroke-dasharray="2 2" stroke-width=".8"/>`);
+ [0,1,2,3,4].forEach(i=>{const[x,y]=P(i,4.9);g+=`<line x1="${cx}" y1="${cy}" x2="${P(i,4)[0]}" y2="${P(i,4)[1]}" stroke="#c9d6da" stroke-width=".8"/><text x="${x}" y="${y+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#555">${EL[i]}${G[i]}</text>`});
+ g+=`<polygon points="${G.map((v,i)=>P(i,Math.min(v,4)).join(',')).join(' ')}" fill="rgba(79,184,214,.25)" stroke="#4fb8d6" stroke-width="1.6"/>`;
+ return `<svg viewBox="0 0 140 135" style="width:120px;display:block;margin:0 auto">${g}</svg>`;
+}
 function buildKarte(){
  const L=window.LAST;if(!L)return;const{y,m,d,r,nm,N,j,G}=L;
  const lines=n=>'<div class="kr-kl"></div>'.repeat(n);
  const box=(t,n,ex)=>`<div class="kr-kb"><div class="kr-kt">${t}${ex?`<span>${ex}</span>`:''}</div>${lines(n)}</div>`;
- let now='<p class="kr-kn">体質チェックの記入なし</p>';
+ const jg=[['',''],[j.head,'頭'],[j.shoulder,'初年'],[j.left,'左手'],[j.chest,'胸'],[j.right,'右手'],[j.lFoot,'晩年'],[j.belly,'腹'],[j.rFoot,'中年']].map(([a,b],i)=>`<div class="${[2,6,8].includes(i)?'s':''}">${a.replace('星','')}<small>${b}</small></div>`).join('');
+ let now='<p class="kr-kn">(体質チェックの記入なし)</p>';
  if(L.sc){
   const mx=Math.max(...L.sc,1);
-  now=`<div class="kr-krow2"><div><p class="kr-kk">いちばん出ているサイン</p><p class="kr-kbig">${L.top.map(t=>t.icon+' '+t.name).join(' ・ ')}</p>
-   <p class="kr-kn">${L.kyo>L.jit?'虚(足りない)に傾き':L.kyo<L.jit?'実(たまっている)に傾き':'虚・実 同程度'} ・ 虚 ${L.kyo} / 実 ${L.jit}</p>
-   <div class="kr-ksc">${TYPES.map((t,i)=>`<div><span>${t.name}</span><i><b style="width:${L.sc[i]/mx*100}%;background:${t.kyo?'#8cc8e8':'#f3b49a'}"></b></i><em>${L.sc[i]}</em></div>`).join('')}</div></div>
-   <div><p class="kr-kk">チェックした項目(${L.checked.length})</p><ul class="kr-kcl">${L.checked.map(c=>`<li>${c}</li>`).join('')}</ul></div></div>`;
+  now=`<p class="kr-kk">いちばん出ているサイン</p><p class="kr-kbig">${L.top.map(t=>t.icon+' '+t.name).join(' ・ ')}</p>
+   <p class="kr-kn">${L.kyo>L.jit?'虚(足りない)に傾き':L.kyo<L.jit?'実(たまっている)に傾き':'虚・実 同程度'}(虚 ${L.kyo} / 実 ${L.jit})</p>
+   <div class="kr-ksc">${TYPES.map((t,i)=>`<div><span>${t.name}</span><i><b style="width:${L.sc[i]/mx*100}%;background:${t.kyo?'#8cc8e8':'#f3b49a'}"></b></i><em>${L.sc[i]}</em></div>`).join('')}</div>
+   <p class="kr-kk" style="margin-top:3px">チェックした項目(${L.checked.length})</p><p class="kr-kcl">${L.checked.join(' / ')}</p>`;
   const rel=relation(r.dayEl,L.top[0].el);
-  now+=`<p class="kr-kmemo">🌿 見立てメモ:生まれ持った中心「${r.dayEl}」× 今のサイン「${L.top[0].el}」(${L.top[0].name}) → ${REL_NAME[rel]} ・ 命式の「${L.top[0].el}」は${G[EL.indexOf(L.top[0].el)]}つ</p>`;
+  now+=`<p class="kr-kmemo">🌿 見立て:生まれ持った「${r.dayEl}」× 今のサイン「${L.top[0].el}」(${L.top[0].name})→ ${REL_NAME[rel]}/命式の「${L.top[0].el}」は${G[EL.indexOf(L.top[0].el)]}つ</p>`;
  }
+ const body=`<svg viewBox="-5 0 420 450" style="width:100%;display:block"><defs><filter id="kbl"><feGaussianBlur stdDeviation="4"/></filter></defs>${bodyFig('F',0,1)}${bodyFig('B',210,1)}</svg>`;
  $('karte').innerHTML=`<div class="kr-kh"><div><b>La*Bell</b> カルテ <span>エレメントバランスケア</span></div><div>記録日 ${todayStr('.')}　No.______</div></div>
- <div class="kr-kinfo"><div><span>お名前</span><b>${nm||'　　　　　　'}</b> 様</div><div><span>生年月日</span>${y}.${pad2(m)}.${pad2(d)}(${ageOf(y,m,d)}歳)</div><div><span>性別</span>女・男・他</div><div><span>来店</span>初回・(　)回目</div></div>
- <div class="kr-ksec"><div class="kr-ksh">🌸 生まれ持った体質(命式)</div>
-  <div class="kr-krow3"><div><p class="kr-kk">陰占</p><p class="kr-kmono">日 ${r.day} ・ 月 ${r.month} ・ 年 ${r.year}</p><p class="kr-kn">天中殺:${r.tenchusatsu}</p></div>
-  <div><p class="kr-kk">日干・胸の星</p><p class="kr-kbig">${N.icon} ${r.day[0]}(${N.img})</p><p class="kr-kn">胸:${j.chest}(${CHUSHIN[j.chest].key})</p></div>
-  <div><p class="kr-kk">五行の数</p><div class="kr-kg">${EL.map((e,i)=>`<span style="background:${EC[i]}">${e}${G[i]}</span>`).join('')}</div></div></div>
-  <p class="kr-kn" style="margin-top:3px">人体図:頭 ${j.head}/胸 ${j.chest}/腹 ${j.belly}/右手 ${j.right}/左手 ${j.left}　初年 ${j.shoulder}/中年 ${j.rFoot}/晩年 ${j.lFoot}</p></div>
- <div class="kr-ksec"><div class="kr-ksh">🫧 今のからだ(体質チェック)</div>${now}</div>
- <div class="kr-kgrid">${box('主訴・お悩み',6)}${box('カウンセリングメモ',6,'睡眠・食事・便通・冷え・生理など')}
- ${box('施術内容・使ったツボ',6)}${box('施術中の反応・気づき',6,'こり・冷え・お腹・頭皮など')}
- ${box('ホームケア・次回のご提案',6)}${box('お客様の声',6)}</div>
- <div class="kr-kfoot"><div>次回予約:　　　月　　　日(　)　　：</div><div>☐ 記録・保管に同意します　ご署名:____________</div></div>`;
+ <div class="kr-top"><div class="kr-kinfo"><div><span>お名前</span><b>${nm||'　'}</b> 様</div><div><span>生年月日</span>${y}.${pad2(m)}.${pad2(d)}(${ageOf(y,m,d)}歳)</div><div><span>来店</span>初回・(　)回目</div></div>
+ <div class="kr-elem"><div class="kr-kk">【エレメント】</div><div><span>性質</span><b>${N.icon} ${r.day[0]}・${N.img}(${r.dayEl})</b></div><div><span>個性</span><b>${j.chest}(${CHUSHIN[j.chest].key})</b></div></div></div>
+ <div class="kr-row">
+  <div class="kr-ksec"><div class="kr-ksh">🌸 生まれ持った体質</div>
+   <div class="kr-born"><div><p class="kr-kk">陰占</p><p class="kr-kmono">日 ${r.day}<br>月 ${r.month}<br>年 ${r.year}</p><p class="kr-kn">天中殺 ${r.tenchusatsu}</p></div>
+   <div><p class="kr-kk">人体図</p><div class="kr-jt">${jg}</div></div></div>
+   <p class="kr-kk" style="margin-top:2px">五行のバランス(命式)</p>${pentaSVG(G)}</div>
+  <div class="kr-ksec"><div class="kr-ksh">🫧 今のからだ</div>${now}</div>
+ </div>
+ <div class="kr-row2">
+  <div class="kr-ksec"><div class="kr-ksh">🖊 こり・冷え・痛みの場所 <span>※セラピスト記入</span></div>${body}</div>
+  <div class="kr-col">${box('主訴・お悩み',5)}${box('施術内容・使ったツボ',5)}${box('施術中の反応・気づき',5,'こり・冷え・お腹・頭皮')}</div>
+ </div>
+ <div class="kr-kgrid">${box('ホームケア・次回のご提案',5)}${box('お客様の声・メモ',5)}</div>
+ <div class="kr-kfoot"><div>次回予約:　　　月　　　日(　)　　：</div><div>セラピスト:__________</div></div>`;
 }
 function printMode(mode){
  document.body.classList.toggle('pk',mode==='karte');
