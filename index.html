@@ -115,17 +115,62 @@ details.acc>summary .sumsub,.sumsub{flex-basis:100%;font-size:12px;font-weight:4
 .sc{background:#fafdfe;border-radius:12px;padding:10px 12px;margin:8px 0;break-inside:avoid}.sch{display:flex;align-items:center;justify-content:space-between;gap:6px}.sc p{margin:3px 0;font-size:13.5px}
 .cnt{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px dashed var(--line)}.cnt:first-of-type{border-top:0}.cnt p{margin:1px 0;font-size:13.5px}
 .cd{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#3d4a4f;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
-</style></head><body><div class="wrap">
+#lock{position:fixed;inset:0;z-index:50;background:linear-gradient(170deg,#e9f9ff,#fffdf3);align-items:center;justify-content:center;padding:16px}
+.lockbox{background:#fff;border-radius:22px;padding:26px 22px;width:100%;max-width:360px;text-align:center;box-shadow:0 6px 24px rgba(79,184,214,.15)}
+.lockbox .logo{font-size:26px;font-weight:700;letter-spacing:.06em}.lockbox .logo span{color:var(--gold)}.lockbox .lsub{color:var(--sub);font-size:13px;margin:2px 0}
+.lockbox .logo-img{display:none;max-width:180px;max-height:80px;margin:0 auto}
+.adm{margin-top:10px;text-align:left;font-size:12px;color:var(--sub)}.adm summary{cursor:pointer;text-align:center}
+#karte{display:none}
+.actions .btn2 small{font-size:10.5px;font-weight:400;opacity:.8}
+@media print{
+ @page{size:A4;margin:10mm}
+ body.pk #karte{display:block;break-after:page;font-size:10.5px;line-height:1.45;color:#333}
+ #karte *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ #karte p{margin:0}
+ .kr-kh{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #A2E8FF;padding-bottom:4px;margin-bottom:6px}
+ .kr-kh b{font-size:17px;letter-spacing:.05em}.kr-kh span{font-size:10px;color:#7a8a90;margin-left:4px}
+ .kr-kinfo{display:grid;grid-template-columns:2fr 1.6fr 1fr 1fr;gap:4px;margin-bottom:6px}.kr-kinfo div{border:1px solid #d6e6eb;border-radius:6px;padding:4px 6px}.kr-kinfo span{display:block;font-size:8.5px;color:#7a8a90}.kr-kinfo b{font-size:13px}
+ .kr-ksec{border:1px solid #d6e6eb;border-radius:8px;padding:5px 8px;margin-bottom:6px}
+ .kr-ksh{font-weight:700;font-size:11px;color:#2f7f99;margin-bottom:3px}
+ .kr-krow3{display:grid;grid-template-columns:1.2fr 1.2fr 1fr;gap:8px}.kr-krow2{display:grid;grid-template-columns:1fr 1.15fr;gap:10px}
+ .kr-kk{font-size:8.5px;color:#7a8a90}.kr-kbig{font-size:12.5px;font-weight:700}.kr-kmono{font-size:11.5px;font-weight:700;letter-spacing:.03em}.kr-kn{font-size:9.5px;color:#555}
+ .kr-kg{display:flex;gap:3px;flex-wrap:wrap}.kr-kg span{border-radius:10px;padding:1px 6px;font-weight:700;font-size:10px}
+ .kr-ksc div{display:grid;grid-template-columns:42px 1fr 22px;align-items:center;gap:4px;font-size:9px;margin:1px 0}.kr-ksc i{height:6px;background:#eef4f6;border-radius:3px;overflow:hidden}.kr-ksc b{display:block;height:100%}.kr-ksc em{font-style:normal;text-align:right}
+ .kr-kcl{margin:0;padding-left:13px;font-size:9px;columns:1}.kr-kcl li{margin:0}
+ .kr-kmemo{margin-top:4px!important;font-size:9.5px;background:#fffbe9;border-radius:6px;padding:3px 6px}
+ .kr-kgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+ .kr-kb{border:1px solid #d6e6eb;border-radius:8px;padding:4px 8px 6px}.kr-kt{font-weight:700;font-size:10.5px;color:#2f7f99}.kr-kt span{font-weight:400;font-size:8.5px;color:#9aa;margin-left:4px}
+ .kr-kl{border-bottom:1px dashed #cfdfe4;height:19px}
+ .kr-kfoot{display:flex;justify-content:space-between;margin-top:8px;font-size:10px;border-top:1px solid #d6e6eb;padding-top:5px}
+ body.pk header{display:none}
+ .lgout{display:none}
+}
+</style></head><body>
+<div id="lock" style="display:none">
+<div class="lockbox">
+<img class="logo-img" src="logo.png" alt="" onload="this.style.display='block';this.nextElementSibling.style.display='none'" onerror="this.remove()">
+<div class="logo">La<span>*</span>Bell</div>
+<p class="lsub">🌿 エレメントバランスケア</p>
+<p style="font-size:14px;margin:14px 0 6px">受講生専用ページです🌸<br>パスワードを入力してください</p>
+<input id="lockpw" type="password" placeholder="パスワード" autocomplete="current-password" onkeydown="if(event.key==='Enter')tryLogin()">
+<button class="btn" type="button" onclick="tryLogin()">ひらく ✨</button>
+<p id="lockmsg" style="color:#c0563f;font-size:13px;min-height:18px"></p>
+<details class="adm"><summary>管理者用:暗号コードを作る</summary>
+<p class="note">新しいパスワードを入れて「作る」を押すと、暗号コードが出ます。そのコードを index.html の「パスワード設定」に貼りつけてください。</p>
+<input id="hashin" placeholder="新しいパスワード"><button type="button" class="btn2" style="margin-top:6px;width:100%" onclick="makeHash()">作る</button>
+<textarea id="hashout" readonly rows="3" style="width:100%;margin-top:6px;font-size:11px;border-radius:10px;border:1.5px solid var(--line);padding:6px" onclick="this.select()"></textarea></details>
+</div></div>
+<div class="wrap">
 <header>
 <!-- ロゴ:同じフォルダに logo.png を置くと自動で画像に切り替わります -->
 <img class="logo-img" src="logo.png" alt="La*Bell" onload="this.style.display='block';this.nextElementSibling.style.display='none'" onerror="this.remove()">
 <div class="logo">La<span>*</span>Bell</div>
-<p>エレメントバランスケア</p></header>
+<p>🌿 エレメントバランスケア</p></header>
 <nav class="tabs no-print">
-<button type="button" data-p="check" onclick="go('check')">🌈<span>体質チェック</span></button>
-<button type="button" data-p="toyo" onclick="go('toyo')">🌿<span>東洋医学</span></button>
-<button type="button" data-p="sanmei" onclick="go('sanmei')">🔮<span>算命学</span></button>
-<button type="button" data-p="self" onclick="go('self')">🪽<span>セルフケア</span></button>
+<button type="button" data-p="check" onclick="go('check')">🌿<span>体質チェック</span></button>
+<button type="button" data-p="toyo" onclick="go('toyo')">🍃<span>東洋医学</span></button>
+<button type="button" data-p="sanmei" onclick="go('sanmei')">🌸<span>算命学</span></button>
+<button type="button" data-p="self" onclick="go('self')">🫧<span>セルフケア</span></button>
 <button type="button" data-p="sejutsu" onclick="go('sejutsu')">🤲<span>施術</span></button>
 </nav>
 <section class="page" id="p-check">
@@ -135,13 +180,14 @@ details.acc>summary .sumsub,.sumsub{flex-basis:100%;font-size:12px;font-weight:4
 <div style="margin-top:10px"><label>生年月日</label><input id="birth" type="date" value="1990-01-01" min="1900-01-01" max="2100-12-31"></div>
 </div>
 <div class="card no-print">
-<h2>今の体のチェック 🌈</h2>
+<h2>今の体のチェック 🌿</h2>
 <p class="note">当てはまるものをタップ(いくつでもOK)。チェックなしなら命式だけを表示します。</p>
 <div class="prog"><span id="cnt">0</span> / 22<i><b id="pbar"></b></i></div>
 <div id="checks"></div>
 <button class="btn" onclick="run()">結果を見る ✨</button>
 </div>
 <div id="result">
+<div id="karte"></div>
 <div class="card"><h2>陰占(いんせん)</h2><p class="note" id="who"></p>
 <div class="insen"><div class="tcs">天中殺<b id="tcs"></b></div>
 <div><div class="kanshi"><small>日</small><small>月</small><small>年</small><div id="ds"></div><div id="ms"></div><div id="ys"></div><div id="db"></div><div id="mb"></div><div id="yb"></div></div>
@@ -152,25 +198,63 @@ details.acc>summary .sumsub,.sumsub{flex-basis:100%;font-size:12px;font-weight:4
 <div class="card"><h2>あなたの本質</h2><div id="nature"></div></div>
 <div class="card"><h2>心のまんなかにある星</h2><div id="chushin"></div></div>
 <div class="card"><h2>五行のバランス 🫧</h2><div class="bars" id="bars"></div><div id="gogyo"></div></div>
-<div class="card"><h2>体のサインとセルフケア 🪽</h2><div id="care"></div></div>
+<div class="card"><h2>体のサインとセルフケア 🌿</h2><div id="care"></div></div>
 <div id="mres">
 <div class="card pb"><h2>今のからだの状態</h2><p class="note">22項目のチェックから見た、今の気・血・水のバランスです。</p><div id="radar"></div><div id="kyojitsu"></div><div id="checked"></div></div>
 <div class="card"><h2>今いちばん出ているサイン</h2><div id="mtype"></div></div>
 <div class="card pb"><h2>なぜ今、このサインが出ているの? 🫧</h2><p class="note">生まれ持った体質(命式)と、今のからだ(チェック)をつなげて考えられる可能性です。</p><div id="bridge"></div></div>
-<div class="card"><h2>コンディションを整える3つのステップ 🪽</h2><div id="steps"></div></div>
+<div class="card"><h2>コンディションを整える3つのステップ 🌿</h2><div id="steps"></div></div>
 </div>
 <div class="card soft"><div id="closing"></div>
 <p class="note">※ 生年月日から見た体質の「傾向」です。医療的な判断ではありません。気になる症状があるときは専門家にご相談ください。</p></div>
-<div class="actions no-print"><button class="btn2" onclick="window.print()">📄 PDFに保存</button><button class="btn2" onclick="window.scrollTo(0,0)">もう一度</button></div>
+<div class="actions no-print"><button class="btn2" onclick="printMode('karte')">🗂 カルテPDF<br><small>サロン保管用</small></button><button class="btn2" onclick="printMode('client')">📄 結果PDF<br><small>お客様用</small></button></div>
+<div class="actions no-print" style="margin-top:8px"><button class="btn2" style="background:#fff;border:1.5px solid var(--line)" onclick="window.scrollTo(0,0)">もう一度</button></div>
 </div>
 </section>
 <section class="page" id="p-toyo"></section>
 <section class="page" id="p-sanmei"></section>
 <section class="page" id="p-self"></section>
 <section class="page" id="p-sejutsu"></section>
+<p class="no-print" style="text-align:center;margin-top:24px"><button type="button" class="lgout" onclick="logout()" style="font:inherit;font-size:12px;background:none;border:1.5px solid var(--line);border-radius:999px;padding:5px 14px;color:var(--sub);cursor:pointer">🔒 ログアウト</button></p>
 <p class="note" style="text-align:center;margin-top:24px">© La*Bell Holistic Salon</p>
 </div>
 <script>
+
+/* =====================================================
+   🔒 パスワード設定(ここだけ編集すればOK)
+   ・パスワードを変えるときは、ロック画面の下の
+     「管理者用:暗号コードを作る」で作ったコードを
+     下の '...' の中に貼りつけます
+   ・コードを2つ並べると、2つのパスワードどちらでも入れます
+   ・FREE_TABS に 'check' を入れると、体質チェックだけ
+     パスワードなしで使えます(例: ['check'])
+   ===================================================== */
+const PASS_HASHES = [
+  '7afc2ce35d0881d20b3950790e314e774390d3c1ef1999acac52b2ba0463a5a0',
+];
+const FREE_TABS = [];
+// パスワード画面を使うときは true にします
+const LOCK_ON = false;
+/* ===================================================== */
+
+function sha256(str){const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+ const b=new TextEncoder().encode(str),l=b.length,n=((l+9+63)>>6)<<6,m=new Uint8Array(n);m.set(b);m[l]=0x80;const bl=l*8;for(let i=0;i<4;i++)m[n-1-i]=(bl>>>(8*i))&255;
+ let H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];const W=new Array(64),r=(x,k)=>(x>>>k)|(x<<(32-k));
+ for(let o=0;o<n;o+=64){for(let i=0;i<16;i++)W[i]=(m[o+4*i]<<24)|(m[o+4*i+1]<<16)|(m[o+4*i+2]<<8)|m[o+4*i+3];
+  for(let i=16;i<64;i++){const s0=r(W[i-15],7)^r(W[i-15],18)^(W[i-15]>>>3),s1=r(W[i-2],17)^r(W[i-2],19)^(W[i-2]>>>10);W[i]=(W[i-16]+s0+W[i-7]+s1)|0;}
+  let[a,bb,c,d,e,f,g,hh]=H;for(let i=0;i<64;i++){const S1=r(e,6)^r(e,11)^r(e,25),ch=(e&f)^(~e&g),t1=(hh+S1+ch+K[i]+W[i])|0,S0=r(a,2)^r(a,13)^r(a,22),mj=(a&bb)^(a&c)^(bb&c),t2=(S0+mj)|0;hh=g;g=f;f=e;e=(d+t1)|0;d=c;c=bb;bb=a;a=(t1+t2)|0;}
+  H=[H[0]+a,H[1]+bb,H[2]+c,H[3]+d,H[4]+e,H[5]+f,H[6]+g,H[7]+hh].map(x=>x|0);}
+ return H.map(x=>(x>>>0).toString(16).padStart(8,'0')).join('');}
+const AUTH_KEY='labell_auth';
+function isAuthed(){try{return PASS_HASHES.includes(localStorage.getItem(AUTH_KEY));}catch(e){return window.__authed===true;}}
+function needLock(id){return LOCK_ON&&!FREE_TABS.includes(id)&&!isAuthed();}
+function showLock(next){window.__next=next||'check';document.getElementById('lock').style.display='flex';document.querySelector('.wrap').style.display='none';setTimeout(()=>{try{document.getElementById('lockpw').focus()}catch(e){}},50);}
+function hideLock(){document.getElementById('lock').style.display='none';document.querySelector('.wrap').style.display='';}
+function tryLogin(){const v=document.getElementById('lockpw').value.trim();const hv=sha256(v);
+ if(PASS_HASHES.includes(hv)){try{localStorage.setItem(AUTH_KEY,hv)}catch(e){}window.__authed=true;document.getElementById('lockmsg').textContent='';hideLock();go(window.__next||'check');}
+ else{document.getElementById('lockmsg').textContent='パスワードがちがいます🌿';}}
+function logout(){try{localStorage.removeItem(AUTH_KEY)}catch(e){}window.__authed=false;showLock('check');}
+function makeHash(){const v=document.getElementById('hashin').value.trim();if(!v)return;document.getElementById('hashout').value=sha256(v);}
 // 算命学 命式計算エンジン(朱学院の命式に合わせて検証)
 const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
@@ -303,12 +387,12 @@ const NIKKAN={
  aru:['頼まれると断れず、気づけば全部ひとりで抱えている','「ちゃんとしなきゃ」と自分にいちばん厳しい','一度決めたことは、途中で変えるのが苦手'],
  body:'がんばりすぎると首・肩・目にこりが出やすく、めぐりが滞るとイライラしやすくなります。',
  care:['朝、両手を空に向けてぐーっと伸びる','緑の多い場所をゆっくり歩く','「今日はここまで」と区切る日をつくる']},
-'乙':{img:'草花',icon:'🌼',catch:'風にしなやかに揺れる、草花の人',
+'乙':{img:'草花',icon:'🌷',catch:'風にしなやかに揺れる、草花の人',
  nature:'やわらかく見えて、実はとても芯の強い人。踏まれても、また立ち上がる草花のような粘り強さがあります。人と人をつなぐのが上手で、その場の空気をやさしく整える力の持ち主です。',
  aru:['相手の気持ちを先に考えて、自分のことは後回し','ひとりより、誰かと一緒のほうが力が出る','季節の変わり目に、心も体もゆらぎやすい'],
  body:'気をつかいすぎると自律神経がゆらぎやすく、ため息や浅い呼吸が増えがちです。',
  care:['好きな香りで深呼吸する時間をつくる','安心できる人と、目的のないおしゃべりを','体をねじるストレッチでめぐりを流す']},
-'丙':{img:'太陽',icon:'🌞',catch:'まわりを明るく照らす、太陽の人',
+'丙':{img:'太陽',icon:'☀️',catch:'まわりを明るく照らす、太陽の人',
  nature:'そこにいるだけで場が明るくなる、天性のムードメーカー。素直で裏表がなく、思ったことが顔に出ます。人を元気にする力を持っていて、あなたの笑顔に救われている人がたくさんいるはず。',
  aru:['隠しごとや、うそが本当に苦手','楽しいとつい予定を詰め込みすぎる','元気な日と、電池切れの日の差が大きい'],
  body:'熱がこもりやすく、のぼせや寝つきの悪さ、気分の上下として出やすいタイプです。',
@@ -1020,6 +1104,7 @@ function tocBar(){const t=[['基本','陰陽(いんよう)'],['五行','五行(�
 function jump(title){const h=[...document.querySelectorAll('#p-toyo h2')].find(x=>x.textContent.trim()===title);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});}
 function go(id){
  if(!['check','toyo','sanmei','self','sejutsu'].includes(id))id='check';
+ if(needLock(id)){showLock(id);return;}
  document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.id==='p-'+id));
  document.querySelectorAll('.tabs button').forEach(a=>a.classList.toggle('on',a.dataset.p===id));
  const el=document.getElementById('p-'+id);
@@ -1050,6 +1135,47 @@ function radarSVG(sc){
 const EL=['木','火','土','金','水'],EC=['#8fd19e','#f4a3a3','#e9c87a','#c9ccd6','#8cc8e8'];
 const $=id=>document.getElementById(id);
 const li=(a,c)=>`<ul class="chk ${c||''}">${a.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+
+function pad2(n){return String(n).padStart(2,'0')}
+function todayStr(sep){const t=new Date();return t.getFullYear()+sep+pad2(t.getMonth()+1)+sep+pad2(t.getDate());}
+function ageOf(y,m,d){const t=new Date();let a=t.getFullYear()-y;if(t.getMonth()+1<m||(t.getMonth()+1===m&&t.getDate()<d))a--;return a;}
+const REL_NAME={same:'同じ五行',iGen:'自分が生む(相生)',genMe:'自分を生む(相生)',iCtrl:'自分がおさえる(相剋)',ctrlMe:'自分をおさえる(相剋)'};
+function buildKarte(){
+ const L=window.LAST;if(!L)return;const{y,m,d,r,nm,N,j,G}=L;
+ const lines=n=>'<div class="kr-kl"></div>'.repeat(n);
+ const box=(t,n,ex)=>`<div class="kr-kb"><div class="kr-kt">${t}${ex?`<span>${ex}</span>`:''}</div>${lines(n)}</div>`;
+ let now='<p class="kr-kn">体質チェックの記入なし</p>';
+ if(L.sc){
+  const mx=Math.max(...L.sc,1);
+  now=`<div class="kr-krow2"><div><p class="kr-kk">いちばん出ているサイン</p><p class="kr-kbig">${L.top.map(t=>t.icon+' '+t.name).join(' ・ ')}</p>
+   <p class="kr-kn">${L.kyo>L.jit?'虚(足りない)に傾き':L.kyo<L.jit?'実(たまっている)に傾き':'虚・実 同程度'} ・ 虚 ${L.kyo} / 実 ${L.jit}</p>
+   <div class="kr-ksc">${TYPES.map((t,i)=>`<div><span>${t.name}</span><i><b style="width:${L.sc[i]/mx*100}%;background:${t.kyo?'#8cc8e8':'#f3b49a'}"></b></i><em>${L.sc[i]}</em></div>`).join('')}</div></div>
+   <div><p class="kr-kk">チェックした項目(${L.checked.length})</p><ul class="kr-kcl">${L.checked.map(c=>`<li>${c}</li>`).join('')}</ul></div></div>`;
+  const rel=relation(r.dayEl,L.top[0].el);
+  now+=`<p class="kr-kmemo">🌿 見立てメモ:生まれ持った中心「${r.dayEl}」× 今のサイン「${L.top[0].el}」(${L.top[0].name}) → ${REL_NAME[rel]} ・ 命式の「${L.top[0].el}」は${G[EL.indexOf(L.top[0].el)]}つ</p>`;
+ }
+ $('karte').innerHTML=`<div class="kr-kh"><div><b>La*Bell</b> カルテ <span>エレメントバランスケア</span></div><div>記録日 ${todayStr('.')}　No.______</div></div>
+ <div class="kr-kinfo"><div><span>お名前</span><b>${nm||'　　　　　　'}</b> 様</div><div><span>生年月日</span>${y}.${pad2(m)}.${pad2(d)}(${ageOf(y,m,d)}歳)</div><div><span>性別</span>女・男・他</div><div><span>来店</span>初回・(　)回目</div></div>
+ <div class="kr-ksec"><div class="kr-ksh">🌸 生まれ持った体質(命式)</div>
+  <div class="kr-krow3"><div><p class="kr-kk">陰占</p><p class="kr-kmono">日 ${r.day} ・ 月 ${r.month} ・ 年 ${r.year}</p><p class="kr-kn">天中殺:${r.tenchusatsu}</p></div>
+  <div><p class="kr-kk">日干・胸の星</p><p class="kr-kbig">${N.icon} ${r.day[0]}(${N.img})</p><p class="kr-kn">胸:${j.chest}(${CHUSHIN[j.chest].key})</p></div>
+  <div><p class="kr-kk">五行の数</p><div class="kr-kg">${EL.map((e,i)=>`<span style="background:${EC[i]}">${e}${G[i]}</span>`).join('')}</div></div></div>
+  <p class="kr-kn" style="margin-top:3px">人体図:頭 ${j.head}/胸 ${j.chest}/腹 ${j.belly}/右手 ${j.right}/左手 ${j.left}　初年 ${j.shoulder}/中年 ${j.rFoot}/晩年 ${j.lFoot}</p></div>
+ <div class="kr-ksec"><div class="kr-ksh">🫧 今のからだ(体質チェック)</div>${now}</div>
+ <div class="kr-kgrid">${box('主訴・お悩み',6)}${box('カウンセリングメモ',6,'睡眠・食事・便通・冷え・生理など')}
+ ${box('施術内容・使ったツボ',6)}${box('施術中の反応・気づき',6,'こり・冷え・お腹・頭皮など')}
+ ${box('ホームケア・次回のご提案',6)}${box('お客様の声',6)}</div>
+ <div class="kr-kfoot"><div>次回予約:　　　月　　　日(　)　　：</div><div>☐ 記録・保管に同意します　ご署名:____________</div></div>`;
+}
+function printMode(mode){
+ document.body.classList.toggle('pk',mode==='karte');
+ const L=window.LAST||{},nm=(L.nm||'').trim();
+ const old=document.title;document.title=`${todayStr('-')}_${nm?nm+'様':'お客様'}_${mode==='karte'?'カルテ':'体質チェック'}`;
+ const done=()=>{document.title=old;document.body.classList.remove('pk');window.removeEventListener('afterprint',done);};
+ window.addEventListener('afterprint',done);
+ try{window.print()}catch(e){done()}
+}
+
 function run(){
  const v=$('birth').value;if(!v)return;
  const [y,m,d]=v.split('-').map(Number);const r=calc(y,m,d);
@@ -1081,6 +1207,7 @@ function run(){
   <div class="box"><h4>${you}におすすめのセルフケア</h4>${li(N.care,'care')}</div>`;
  $('closing').innerHTML=`<p>🌿 ${N.catch}。<br>体と心を整えるほど、${you}らしさはもっと輝きます。</p><p style="font-size:13px;color:var(--gold)">La*Bell Holistic Salon</p>`;
  
+ window.LAST={y,m,d,r,nm,N,j,G,checked:[],sc:null,top:[],kyo:0,jit:0,K:null};
  const nck=CHK.filter(Boolean).length;
  if(!nck){$('mres').style.display='none';}else{$('mres').style.display='block';
   const sc=scoreMonshin(CHK),mx=Math.max(...sc),top=TYPES.filter((t,i)=>sc[i]===mx&&mx>0);
@@ -1101,12 +1228,14 @@ function run(){
   const order=sc.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
   const sec=order.find(([v,i])=>v>0&&!top.includes(TYPES[i]));
   const K=kousatsu({you,de:r.dayEl,te:top[0].el,top:top[0],second:sec?TYPES[sec[1]]:null,N,chest:j.chest,gogyo:r.gogyo,kyo,jit,img:N.img});
+  Object.assign(window.LAST,{checked:all,sc,top,kyo,jit,K});
   $('bridge').innerHTML=K.parts.map(([t,p])=>`<div class="why"><h4>${t}</h4><p>${p}</p></div>`).join('')+
    `<p class="note">※ ここに書いたのは「可能性」です。思い当たるものがあれば、そこからケアを始めてみてください。</p>`;
   $('steps').innerHTML=K.advice.map((a,i)=>`<div class="step"><div class="no">${i+1}</div><div><h4>${a.t}</h4><p>${a.d}</p>${li(a.list,'care')}</div></div>`).join('')+
    `<div class="box"><h4>今日からの1日の過ごし方</h4><div class="day">${K.day.map(([a,b])=>`<b>${a}</b><span>${b}</span>`).join('')}</div></div>
    <div class="box"><h4>気をつけたい季節</h4><p style="font-size:14px">${K.season}</p></div>`;
  }
+ buildKarte();
  $('result').style.display='block';$('result').scrollIntoView({behavior:'smooth'});
 }
 </script></body></html>
